@@ -6,11 +6,6 @@
 //  Copyright © 2018 apple. All rights reserved.
 //
 
-
-
-
-
-
 #import "FoundPasswordViewController.h"
 #import "SetNewPasswordViewController.h"
 
@@ -25,6 +20,7 @@
 @property (nonatomic , strong) UITextField *codeTF;
 
 @property (nonatomic , strong) UIButton *getCodeBtn;
+@property (nonatomic , assign) int time;
 
 @property (nonatomic , strong) UIButton *nextStepBtn;
 
@@ -112,7 +108,7 @@
         make.height.mas_equalTo(1);
     }];
 
-    self.getCodeBtn = [UIButton buttonWithTitle:@"获取验证码" font:16 titleColor:WordGreen backGroundColor:nil aligment:UIControlContentHorizontalAlignmentRight];
+    self.getCodeBtn = [UIButton buttonWithTitle:@"获取验证码" font:16 titleColor:WordGreen backGroundColor:nil aligment:UIControlContentHorizontalAlignmentCenter];
     [self.getCodeBtn addTarget:self action:@selector(getCodeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.backTableView addSubview:self.getCodeBtn];
     [self.getCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -149,7 +145,20 @@
 }
 
 - (void)getCodeAction:(UIButton *)sender{
-    
+    [sender setTitle:@"60s" forState:UIControlStateNormal];
+    sender.titleLabel.text = @"60s";
+    sender.userInteractionEnabled = NO;
+    self.time = 60;
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+        self.time--;
+        [sender setTitle:[NSString stringWithFormat:@"%ds",self.time] forState:UIControlStateNormal];
+        if (self.time <= 0) {
+            [timer invalidate];
+            timer = nil;
+            sender.userInteractionEnabled = YES;
+            [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
+        }
+    }];
 }
 
 - (void)nextStepAction:(UIButton *)sender{

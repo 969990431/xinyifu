@@ -31,4 +31,6 @@
 #define WordGreen UIColorFromRGB(20,194,193)
 //提示字体灰色
 #define AlertGray UIColorFromRGB(153,153,153)
+//字体近黑色
+#define WordCloseBlack UIColorFromRGB(51,51,51)
 #endif /* RGBColors_h */
