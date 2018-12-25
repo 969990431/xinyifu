@@ -33,4 +33,8 @@
 #define AlertGray UIColorFromRGB(153,153,153)
 //字体近黑色
 #define WordCloseBlack UIColorFromRGB(51,51,51)
+//tab红色
+#define TabRed UIColorFromRGB(208,2,27)
+//tab灰色
+#define TabGray UIColorFromRGB(102,102,102)
 #endif /* RGBColors_h */

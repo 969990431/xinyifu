@@ -21,9 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [super viewDidLoad];
-    [self setChildVc:[[CashierViewController alloc]init] title:@"收银" image:@"" selectImage:@""];
-    [self setChildVc:[[BillViewController alloc]init] title:@"账单" image:@"" selectImage:@""];
-    [self setChildVc:[[MineViewController alloc]init] title:@"我的" image:@"" selectImage:@""];
+    [self setChildVc:[[CashierViewController alloc]init] title:@"收银" image:@"shouyin2" selectImage:@"shouyin1"];
+    [self setChildVc:[[BillViewController alloc]init] title:@"账单" image:@"zhangdan2" selectImage:@"zhangdan1"];
+    [self setChildVc:[[MineViewController alloc]init] title:@"我的" image:@"geren2" selectImage:@"geren1"];
     
     UITabBar *tab = [[UITabBar alloc]init];
     //    [[UITabBar appearance] setBarTintColor:[UIColor lightGrayColor]];
@@ -35,8 +35,8 @@
     
     //    vc.tabBarItem.title = title;
     vc.title = title;
-    //    vc.tabBarItem.image = [self OriginImage:[UIImage imageNamed:image] scaleToSize:CGSizeMake(30, 30)];
-    //    vc.tabBarItem.selectedImage = [self OriginImage:[UIImage imageNamed:selectImage] scaleToSize:CGSizeMake(30, 30)];
+//        vc.tabBarItem.image = [self OriginImage:[UIImage imageNamed:image] scaleToSize:CGSizeMake(30, 30)];
+//        vc.tabBarItem.selectedImage = [self OriginImage:[UIImage imageNamed:selectImage] scaleToSize:CGSizeMake(30, 30)];
     vc.tabBarItem.image = [[UIImage imageNamed:image]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectImage]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [self addChildViewController:[[NavViewController alloc]initWithRootViewController:vc]];
@@ -56,11 +56,11 @@
 + (void)initialize {
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
     attrs[NSFontAttributeName] = [UIFont systemFontOfSize:12];
-    attrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+    attrs[NSForegroundColorAttributeName] = TabGray;
     
     NSMutableDictionary *selectAtts = [NSMutableDictionary dictionary];
     selectAtts[NSFontAttributeName] = [UIFont systemFontOfSize:12];
-    selectAtts[NSForegroundColorAttributeName] = [UIColor redColor];
+    selectAtts[NSForegroundColorAttributeName] = TabRed;
     
     UITabBarItem *item = [UITabBarItem appearance];
     [item setTitleTextAttributes:attrs forState:UIControlStateNormal];
