@@ -1,0 +1,34 @@
+
+//
+//  XinYiFu_PrefixHeader.pch
+//  XinYiFu
+//
+//  Created by apple on 2018/12/24.
+//  Copyright © 2018 apple. All rights reserved.
+//
+
+#ifndef XinYiFu_PrefixHeader_pch
+#define XinYiFu_PrefixHeader_pch
+
+#import <Masonry/Masonry.h>
+#import <AFNetworking/AFNetworking.h>
+#import "SDWebImage/UIImageView+WebCache.h"
+#import "MJRefresh.h"
+#import "SVProgressHUD.h"
+
+#import "PublicMacrosHeader.h"
+#import "RGBColors.h"
+#import "NSStringUtil.h"
+#import "NSString+tool.h"
+#import "NSString+MD5.h"
+#import "SetVerticalLabel.h"
+#import "UIButton+tool.h"
+#import "UIButton+CreatBtn.h"
+#import "UINavigationController+BackButtonHandler.h"
+#import "UIColor+StringColor.h"
+#import "UIImage+tool.h"
+#import "UILabel+tool.h"
+#import "UITextField+tool.h"
+#import "UIControl+indexPath.h"
+
+#endif /* XinYiFu_PrefixHeader_pch */
