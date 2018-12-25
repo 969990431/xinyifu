@@ -108,7 +108,7 @@
         make.height.mas_equalTo(1);
     }];
 
-    self.getCodeBtn = [UIButton buttonWithTitle:@"获取验证码" font:16 titleColor:WordGreen backGroundColor:nil aligment:UIControlContentHorizontalAlignmentCenter];
+    self.getCodeBtn = [UIButton buttonWithTitle:@"获取验证码" font:16 titleColor:WordGreen backGroundColor:nil aligment:0];
     [self.getCodeBtn addTarget:self action:@selector(getCodeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.backTableView addSubview:self.getCodeBtn];
     [self.getCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
