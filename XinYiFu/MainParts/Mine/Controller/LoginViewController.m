@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "FoundPasswordViewController.h"
+#import "RegisterViewController.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong)UITableView *backTableView;
@@ -29,6 +30,7 @@
 @property (nonatomic, strong)UIButton *loginBtn;
 @property (nonatomic, strong)UILabel *agreementLabel;
 @property (nonatomic, strong)UILabel *registerLabel;
+
 @end
 
 @implementation LoginViewController
@@ -195,6 +197,10 @@
         make.height.mas_equalTo(21);
     }];
     self.registerLabel.attributedText = [@"还没有账号？立即注册"changeColor:WordOrange andRange:NSMakeRange(6, 4)];
+    
+    self.registerLabel.userInteractionEnabled = 1;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickRegister)];
+    [self.registerLabel addGestureRecognizer:tap];
 }
 
 - (void)textfieldChanged: (UITextField *)textField {
@@ -210,6 +216,10 @@
 - (void)forgetPasswordAction:(UIButton *)sender{
     [self presentViewController:[[FoundPasswordViewController alloc]init] animated:YES completion:nil];
 //    [self.navigationController pushViewController:[[FoundPasswordViewController alloc]init] animated:YES];
+}
+
+- (void)clickRegister {
+    [self presentViewController:[[RegisterViewController alloc]init] animated:YES completion:nil];
 }
 
 @end

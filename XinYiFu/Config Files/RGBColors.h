@@ -31,4 +31,8 @@
 #define WordGreen UIColorFromRGB(20,194,193)
 //提示字体灰色
 #define AlertGray UIColorFromRGB(153,153,153)
+//tab红色
+#define TabRed UIColorFromRGB(208,2,27)
+//tab灰色
+#define TabGray UIColorFromRGB(102,102,102)
 #endif /* RGBColors_h */

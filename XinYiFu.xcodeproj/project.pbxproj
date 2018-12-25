@@ -42,6 +42,8 @@
 		184A5A9021D0C3E6008900D5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A5A8F21D0C3E6008900D5 /* LoginViewController.m */; };
 		1888555C21D0F02C00DF2CDC /* FoundPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */; };
 		1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */; };
+		18B0746C21D1FD8200B8804B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0746A21D1FD8200B8804B /* RegisterViewController.m */; };
+		18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0746B21D1FD8200B8804B /* RegisterSureViewController.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
 		F4FBAE38B0AB1C1D85FCA4C1 /* libPods-XinYiFuUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FFF61D8F0A105C3B6AFDE9 /* libPods-XinYiFuUITests.a */; };
@@ -138,6 +140,10 @@
 		1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundPasswordViewController.m; sourceTree = "<group>"; };
 		1888555D21D0F17300DF2CDC /* SetNewPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetNewPasswordViewController.h; sourceTree = "<group>"; };
 		1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetNewPasswordViewController.m; sourceTree = "<group>"; };
+		18B0746821D1FD8100B8804B /* RegisterSureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterSureViewController.h; sourceTree = "<group>"; };
+		18B0746921D1FD8100B8804B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		18B0746A21D1FD8200B8804B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		18B0746B21D1FD8200B8804B /* RegisterSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterSureViewController.m; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38D152CFC4C7EB4E5EA9F568 /* Pods-XinYiFu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFu.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFu/Pods-XinYiFu.release.xcconfig"; sourceTree = "<group>"; };
 		5F79C9262C100AF14D3E00CB /* Pods-XinYiFuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuTests/Pods-XinYiFuTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -286,6 +292,10 @@
 				184A5A3321D0859B008900D5 /* MineViewController.m */,
 				184A5A8E21D0C3E6008900D5 /* LoginViewController.h */,
 				184A5A8F21D0C3E6008900D5 /* LoginViewController.m */,
+				18B0746821D1FD8100B8804B /* RegisterSureViewController.h */,
+				18B0746B21D1FD8200B8804B /* RegisterSureViewController.m */,
+				18B0746921D1FD8100B8804B /* RegisterViewController.h */,
+				18B0746A21D1FD8200B8804B /* RegisterViewController.m */,
 				1888555A21D0F02C00DF2CDC /* FoundPasswordViewController.h */,
 				1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */,
 				1888555D21D0F17300DF2CDC /* SetNewPasswordViewController.h */,
@@ -716,6 +726,7 @@
 				184A5A7821D08F98008900D5 /* SetVerticalLabel.m in Sources */,
 				184A5A8821D0AC2B008900D5 /* RequestTool.m in Sources */,
 				184A5A3421D0859B008900D5 /* MineViewController.m in Sources */,
+				18B0746C21D1FD8200B8804B /* RegisterViewController.m in Sources */,
 				184A5A8121D08F98008900D5 /* UIView+tool.m in Sources */,
 				184A5A7A21D08F98008900D5 /* NSStringUtil.m in Sources */,
 				184A59E321D07F87008900D5 /* AppDelegate.m in Sources */,
@@ -728,6 +739,7 @@
 				184A5A8D21D0AC96008900D5 /* BaseResponse.m in Sources */,
 				184A5A7421D08F98008900D5 /* UIColor+StringColor.m in Sources */,
 				184A5A7D21D08F98008900D5 /* NSString+MD5.m in Sources */,
+				18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */,
 				184A5A7221D08F98008900D5 /* UIButton+tool.m in Sources */,
 				184A5A7521D08F98008900D5 /* UINavigationController+BackButtonHandler.m in Sources */,
 				184A5A3A21D08628008900D5 /* NavViewController.m in Sources */,
