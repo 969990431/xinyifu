@@ -8,6 +8,7 @@
 
 #import "CashierViewController.h"
 #import "LoginViewController.h"
+#import "UserServiceViewController.h"
 
 #import "CashierFirstTableViewCell.h"
 #import "CashierSecondTableViewCell.h"
@@ -62,6 +63,7 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -110,6 +112,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
 //        商家服务
+        [self userService];
     }
 }
 
@@ -130,4 +133,9 @@
     
 }
 
+- (void)userService{
+    UserServiceViewController *view = [[UserServiceViewController alloc] init];
+    view.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:view animated:YES];
+}
 @end
