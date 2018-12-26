@@ -44,6 +44,8 @@
 		1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */; };
 		18B0746C21D1FD8200B8804B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0746A21D1FD8200B8804B /* RegisterViewController.m */; };
 		18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0746B21D1FD8200B8804B /* RegisterSureViewController.m */; };
+		18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */; };
+		18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
 		F4FBAE38B0AB1C1D85FCA4C1 /* libPods-XinYiFuUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FFF61D8F0A105C3B6AFDE9 /* libPods-XinYiFuUITests.a */; };
@@ -144,6 +146,10 @@
 		18B0746921D1FD8100B8804B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		18B0746A21D1FD8200B8804B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		18B0746B21D1FD8200B8804B /* RegisterSureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterSureViewController.m; sourceTree = "<group>"; };
+		18B0747921D31F1500B8804B /* CashierFirstTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CashierFirstTableViewCell.h; sourceTree = "<group>"; };
+		18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierFirstTableViewCell.m; sourceTree = "<group>"; };
+		18B0747C21D31F2300B8804B /* CashierSecondTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CashierSecondTableViewCell.h; sourceTree = "<group>"; };
+		18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierSecondTableViewCell.m; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38D152CFC4C7EB4E5EA9F568 /* Pods-XinYiFu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFu.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFu/Pods-XinYiFu.release.xcconfig"; sourceTree = "<group>"; };
 		5F79C9262C100AF14D3E00CB /* Pods-XinYiFuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuTests/Pods-XinYiFuTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -321,9 +327,9 @@
 		184A5A2121D08132008900D5 /* Cashier */ = {
 			isa = PBXGroup;
 			children = (
+				18B0747221D2194800B8804B /* Model */,
+				18B0747121D2194500B8804B /* View */,
 				184A5A2221D08132008900D5 /* Controller */,
-				184A5A2321D08132008900D5 /* Model */,
-				184A5A2421D08132008900D5 /* View */,
 			);
 			path = Cashier;
 			sourceTree = "<group>";
@@ -335,20 +341,6 @@
 				184A5A3021D08590008900D5 /* CashierViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		184A5A2321D08132008900D5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		184A5A2421D08132008900D5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		184A5A2521D08265008900D5 /* AppDelegate */ = {
@@ -458,6 +450,24 @@
 				184A5A4021D089D0008900D5 /* BaseViewController.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		18B0747121D2194500B8804B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18B0747921D31F1500B8804B /* CashierFirstTableViewCell.h */,
+				18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */,
+				18B0747C21D31F2300B8804B /* CashierSecondTableViewCell.h */,
+				18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18B0747221D2194800B8804B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		93833E6D59554D29778C56EC /* Frameworks */ = {
@@ -723,6 +733,7 @@
 				184A59F121D07F89008900D5 /* main.m in Sources */,
 				184A5A7021D08F98008900D5 /* UIControl+indexPath.m in Sources */,
 				1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */,
+				18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */,
 				184A5A7821D08F98008900D5 /* SetVerticalLabel.m in Sources */,
 				184A5A8821D0AC2B008900D5 /* RequestTool.m in Sources */,
 				184A5A3421D0859B008900D5 /* MineViewController.m in Sources */,
@@ -743,6 +754,7 @@
 				184A5A7221D08F98008900D5 /* UIButton+tool.m in Sources */,
 				184A5A7521D08F98008900D5 /* UINavigationController+BackButtonHandler.m in Sources */,
 				184A5A3A21D08628008900D5 /* NavViewController.m in Sources */,
+				18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */,
 				184A5A7E21D08F98008900D5 /* ModelToJson.m in Sources */,
 				184A5A7921D08F98008900D5 /* UIButton+CreatBtn.m in Sources */,
 			);
