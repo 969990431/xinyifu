@@ -8,6 +8,7 @@
 
 #import "UserServiceViewController.h"
 #import "AddAddressViewController.h"
+#import "ChooseAddressViewController.h"
 
 @interface UserServiceViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIButton *selectedButton;
@@ -153,9 +154,10 @@
         UIImageView *imgView = [[UIImageView alloc] initWithImage:GetImage(@"dayinji")];
         [cell.contentView addSubview:imgView];
         [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
+            make.centerY.mas_equalTo(cell.contentView);
             make.left.mas_equalTo(16);
-            make.width.height.mas_equalTo(70);
+            make.width.mas_equalTo(62);
+            make.height.mas_equalTo(57);
         }];
         
         UILabel *title = [UILabel labelWithTextColor:WordCloseBlack font:16 aligment:NSTextAlignmentLeft];
@@ -183,7 +185,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (selectedButton == self.item0) {
-        [self.navigationController pushViewController:[[AddAddressViewController alloc] init] animated:YES];
+//        [self.navigationController pushViewController:[[AddAddressViewController alloc] init] animated:YES];
+        [self.navigationController pushViewController:[[ChooseAddressViewController alloc] init] animated:YES];
     }
 }
 
@@ -226,6 +229,7 @@
     }else{
         button = [UIButton buttonWithTitle:@"同意协议并保存图片" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
     }
+    [button addTarget:self action:@selector(submitBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
     [view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -246,6 +250,12 @@
     return 70.f;
 }
 
+- (void)submitBtnAction:(UIButton *)sender{
+    if (selectedButton == self.item0) {
+        XYFAlertView *view = [[XYFAlertView alloc] initAlertViewWithTitle:@"恭喜您，领取成功" content:@"您的订单已收到，会尽快给您发货！" buttonTitle:@"确定"];
+        [view show];
+    }
+}
 
 /*
 #pragma mark - Navigation

@@ -30,5 +30,6 @@
 #import "UILabel+tool.h"
 #import "UITextField+tool.h"
 #import "UIControl+indexPath.h"
+#import "XYFAlertView.h"
 
 #endif /* XinYiFu_PrefixHeader_pch */
