@@ -36,10 +36,10 @@
         self.nextImageV.hidden = 1;
         self.textField.textAlignment = NSTextAlignmentLeft;
         [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(65);
             make.right.mas_equalTo(-20);
-            make.height.mas_equalTo(40);
             make.centerY.mas_equalTo(self);
+            make.height.mas_equalTo(40);
+            make.width.mas_equalTo(SCREEN_WIDTH-85);
         }];
     }
     if (type == 2) {
