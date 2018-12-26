@@ -18,7 +18,7 @@
 #define IsStrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref)isEqualToString:@""]) || ([(_ref) isEqual:@"<null>"])|| ([(_ref) isEqual:@"(null)"]))
 
 //iPhoneX系列判断
-#define iPhoneX (((Main_Screen_Width == 375 && Main_Screen_Height == 812) || (Main_Screen_Width == 414 && Main_Screen_Height == 896))? YES:NO)
+#define iPhoneX (((SCREEN_WIDTH == 375 && SCREEN_HEIGHT == 812) || (SCREEN_WIDTH == 414 && SCREEN_HEIGHT == 896))? YES:NO)
 //获取等比尺寸
 #define GetFloatWithPXSIX(pxValue) pxValue/375.0*SCREEN_WIDTH
 #define GetFloatWithHightPXSIX(pxValue) pxValue/667.0*SCREEN_HEIGHT

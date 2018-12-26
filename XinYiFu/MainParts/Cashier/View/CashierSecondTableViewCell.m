@@ -12,6 +12,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        self.selectionStyle = NO;
         self.backgroundColor = [UIColor clearColor];
         
         UIView *backView = [[UIView alloc]init];

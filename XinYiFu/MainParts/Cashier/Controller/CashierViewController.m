@@ -13,6 +13,12 @@
 #import "CashierFirstTableViewCell.h"
 #import "CashierSecondTableViewCell.h"
 
+#import "PersonalAuthViewController.h"
+#import "CompanyAuthenViewController.h"
+
+#import "SetMoneyViewController.h"
+#import "AuthStatusViewController.h"
+
 @interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate>
 
 /**
@@ -41,9 +47,16 @@
     [self prepareViews];
     
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 - (void)prepareViews {
-    self.navigationController.navigationBar.hidden = 1;
     self.view.backgroundColor = UIColorFromRGB(248, 248, 248);
     
     UIImageView *backImageV = [[UIImageView alloc]initWithImage:GetImage(@"shouyinbeijing")];
@@ -118,11 +131,21 @@
 
 //认证确认跳转
 - (void)authenWithType:(NSInteger)type {
-    
+    if (type == 0) {
+        PersonalAuthViewController *vc = [[PersonalAuthViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        CompanyAuthenViewController *vc = [[CompanyAuthenViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 //设置金额
 - (void)setMoney {
-    
+    SetMoneyViewController *vc = [[SetMoneyViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 //保存首款吗
 - (void)savePic {
@@ -137,5 +160,7 @@
     UserServiceViewController *view = [[UserServiceViewController alloc] init];
     view.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:view animated:YES];
+//    AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
+//    [self.navigationController pushViewController:authVC animated:YES];
 }
 @end

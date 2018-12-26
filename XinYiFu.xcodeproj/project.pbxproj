@@ -50,6 +50,11 @@
 		18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0746B21D1FD8200B8804B /* RegisterSureViewController.m */; };
 		18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */; };
 		18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */; };
+		18B0748121D3594D00B8804B /* PersonalAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748021D3594D00B8804B /* PersonalAuthViewController.m */; };
+		18B0748721D35CA700B8804B /* EditInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748621D35CA700B8804B /* EditInfoTableViewCell.m */; };
+		18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */; };
+		18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748E21D379F300B8804B /* SetMoneyViewController.m */; };
+		18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0749121D3883100B8804B /* AuthStatusViewController.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
 		2F91AE5421D3878300ACF08C /* IncomeRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
@@ -163,6 +168,16 @@
 		18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierFirstTableViewCell.m; sourceTree = "<group>"; };
 		18B0747C21D31F2300B8804B /* CashierSecondTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CashierSecondTableViewCell.h; sourceTree = "<group>"; };
 		18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierSecondTableViewCell.m; sourceTree = "<group>"; };
+		18B0747F21D3594D00B8804B /* PersonalAuthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalAuthViewController.h; sourceTree = "<group>"; };
+		18B0748021D3594D00B8804B /* PersonalAuthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalAuthViewController.m; sourceTree = "<group>"; };
+		18B0748521D35CA700B8804B /* EditInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInfoTableViewCell.h; sourceTree = "<group>"; };
+		18B0748621D35CA700B8804B /* EditInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInfoTableViewCell.m; sourceTree = "<group>"; };
+		18B0748A21D3698700B8804B /* CompanyAuthenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyAuthenViewController.h; sourceTree = "<group>"; };
+		18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyAuthenViewController.m; sourceTree = "<group>"; };
+		18B0748D21D379F300B8804B /* SetMoneyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetMoneyViewController.h; sourceTree = "<group>"; };
+		18B0748E21D379F300B8804B /* SetMoneyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetMoneyViewController.m; sourceTree = "<group>"; };
+		18B0749021D3883100B8804B /* AuthStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthStatusViewController.h; sourceTree = "<group>"; };
+		18B0749121D3883100B8804B /* AuthStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthStatusViewController.m; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2F91AE5221D3878300ACF08C /* IncomeRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeRecordViewController.h; sourceTree = "<group>"; };
 		2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordViewController.m; sourceTree = "<group>"; };
@@ -365,6 +380,14 @@
 			children = (
 				184A5A2F21D08590008900D5 /* CashierViewController.h */,
 				184A5A3021D08590008900D5 /* CashierViewController.m */,
+				18B0747F21D3594D00B8804B /* PersonalAuthViewController.h */,
+				18B0748021D3594D00B8804B /* PersonalAuthViewController.m */,
+				18B0748A21D3698700B8804B /* CompanyAuthenViewController.h */,
+				18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */,
+				18B0748D21D379F300B8804B /* SetMoneyViewController.h */,
+				18B0748E21D379F300B8804B /* SetMoneyViewController.m */,
+				18B0749021D3883100B8804B /* AuthStatusViewController.h */,
+				18B0749121D3883100B8804B /* AuthStatusViewController.m */,
 				1851F0EB21D21643009F23BD /* UserServiceViewController.h */,
 				1851F0EC21D21643009F23BD /* UserServiceViewController.m */,
 				1851F0EE21D233C3009F23BD /* AddAddressViewController.h */,
@@ -492,6 +515,8 @@
 				18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */,
 				18B0747C21D31F2300B8804B /* CashierSecondTableViewCell.h */,
 				18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */,
+				18B0748521D35CA700B8804B /* EditInfoTableViewCell.h */,
+				18B0748621D35CA700B8804B /* EditInfoTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -747,11 +772,15 @@
 				184A5A3721D085FB008900D5 /* MainTabViewController.m in Sources */,
 				184A5A9021D0C3E6008900D5 /* LoginViewController.m in Sources */,
 				184A5A7B21D08F98008900D5 /* UIImage+tool.m in Sources */,
+				18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */,
+				18B0748121D3594D00B8804B /* PersonalAuthViewController.m in Sources */,
 				184A59F121D07F89008900D5 /* main.m in Sources */,
+				18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */,
 				1851F0ED21D21643009F23BD /* UserServiceViewController.m in Sources */,
 				184A5A7021D08F98008900D5 /* UIControl+indexPath.m in Sources */,
 				1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */,
 				18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */,
+				18B0748721D35CA700B8804B /* EditInfoTableViewCell.m in Sources */,
 				184A5A7821D08F98008900D5 /* SetVerticalLabel.m in Sources */,
 				184A5A8821D0AC2B008900D5 /* RequestTool.m in Sources */,
 				184A5A3421D0859B008900D5 /* MineViewController.m in Sources */,
@@ -770,6 +799,7 @@
 				184A5A2E21D0857D008900D5 /* BillViewController.m in Sources */,
 				1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */,
 				184A5A8D21D0AC96008900D5 /* BaseResponse.m in Sources */,
+				18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */,
 				184A5A7421D08F98008900D5 /* UIColor+StringColor.m in Sources */,
 				184A5A7D21D08F98008900D5 /* NSString+MD5.m in Sources */,
 				18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */,

@@ -25,7 +25,7 @@
     self.backTableView = [[UITableView alloc]initWithFrame:CGRectNull style:UITableViewStyleGrouped];
     self.backTableView.dataSource = self;
     self.backTableView.delegate = self;
-    self.backTableView.backgroundColor = ThemeColor;
+    self.backTableView.backgroundColor = BackGrayColor;
     self.backTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10)];
     self.backTableView.sectionHeaderHeight = CGFLOAT_MIN;
     self.backTableView.sectionFooterHeight = 12.f;
