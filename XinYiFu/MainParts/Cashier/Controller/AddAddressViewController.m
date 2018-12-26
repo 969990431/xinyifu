@@ -24,7 +24,7 @@
     self.backTableView = [[UITableView alloc]init];
     self.backTableView.dataSource = self;
     self.backTableView.delegate = self;
-    self.backTableView.backgroundColor = ThemeColor;
+    self.backTableView.backgroundColor = BackGrayColor;
     [self.view addSubview:self.backTableView];
     [self.backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);

@@ -19,10 +19,10 @@
     [self setNaviBar];
 }
 - (void)setNaviBar {
-    self.navigationBar.barTintColor = [UIColor redColor];
-    self.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationBar.tintColor = UIColorFromRGB(119,119,119);
     
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:17]};
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont systemFontOfSize:18]};
     
     
     

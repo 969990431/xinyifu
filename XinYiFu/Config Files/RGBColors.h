@@ -16,7 +16,7 @@
 #define RandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
 
 //背景灰色
-#define ThemeColor UIColorFromRGB(243,243,243)
+#define BackGrayColor UIColorFromRGB(248, 248, 248)
 //字体灰色
 #define WordGray UIColorFromRGB(190,192,192)
 //字体深灰色
