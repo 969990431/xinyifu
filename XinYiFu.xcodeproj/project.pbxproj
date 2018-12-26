@@ -51,6 +51,7 @@
 		18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0747A21D31F1500B8804B /* CashierFirstTableViewCell.m */; };
 		18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
+		2F91AE5421D3878300ACF08C /* IncomeRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
 		F4FBAE38B0AB1C1D85FCA4C1 /* libPods-XinYiFuUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FFF61D8F0A105C3B6AFDE9 /* libPods-XinYiFuUITests.a */; };
 /* End PBXBuildFile section */
@@ -163,6 +164,8 @@
 		18B0747C21D31F2300B8804B /* CashierSecondTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CashierSecondTableViewCell.h; sourceTree = "<group>"; };
 		18B0747D21D31F2300B8804B /* CashierSecondTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierSecondTableViewCell.m; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2F91AE5221D3878300ACF08C /* IncomeRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeRecordViewController.h; sourceTree = "<group>"; };
+		2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordViewController.m; sourceTree = "<group>"; };
 		38D152CFC4C7EB4E5EA9F568 /* Pods-XinYiFu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFu.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFu/Pods-XinYiFu.release.xcconfig"; sourceTree = "<group>"; };
 		5F79C9262C100AF14D3E00CB /* Pods-XinYiFuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuTests/Pods-XinYiFuTests.release.xcconfig"; sourceTree = "<group>"; };
 		814C725B5391DED2AE947865 /* Pods-XinYiFuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 			children = (
 				184A5A2C21D0857D008900D5 /* BillViewController.h */,
 				184A5A2D21D0857D008900D5 /* BillViewController.m */,
+				2F91AE5221D3878300ACF08C /* IncomeRecordViewController.h */,
+				2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -657,15 +662,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-XinYiFuUITests-checkManifestLockResult.txt",
 			);
@@ -679,15 +680,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-XinYiFuTests-checkManifestLockResult.txt",
 			);
@@ -701,8 +698,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-XinYiFu/Pods-XinYiFu-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
@@ -710,8 +705,6 @@
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
@@ -727,15 +720,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-XinYiFu-checkManifestLockResult.txt",
 			);
@@ -775,6 +764,7 @@
 				1851F0F021D233C3009F23BD /* AddAddressViewController.m in Sources */,
 				184A5A8A21D0AC2B008900D5 /* RequestManage.m in Sources */,
 				184A5A3D21D0864A008900D5 /* GuideViewController.m in Sources */,
+				2F91AE5421D3878300ACF08C /* IncomeRecordViewController.m in Sources */,
 				184A5A7F21D08F98008900D5 /* NSString+tool.m in Sources */,
 				184A5A7121D08F98008900D5 /* UILabel+tool.m in Sources */,
 				184A5A2E21D0857D008900D5 /* BillViewController.m in Sources */,
@@ -965,6 +955,7 @@
 				DEVELOPMENT_TEAM = 2U5L8EXZDH;
 				GCC_PREFIX_HEADER = "XinYiFu/Config Files/XinYiFu_PrefixHeader.pch";
 				INFOPLIST_FILE = XinYiFu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -988,6 +979,7 @@
 				DEVELOPMENT_TEAM = 2U5L8EXZDH;
 				GCC_PREFIX_HEADER = "XinYiFu/Config Files/XinYiFu_PrefixHeader.pch";
 				INFOPLIST_FILE = XinYiFu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -7,7 +7,7 @@
 //
 
 #import "BillViewController.h"
-
+#import "IncomeRecordViewController.h"
 
 @interface BillViewController ()
 @property (nonatomic ,strong) UITableView *backTableView;
@@ -32,6 +32,11 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)prepareViews{
@@ -73,6 +78,7 @@
     topBackView.layer.shadowOffset = CGSizeMake(0,3);
     topBackView.layer.shadowOpacity = 1;
     topBackView.layer.shadowRadius = 11;
+    [topBackView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(incomeRecordAction:)]];
     
     UILabel *todayIncome = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#F3E7E7"] font:14 aligment:NSTextAlignmentLeft];
     todayIncome.text = @"今日收款（元）";
@@ -99,6 +105,15 @@
         make.top.mas_equalTo(78);
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(1);
+    }];
+    
+    UIImageView *arrow = [[UIImageView alloc] initWithImage:GetImage(@"youjaintou")];
+    [topBackView addSubview:arrow];
+    [arrow mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.mas_equalTo(48);
+        make.right.mas_equalTo(topBackView.mas_right).offset(-12);
+        make.width.mas_equalTo(6);
+        make.height.mas_equalTo(10);
     }];
     
     CGFloat labelWidth = (CGRectGetWidth(self.view.frame) - 34) / 3;
@@ -205,6 +220,16 @@
         make.left.mas_equalTo(20);
         make.height.mas_equalTo(42);
     }];
+    
+    arrow = [[UIImageView alloc] initWithImage:GetImage(@"youjaintou")];
+    [bottomBackView addSubview:arrow];
+    [arrow mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.mas_equalTo(48);
+        make.right.mas_equalTo(topBackView.mas_right).offset(-12);
+        make.width.mas_equalTo(6);
+        make.height.mas_equalTo(10);
+    }];
+
 
     segLine = [[UILabel alloc] init];
     segLine.backgroundColor = [UIColor colorWithHexString:@"#EAEAEA"];
@@ -255,6 +280,10 @@
         }
     }
 
+}
+
+- (void)incomeRecordAction:(UITapGestureRecognizer *)tap{
+    [self.navigationController pushViewController:[[IncomeRecordViewController alloc] init] animated:YES];
 }
 
 @end
