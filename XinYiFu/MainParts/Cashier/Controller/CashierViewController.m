@@ -17,6 +17,7 @@
 #import "CompanyAuthenViewController.h"
 
 #import "SetMoneyViewController.h"
+#import "AuthStatusViewController.h"
 
 @interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate>
 
@@ -159,5 +160,7 @@
     UserServiceViewController *view = [[UserServiceViewController alloc] init];
     view.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:view animated:YES];
+//    AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
+//    [self.navigationController pushViewController:authVC animated:YES];
 }
 @end

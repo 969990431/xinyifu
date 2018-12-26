@@ -8,6 +8,7 @@
 
 #import "CompanyAuthenViewController.h"
 #import "EditInfoTableViewCell.h"
+#import "AuthStatusViewController.h"
 
 @interface CompanyAuthenViewController ()<UITableViewDelegate, UITableViewDataSource,EditInfoTableViewCellDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -164,7 +165,8 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
-    
+    AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
+    [self.navigationController pushViewController:authVC animated:YES];
 }
 
 @end

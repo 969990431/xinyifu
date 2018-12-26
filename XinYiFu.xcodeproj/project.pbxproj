@@ -54,6 +54,7 @@
 		18B0748721D35CA700B8804B /* EditInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748621D35CA700B8804B /* EditInfoTableViewCell.m */; };
 		18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */; };
 		18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748E21D379F300B8804B /* SetMoneyViewController.m */; };
+		18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0749121D3883100B8804B /* AuthStatusViewController.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
 		F4FBAE38B0AB1C1D85FCA4C1 /* libPods-XinYiFuUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FFF61D8F0A105C3B6AFDE9 /* libPods-XinYiFuUITests.a */; };
@@ -174,6 +175,8 @@
 		18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyAuthenViewController.m; sourceTree = "<group>"; };
 		18B0748D21D379F300B8804B /* SetMoneyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetMoneyViewController.h; sourceTree = "<group>"; };
 		18B0748E21D379F300B8804B /* SetMoneyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetMoneyViewController.m; sourceTree = "<group>"; };
+		18B0749021D3883100B8804B /* AuthStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthStatusViewController.h; sourceTree = "<group>"; };
+		18B0749121D3883100B8804B /* AuthStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthStatusViewController.m; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38D152CFC4C7EB4E5EA9F568 /* Pods-XinYiFu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFu.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFu/Pods-XinYiFu.release.xcconfig"; sourceTree = "<group>"; };
 		5F79C9262C100AF14D3E00CB /* Pods-XinYiFuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuTests/Pods-XinYiFuTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */,
 				18B0748D21D379F300B8804B /* SetMoneyViewController.h */,
 				18B0748E21D379F300B8804B /* SetMoneyViewController.m */,
+				18B0749021D3883100B8804B /* AuthStatusViewController.h */,
+				18B0749121D3883100B8804B /* AuthStatusViewController.m */,
 				1851F0EB21D21643009F23BD /* UserServiceViewController.h */,
 				1851F0EC21D21643009F23BD /* UserServiceViewController.m */,
 				1851F0EE21D233C3009F23BD /* AddAddressViewController.h */,
@@ -781,6 +786,7 @@
 				18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */,
 				18B0748121D3594D00B8804B /* PersonalAuthViewController.m in Sources */,
 				184A59F121D07F89008900D5 /* main.m in Sources */,
+				18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */,
 				1851F0ED21D21643009F23BD /* UserServiceViewController.m in Sources */,
 				184A5A7021D08F98008900D5 /* UIControl+indexPath.m in Sources */,
 				1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */,
