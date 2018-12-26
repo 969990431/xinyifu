@@ -151,7 +151,8 @@
         make.top.mas_equalTo(segLine2.mas_bottom).offset(40);
     }];
 
-    [self showAlertViewWithTitle:@"设置成功" content:@"密码设置成功，请重新登录密码设置成功，请重新登录密码设置成功，请重新登录" buttonTitle:@"现在登录"];
+    XYFAlertView *view = [[XYFAlertView alloc] initAlertViewWithTitle:@"设置成功" content:@"密码设置成功，请重新登录密码设置成功，请重新登录密码设置成功，请重新登录" buttonTitle:@"现在登录"];
+    [view show];
 }
 
 - (void)textfieldChanged: (UITextField *)textField {
@@ -222,64 +223,4 @@
     }
 }
 
-- (void)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle{
-    NSLog(@"%@",NSStringFromCGRect([UIApplication sharedApplication].keyWindow.frame));
-    UIView *backView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-    backView.backgroundColor = UIColorFromRGBWithAlpha(0, .5);
-    
-    UIView *alertView = [[UIView alloc] init];
-    [backView addSubview:alertView];
-    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
-        make.right.mas_equalTo(backView.mas_right).offset(-20);
-        make.centerY.mas_equalTo(backView);
-        make.height.mas_equalTo(230);
-    }];
-    
-    UIImageView *imageView = [[UIImageView alloc]initWithImage:GetImage(@"7弹出框")];
-    [alertView addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(0);
-    }];
-    
-    UILabel *titleLabel = [UILabel labelWithTextColor:WordOrange font:22 aligment:NSTextAlignmentCenter];
-    titleLabel.text = title;
-    [alertView addSubview:titleLabel];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(22);
-        make.centerX.mas_equalTo(alertView);
-        make.height.mas_equalTo(30);
-    }];
-    
-    UILabel *contentLabel = [UILabel labelWithTextColor:WordCloseBlack font:18 aligment:NSTextAlignmentCenter];
-    contentLabel.text = content;
-    contentLabel.numberOfLines = 0;
-    [alertView addSubview:contentLabel];
-    [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
-        make.right.mas_equalTo(alertView.mas_right).offset(-20);
-        make.top.mas_equalTo(titleLabel.mas_bottom).offset(32);
-    }];
-    
-    UIButton *button = [UIButton buttonWithTitle:buttonTitle font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
-    [button addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
-    [button setBackgroundImage:GetImage(@"jianbianxaio") forState:UIControlStateNormal];
-    [alertView addSubview:button];
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(48);
-        make.right.mas_equalTo(alertView.mas_right).offset(-48);
-        make.bottom.mas_equalTo(alertView.mas_bottom).offset(-16);
-        make.height.mas_equalTo(40);
-    }];
-    
-    [alertView sendSubviewToBack:imageView];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication].keyWindow addSubview:backView];
-    });
-
-}
-
-- (void)cancelAction:(UIButton *)sender{
-    [sender.superview.superview removeFromSuperview];
-}
 @end

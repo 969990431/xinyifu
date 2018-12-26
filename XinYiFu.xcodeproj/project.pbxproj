@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */; };
+		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
 		184A59E321D07F87008900D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A59E221D07F87008900D5 /* AppDelegate.m */; };
 		184A59E921D07F87008900D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A59E721D07F87008900D5 /* Main.storyboard */; };
 		184A59EB21D07F89008900D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A59EA21D07F89008900D5 /* Assets.xcassets */; };
@@ -75,6 +77,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1819D9DB21D31BC7009CC7E1 /* ChooseAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAddressViewController.h; sourceTree = "<group>"; };
+		1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressViewController.m; sourceTree = "<group>"; };
+		1819D9E221D323A3009CC7E1 /* XYFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYFAlertView.h; sourceTree = "<group>"; };
+		1819D9E321D323A3009CC7E1 /* XYFAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYFAlertView.m; sourceTree = "<group>"; };
 		184A59DE21D07F87008900D5 /* XinYiFu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XinYiFu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A59E121D07F87008900D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184A59E221D07F87008900D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -207,6 +213,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1819D9DE21D31F47009CC7E1 /* CommonFunction */ = {
+			isa = PBXGroup;
+			children = (
+				1819D9E221D323A3009CC7E1 /* XYFAlertView.h */,
+				1819D9E321D323A3009CC7E1 /* XYFAlertView.m */,
+			);
+			path = CommonFunction;
+			sourceTree = "<group>";
+		};
 		184A59D521D07F87008900D5 = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +382,8 @@
 				1851F0EC21D21643009F23BD /* UserServiceViewController.m */,
 				1851F0EE21D233C3009F23BD /* AddAddressViewController.h */,
 				1851F0EF21D233C3009F23BD /* AddAddressViewController.m */,
+				1819D9DB21D31BC7009CC7E1 /* ChooseAddressViewController.h */,
+				1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -429,6 +446,7 @@
 				184A5A2121D08132008900D5 /* Cashier */,
 				184A5A1D21D08132008900D5 /* Mine */,
 				184A5A2B21D08534008900D5 /* Entrance */,
+				1819D9DE21D31F47009CC7E1 /* CommonFunction */,
 			);
 			path = MainParts;
 			sourceTree = "<group>";
@@ -775,6 +793,7 @@
 				184A5A8121D08F98008900D5 /* UIView+tool.m in Sources */,
 				184A5A7A21D08F98008900D5 /* NSStringUtil.m in Sources */,
 				184A59E321D07F87008900D5 /* AppDelegate.m in Sources */,
+				1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */,
 				184A5A7C21D08F98008900D5 /* UITextField+tool.m in Sources */,
 				1851F0F021D233C3009F23BD /* AddAddressViewController.m in Sources */,
 				184A5A8A21D0AC2B008900D5 /* RequestManage.m in Sources */,
@@ -782,6 +801,7 @@
 				184A5A7F21D08F98008900D5 /* NSString+tool.m in Sources */,
 				184A5A7121D08F98008900D5 /* UILabel+tool.m in Sources */,
 				184A5A2E21D0857D008900D5 /* BillViewController.m in Sources */,
+				1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */,
 				184A5A8D21D0AC96008900D5 /* BaseResponse.m in Sources */,
 				18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */,
 				184A5A7421D08F98008900D5 /* UIColor+StringColor.m in Sources */,
