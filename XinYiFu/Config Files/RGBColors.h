@@ -37,4 +37,10 @@
 #define TabRed UIColorFromRGB(208,2,27)
 //tab灰色
 #define TabGray UIColorFromRGB(102,102,102)
+//tab橙色
+#define FingerOrange UIColorFromRGB(245,156,19)
+//认证状态
+#define StatusOrange UIColorFromRGB(248,126,53)
+//
+
 #endif /* RGBColors_h */

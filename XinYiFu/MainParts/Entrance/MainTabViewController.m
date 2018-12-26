@@ -27,7 +27,7 @@
     
     UITabBar *tab = [[UITabBar alloc]init];
     //    [[UITabBar appearance] setBarTintColor:[UIColor lightGrayColor]];
-    //    [UITabBar appearance].translucent = 0;
+        [UITabBar appearance].translucent = 0;
     [self setValue:tab forKeyPath:@"tabBar"];
 }
 
