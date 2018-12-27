@@ -13,6 +13,7 @@
 #import "UserInfoViewController.h"
 #import "UserSetViewController.h"
 #import "FeedbackProblemViewController.h"
+#import "MessageCenterViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -82,6 +83,11 @@
     } userCenterClick:^{
 //        个人信息
         UserInfoViewController *vc = [[UserInfoViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = 1;
+        [self.navigationController pushViewController:vc animated:YES];
+    } messageCenter:^{
+//        消息中心
+        MessageCenterViewController *vc = [[MessageCenterViewController alloc]init];
         vc.hidesBottomBarWhenPushed = 1;
         [self.navigationController pushViewController:vc animated:YES];
     }];
