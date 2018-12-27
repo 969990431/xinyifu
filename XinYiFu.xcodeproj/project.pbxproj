@@ -13,6 +13,10 @@
 		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
 		181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */; };
 		181BFF9A21D485FF00B8AB37 /* MoneyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */; };
+		181BFFA421D4A11800B8AB37 /* MoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9F21D4A11800B8AB37 /* MoneyDetailCell.m */; };
+		181BFFA521D4A11800B8AB37 /* IncomeRecordContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFFA221D4A11800B8AB37 /* IncomeRecordContentCell.m */; };
+		181BFFA621D4A11800B8AB37 /* IncomeRecordHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFFA321D4A11800B8AB37 /* IncomeRecordHeadCell.m */; };
+		181BFFA921D4C67800B8AB37 /* FeedbackProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */; };
 		184A59E321D07F87008900D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A59E221D07F87008900D5 /* AppDelegate.m */; };
 		184A59E921D07F87008900D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A59E721D07F87008900D5 /* Main.storyboard */; };
 		184A59EB21D07F89008900D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A59EA21D07F89008900D5 /* Assets.xcassets */; };
@@ -105,6 +109,14 @@
 		181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomQueryViewController.m; sourceTree = "<group>"; };
 		181BFF9821D485FF00B8AB37 /* MoneyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyDetailViewController.h; sourceTree = "<group>"; };
 		181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailViewController.m; sourceTree = "<group>"; };
+		181BFF9E21D4A11800B8AB37 /* MoneyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyDetailCell.h; sourceTree = "<group>"; };
+		181BFF9F21D4A11800B8AB37 /* MoneyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailCell.m; sourceTree = "<group>"; };
+		181BFFA021D4A11800B8AB37 /* IncomeRecordHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordHeadCell.h; sourceTree = "<group>"; };
+		181BFFA121D4A11800B8AB37 /* IncomeRecordContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordContentCell.h; sourceTree = "<group>"; };
+		181BFFA221D4A11800B8AB37 /* IncomeRecordContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordContentCell.m; sourceTree = "<group>"; };
+		181BFFA321D4A11800B8AB37 /* IncomeRecordHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordHeadCell.m; sourceTree = "<group>"; };
+		181BFFA721D4C67800B8AB37 /* FeedbackProblemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackProblemViewController.h; sourceTree = "<group>"; };
+		181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackProblemViewController.m; sourceTree = "<group>"; };
 		184A59DE21D07F87008900D5 /* XinYiFu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XinYiFu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A59E121D07F87008900D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184A59E221D07F87008900D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -405,6 +417,8 @@
 				1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */,
 				1888555D21D0F17300DF2CDC /* SetNewPasswordViewController.h */,
 				1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */,
+				181BFFA721D4C67800B8AB37 /* FeedbackProblemViewController.h */,
+				181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -842,6 +856,7 @@
 				189C48E721D4AA67004B256A /* UserSetViewController.m in Sources */,
 				184A5A3721D085FB008900D5 /* MainTabViewController.m in Sources */,
 				189C48DB21D46ED0004B256A /* MineHeaderView.m in Sources */,
+				181BFFA921D4C67800B8AB37 /* FeedbackProblemViewController.m in Sources */,
 				184A5A9021D0C3E6008900D5 /* LoginViewController.m in Sources */,
 				184A5A7B21D08F98008900D5 /* UIImage+tool.m in Sources */,
 				18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */,
