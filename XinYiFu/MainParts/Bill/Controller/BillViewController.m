@@ -8,6 +8,7 @@
 
 #import "BillViewController.h"
 #import "IncomeRecordViewController.h"
+#import "MoneyDetailViewController.h"
 
 @interface BillViewController ()
 @property (nonatomic ,strong) UITableView *backTableView;
@@ -202,6 +203,7 @@
     bottomBackView.layer.shadowOffset = CGSizeMake(0,2);
     bottomBackView.layer.shadowOpacity = 1;
     bottomBackView.layer.shadowRadius = 11;
+    [bottomBackView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moneyDetailAction:)]];
     
     todayIncome = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#999999"] font:14 aligment:NSTextAlignmentLeft];
     todayIncome.text = @"今日收款总额（元）";
@@ -283,7 +285,15 @@
 }
 
 - (void)incomeRecordAction:(UITapGestureRecognizer *)tap{
-    [self.navigationController pushViewController:[[IncomeRecordViewController alloc] init] animated:YES];
+    IncomeRecordViewController *vc = [[IncomeRecordViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)moneyDetailAction:(UITapGestureRecognizer *)tap{
+    MoneyDetailViewController *vc = [[MoneyDetailViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
