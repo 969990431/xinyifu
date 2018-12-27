@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^ClickCallBack)();
 
 @interface MineHeaderView : UIView
-+ (instancetype)mineHeaderViewWithSetClick: (ClickCallBack)setClick userCenterClick: (ClickCallBack)userCenterClick;
++ (instancetype)mineHeaderViewWithSetClick: (ClickCallBack)setClick userCenterClick: (ClickCallBack)userCenterClick messageCenter: (ClickCallBack)messageCenterClick;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,13 +20,15 @@
 
 @property (nonatomic, copy)ClickCallBack setClick;
 @property (nonatomic, copy)ClickCallBack userCenterClick;
+@property (nonatomic, copy)ClickCallBack messageCenterClick;
 @end
 
 @implementation MineHeaderView
-+ (instancetype)mineHeaderViewWithSetClick:(ClickCallBack)setClick userCenterClick:(ClickCallBack)userCenterClick {
++ (instancetype)mineHeaderViewWithSetClick:(ClickCallBack)setClick userCenterClick:(ClickCallBack)userCenterClick messageCenter:(ClickCallBack)messageCenterClick{
     MineHeaderView *view = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 211)];
     view.setClick = setClick;
     view.userCenterClick = userCenterClick;
+    view.messageCenterClick = messageCenterClick;
     
     [view.headerImageV sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:GetImage(@"bianjitouxiang")];
     view.companyNameLabel.text = @"公司名字";
@@ -100,6 +102,9 @@
         }];
         
         self.messageCenterV = [[UIView alloc]init];
+        self.messageCenterV.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gotoMessageClick)];
+        [self.messageCenterV addGestureRecognizer:tap];
         self.messageCenterV.backgroundColor = [UIColor whiteColor];
 //        self.messageCenterV.layer.masksToBounds = 1;
         self.messageCenterV.layer.cornerRadius = 5;
@@ -172,6 +177,11 @@
 - (void)gotoSetClick {
     if (self.setClick) {
         self.setClick();
+    }
+}
+- (void)gotoMessageClick {
+    if (self.messageCenterClick) {
+        self.messageCenterClick();
     }
 }
 /*

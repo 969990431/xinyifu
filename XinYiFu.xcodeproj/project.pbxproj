@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1801255E21D4C6DA000919E1 /* MessageCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801255D21D4C6DA000919E1 /* MessageCenterTableViewCell.m */; };
+		1801256121D4CD4A000919E1 /* MessageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801256021D4CD4A000919E1 /* MessageContentViewController.m */; };
 		1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */; };
 		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
 		184A59E321D07F87008900D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A59E221D07F87008900D5 /* AppDelegate.m */; };
@@ -89,6 +91,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1801255C21D4C6DA000919E1 /* MessageCenterTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCenterTableViewCell.h; sourceTree = "<group>"; };
+		1801255D21D4C6DA000919E1 /* MessageCenterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCenterTableViewCell.m; sourceTree = "<group>"; };
+		1801255F21D4CD4A000919E1 /* MessageContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageContentViewController.h; sourceTree = "<group>"; };
+		1801256021D4CD4A000919E1 /* MessageContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageContentViewController.m; sourceTree = "<group>"; };
 		1819D9DB21D31BC7009CC7E1 /* ChooseAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAddressViewController.h; sourceTree = "<group>"; };
 		1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressViewController.m; sourceTree = "<group>"; };
 		1819D9E221D323A3009CC7E1 /* XYFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYFAlertView.h; sourceTree = "<group>"; };
@@ -369,6 +375,8 @@
 				184A5A3321D0859B008900D5 /* MineViewController.m */,
 				189C48F121D4BE4D004B256A /* MessageCenterViewController.h */,
 				189C48F221D4BE4D004B256A /* MessageCenterViewController.m */,
+				1801255F21D4CD4A000919E1 /* MessageContentViewController.h */,
+				1801256021D4CD4A000919E1 /* MessageContentViewController.m */,
 				189C48DC21D4A0CA004B256A /* UserInfoViewController.h */,
 				189C48DD21D4A0CA004B256A /* UserInfoViewController.m */,
 				189C48E521D4AA66004B256A /* UserSetViewController.h */,
@@ -547,6 +555,8 @@
 				189C48E321D4A402004B256A /* UserInfoTableViewCell.m */,
 				189C48E821D4AB00004B256A /* UserSetTableViewCell.h */,
 				189C48E921D4AB00004B256A /* UserSetTableViewCell.m */,
+				1801255C21D4C6DA000919E1 /* MessageCenterTableViewCell.h */,
+				1801255D21D4C6DA000919E1 /* MessageCenterTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -831,6 +841,7 @@
 				1851F0ED21D21643009F23BD /* UserServiceViewController.m in Sources */,
 				184A5A7021D08F98008900D5 /* UIControl+indexPath.m in Sources */,
 				1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */,
+				1801256121D4CD4A000919E1 /* MessageContentViewController.m in Sources */,
 				18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */,
 				18B0748721D35CA700B8804B /* EditInfoTableViewCell.m in Sources */,
 				189C48DE21D4A0CA004B256A /* UserInfoViewController.m in Sources */,
@@ -854,6 +865,7 @@
 				184A5A7F21D08F98008900D5 /* NSString+tool.m in Sources */,
 				184A5A7121D08F98008900D5 /* UILabel+tool.m in Sources */,
 				189C48F321D4BE4D004B256A /* MessageCenterViewController.m in Sources */,
+				1801255E21D4C6DA000919E1 /* MessageCenterTableViewCell.m in Sources */,
 				184A5A2E21D0857D008900D5 /* BillViewController.m in Sources */,
 				1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */,
 				184A5A8D21D0AC96008900D5 /* BaseResponse.m in Sources */,
