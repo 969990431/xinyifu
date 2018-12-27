@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */; };
 		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
+		181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */; };
+		181BFF9A21D485FF00B8AB37 /* MoneyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */; };
+		181BFFA421D4A11800B8AB37 /* MoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9F21D4A11800B8AB37 /* MoneyDetailCell.m */; };
+		181BFFA521D4A11800B8AB37 /* IncomeRecordContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFFA221D4A11800B8AB37 /* IncomeRecordContentCell.m */; };
+		181BFFA621D4A11800B8AB37 /* IncomeRecordHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFFA321D4A11800B8AB37 /* IncomeRecordHeadCell.m */; };
 		184A59E321D07F87008900D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A59E221D07F87008900D5 /* AppDelegate.m */; };
 		184A59E921D07F87008900D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A59E721D07F87008900D5 /* Main.storyboard */; };
 		184A59EB21D07F89008900D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A59EA21D07F89008900D5 /* Assets.xcassets */; };
@@ -83,6 +88,16 @@
 		1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressViewController.m; sourceTree = "<group>"; };
 		1819D9E221D323A3009CC7E1 /* XYFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYFAlertView.h; sourceTree = "<group>"; };
 		1819D9E321D323A3009CC7E1 /* XYFAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYFAlertView.m; sourceTree = "<group>"; };
+		181BFF9521D46E7A00B8AB37 /* CustomQueryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomQueryViewController.h; sourceTree = "<group>"; };
+		181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomQueryViewController.m; sourceTree = "<group>"; };
+		181BFF9821D485FF00B8AB37 /* MoneyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyDetailViewController.h; sourceTree = "<group>"; };
+		181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailViewController.m; sourceTree = "<group>"; };
+		181BFF9E21D4A11800B8AB37 /* MoneyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyDetailCell.h; sourceTree = "<group>"; };
+		181BFF9F21D4A11800B8AB37 /* MoneyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailCell.m; sourceTree = "<group>"; };
+		181BFFA021D4A11800B8AB37 /* IncomeRecordHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordHeadCell.h; sourceTree = "<group>"; };
+		181BFFA121D4A11800B8AB37 /* IncomeRecordContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordContentCell.h; sourceTree = "<group>"; };
+		181BFFA221D4A11800B8AB37 /* IncomeRecordContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordContentCell.m; sourceTree = "<group>"; };
+		181BFFA321D4A11800B8AB37 /* IncomeRecordHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordHeadCell.m; sourceTree = "<group>"; };
 		184A59DE21D07F87008900D5 /* XinYiFu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XinYiFu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A59E121D07F87008900D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184A59E221D07F87008900D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -304,6 +319,10 @@
 				184A5A2D21D0857D008900D5 /* BillViewController.m */,
 				2F91AE5221D3878300ACF08C /* IncomeRecordViewController.h */,
 				2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */,
+				181BFF9521D46E7A00B8AB37 /* CustomQueryViewController.h */,
+				181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */,
+				181BFF9821D485FF00B8AB37 /* MoneyDetailViewController.h */,
+				181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,6 +337,12 @@
 		184A5A1C21D08132008900D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				181BFFA121D4A11800B8AB37 /* IncomeRecordContentCell.h */,
+				181BFFA221D4A11800B8AB37 /* IncomeRecordContentCell.m */,
+				181BFFA021D4A11800B8AB37 /* IncomeRecordHeadCell.h */,
+				181BFFA321D4A11800B8AB37 /* IncomeRecordHeadCell.m */,
+				181BFF9E21D4A11800B8AB37 /* MoneyDetailCell.h */,
+				181BFF9F21D4A11800B8AB37 /* MoneyDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -774,11 +799,13 @@
 				184A5A7B21D08F98008900D5 /* UIImage+tool.m in Sources */,
 				18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */,
 				18B0748121D3594D00B8804B /* PersonalAuthViewController.m in Sources */,
+				181BFFA521D4A11800B8AB37 /* IncomeRecordContentCell.m in Sources */,
 				184A59F121D07F89008900D5 /* main.m in Sources */,
 				18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */,
 				1851F0ED21D21643009F23BD /* UserServiceViewController.m in Sources */,
 				184A5A7021D08F98008900D5 /* UIControl+indexPath.m in Sources */,
 				1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */,
+				181BFF9A21D485FF00B8AB37 /* MoneyDetailViewController.m in Sources */,
 				18B0747B21D31F1500B8804B /* CashierFirstTableViewCell.m in Sources */,
 				18B0748721D35CA700B8804B /* EditInfoTableViewCell.m in Sources */,
 				184A5A7821D08F98008900D5 /* SetVerticalLabel.m in Sources */,
@@ -788,13 +815,16 @@
 				184A5A8121D08F98008900D5 /* UIView+tool.m in Sources */,
 				184A5A7A21D08F98008900D5 /* NSStringUtil.m in Sources */,
 				184A59E321D07F87008900D5 /* AppDelegate.m in Sources */,
+				181BFFA421D4A11800B8AB37 /* MoneyDetailCell.m in Sources */,
 				1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */,
 				184A5A7C21D08F98008900D5 /* UITextField+tool.m in Sources */,
+				181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */,
 				1851F0F021D233C3009F23BD /* AddAddressViewController.m in Sources */,
 				184A5A8A21D0AC2B008900D5 /* RequestManage.m in Sources */,
 				184A5A3D21D0864A008900D5 /* GuideViewController.m in Sources */,
 				2F91AE5421D3878300ACF08C /* IncomeRecordViewController.m in Sources */,
 				184A5A7F21D08F98008900D5 /* NSString+tool.m in Sources */,
+				181BFFA621D4A11800B8AB37 /* IncomeRecordHeadCell.m in Sources */,
 				184A5A7121D08F98008900D5 /* UILabel+tool.m in Sources */,
 				184A5A2E21D0857D008900D5 /* BillViewController.m in Sources */,
 				1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */,

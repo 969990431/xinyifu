@@ -7,6 +7,9 @@
 //
 
 #import "IncomeRecordViewController.h"
+#import "IncomeRecordHeadCell.h"
+#import "IncomeRecordContentCell.h"
+#import "CustomQueryViewController.h"
 
 @interface IncomeRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *backTableView;
@@ -43,62 +46,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"title"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"title"];
-            UILabel *incomeCountLabel = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"999999"] font:16 aligment:NSTextAlignmentLeft];
-            incomeCountLabel.text = @"收款笔数";
-            [cell.contentView addSubview:incomeCountLabel];
-            [incomeCountLabel mas_makeConstraints:^(MASConstraintMaker *make){
-                make.top.mas_equalTo(16);
-                make.left.mas_equalTo(16);
-                make.height.mas_equalTo(22);
-            }];
-            
-            UILabel *countValueLabel = [UILabel labelWithTextColor:WordCloseBlack font:24 aligment:NSTextAlignmentLeft];
-            countValueLabel.tag = 1001;
-            [cell.contentView addSubview:countValueLabel];
-            [countValueLabel mas_makeConstraints:^(MASConstraintMaker *make){
-                make.top.mas_equalTo(incomeCountLabel.mas_bottom).offset(10);
-                make.left.mas_equalTo(16);
-                make.height.mas_equalTo(34);
-            }];
-            
-            UILabel *totalTitle = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"999999"] font:16 aligment:NSTextAlignmentRight];
-            totalTitle.text = @"合计";
-            [cell.contentView addSubview:totalTitle];
-            [totalTitle mas_makeConstraints:^(MASConstraintMaker *make){
-                make.top.mas_equalTo(16);
-                make.right.mas_equalTo(cell.contentView.mas_right).offset(-16);
-                make.height.mas_equalTo(22);
-            }];
-
-            UILabel *totalValue = [UILabel labelWithTextColor:WordCloseBlack font:24 aligment:NSTextAlignmentLeft];
-            totalValue.tag = 1002;
-            [cell.contentView addSubview:totalValue];
-            [totalValue mas_makeConstraints:^(MASConstraintMaker *make){
-                make.top.mas_equalTo(totalTitle.mas_bottom).offset(10);
-                make.right.mas_equalTo(cell.contentView.mas_right).offset(-16);
-                make.height.mas_equalTo(34);
-            }];
-        }
-        UILabel *countValueLabel = [cell.contentView viewWithTag:1001];
-        countValueLabel.text = @"2";
-        
-        UILabel *totalValue = [cell.contentView viewWithTag:1002];
-        totalValue.text = @"￥23.00";
-
-        return cell;
+        return [IncomeRecordHeadCell cellWithTableView:tableView indexPath:indexPath count:@"2" total:@"￥23.00"];
     }else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"content"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"content"];
-            
-            UILabel *name = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentLeft];
-            
-            
-        }
-        return cell;
+        return [IncomeRecordContentCell cellWithTableView:tableView indexPath:indexPath name:@"zk***夏天" time:@"13：00：89" money:@"￥20.00"];
     }
 }
 
@@ -107,6 +57,49 @@
         return 86.f;
     }
     return 66.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
+    
+    UILabel *timeLabel = [UILabel labelWithTextColor:AlertGray font:16 aligment:NSTextAlignmentLeft];
+    timeLabel.text = @"2018年12月18日";
+    [backView addSubview:timeLabel];
+    [timeLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.mas_equalTo(backView);
+        make.left.mas_equalTo(16);
+        make.height.mas_equalTo(22);
+    }];
+    
+    if (section == 0) {
+        UIButton *queryBtn = [UIButton buttonWithTitle:@"自定义查询" font:16 titleColor:[UIColor colorWithHexString:@"#3FC3C2"] backGroundColor:nil aligment:UIControlContentHorizontalAlignmentRight];
+        [queryBtn addTarget:self action:@selector(customQueryAction:) forControlEvents:UIControlEventTouchUpInside];
+        [backView addSubview:queryBtn];
+        [queryBtn mas_makeConstraints:^(MASConstraintMaker *make){
+            make.centerY.mas_equalTo(backView);
+            make.right.mas_equalTo(backView.mas_right).offset(-16);
+            make.width.mas_equalTo(100);
+            make.height.mas_equalTo(22);
+        }];
+    }
+    
+    return backView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
+}
+
+- (void)customQueryAction:(UIButton *)sender{
+    [self.navigationController pushViewController:[[CustomQueryViewController alloc] init] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
