@@ -8,7 +8,7 @@
 
 #import "FeedbackProblemViewController.h"
 
-@interface FeedbackProblemViewController ()
+@interface FeedbackProblemViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic ,strong) UITableView *backTableView;
 
 @property (nonatomic ,strong) UITextView *textView;
@@ -119,13 +119,33 @@
 }
 
 - (void)reloadImageWall{
+    [self.imageWallView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     CGFloat imageWidth = (CGRectGetWidth(self.view.frame) - 36 - 20) / 3;
     for (int i = 0; i < self.imageArray.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.imageArray[i]];
+        [self.imageWallView addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(10);
+            make.left.mas_equalTo(18+imageWidth*i+10*i);
+            make.width.height.mas_equalTo(imageWidth);
+        }];
+        
+        UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        delBtn.tag = 20181227+i;
+        [delBtn addTarget:self action:@selector(deleteImage:) forControlEvents:UIControlEventTouchUpInside];
+        [delBtn setBackgroundImage:GetImage(@"deletePic") forState:UIControlStateNormal];
+        [self.imageWallView addSubview:delBtn];
+        [delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(imageView.mas_right).offset(-14);
+            make.top.mas_equalTo(imageView.mas_top).offset(-6);
+            make.width.height.mas_equalTo(20);
+        }];
     }
     
     if (self.imageArray.count < 3) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setBackgroundImage:GetImage(@"shangchuantupian") forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(addImage) forControlEvents:UIControlEventTouchUpInside];
         [self.imageWallView addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
@@ -136,8 +156,51 @@
 
 }
 
+- (void)deleteImage:(UIButton *)sender{
+    [self.imageArray removeObjectAtIndex:sender.tag - 20181227];
+    [self reloadImageWall];
+}
+
 - (void)addImage{
-//    UIAlertController *alert = [UIAlertController al]
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+        picker.mediaTypes = temp_MediaTypes;
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"照相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+            picker.mediaTypes = temp_MediaTypes;
+            picker.delegate = self;
+            picker.allowsEditing = NO;
+        }
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+        
+    }]];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    if (!self.imageArray) {
+        self.imageArray = [[NSMutableArray alloc] init];
+    }
+    [self.imageArray addObject:info[@"UIImagePickerControllerOriginalImage"]];
+    [self reloadImageWall];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
