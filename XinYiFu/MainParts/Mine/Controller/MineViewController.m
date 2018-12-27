@@ -12,6 +12,7 @@
 
 #import "UserInfoViewController.h"
 #import "UserSetViewController.h"
+#import "FeedbackProblemViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -96,7 +97,11 @@
     return [MineTableViewCell cellWithTableView:tableView indexPath:indexPath imageName:self.titleImageNameArray[indexPath.row+1] title:self.titleArray[indexPath.row+1]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.row == 2) {
+        FeedbackProblemViewController *vc = [[FeedbackProblemViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 
