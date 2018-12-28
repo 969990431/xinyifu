@@ -37,6 +37,22 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     //请求
     VDLog(@"\nRequest=====>URl:%@%@\nparams:%@",baseUrl,formatAPI,[params my_description]);
+    
+    
+    NSMutableDictionary *generalParam = [NSMutableDictionary new];
+    NSArray *digestArray = @[@"app", @"userLogin", [NSString convertToJsonData:params], @"1545655591864", @"Jg9eWSEllo"];
+    NSString *md5Digest = [NSString stringToMD5:[digestArray componentsJoinedByString:@""]];
+    NSString *base64Digest = [[md5Digest dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];
+//    NSString *digest = [[[NSString stringToMD5:[digestArray componentsJoinedByString:@""]] dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];;
+    
+    [generalParam setObject:[NSString convertToJsonData:params] forKey:@"params"];
+    [generalParam setObject:@"app" forKey:@"appKey"];
+    [generalParam setObject:@"userLogin" forKey:@"serviceCode"];
+    [generalParam setObject:@"1545655591864" forKey:@"timestamp"];
+    [generalParam setObject:base64Digest forKey:@"digest"];
+
+    NSLog(@"md5Digest========%@\nbase64Digest===========%@\nparameter ====== %@", md5Digest, base64Digest, generalParam);
+    
     [[RequestManage shareHTTPManage] POST:formatAPI parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

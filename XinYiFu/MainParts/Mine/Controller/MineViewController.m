@@ -14,6 +14,7 @@
 #import "UserSetViewController.h"
 #import "FeedbackProblemViewController.h"
 #import "MessageCenterViewController.h"
+#import "GradeViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -103,10 +104,22 @@
     return [MineTableViewCell cellWithTableView:tableView indexPath:indexPath imageName:self.titleImageNameArray[indexPath.row+1] title:self.titleArray[indexPath.row+1]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        GradeViewController *vc = [[GradeViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     if (indexPath.row == 2) {
         FeedbackProblemViewController *vc = [[FeedbackProblemViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.row == 0) {
+        
+        [[RequestTool shareManager]sendRequestWithAPI:@"" withVC:self withParams:@{@"mobile":@"13111111111", @"password":@"test123", @"version":@"1.0.1"} withClassName:nil responseBlock:^(id response, BOOL isError, NSString *errorMessage, NSInteger errorCode) {
+            
+        }];
     }
 }
 

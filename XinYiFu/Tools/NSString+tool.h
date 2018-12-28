@@ -258,4 +258,7 @@ typedef enum
  */
 +(NSString *)countNumAndChangeformat:(NSString *)num;
 
+
+//字典转json
++ (NSString *)convertToJsonData:(NSDictionary *)dict;
 @end
