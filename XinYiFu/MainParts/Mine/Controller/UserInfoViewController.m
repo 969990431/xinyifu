@@ -10,8 +10,9 @@
 #import "UserInfoTableViewCell.h"
 #import "UserHeaderTableViewCell.h"
 
-@interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
+@property (nonatomic, strong)UIImage *headerImage;
 @end
 
 @implementation UserInfoViewController
@@ -71,13 +72,54 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? [UserHeaderTableViewCell cellWithTableView:tableView]:[UserInfoTableViewCell cellWithTableView:tableView indexPath:indexPath];
+    return indexPath.section == 0 ? [UserHeaderTableViewCell cellWithTableView:tableView headerImage:self.headerImage]:[UserInfoTableViewCell cellWithTableView:tableView indexPath:indexPath];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.row == 0) {
+        [self addImage];
+    }
 }
 //退出登录
 - (void)loginOutAction {
     
+}
+
+- (void)addImage{
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+        picker.mediaTypes = temp_MediaTypes;
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"照相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+            picker.mediaTypes = temp_MediaTypes;
+            picker.delegate = self;
+            picker.allowsEditing = NO;
+        }
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+        
+    }]];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    self.headerImage = info[@"UIImagePickerControllerOriginalImage"];
+    [self.backTableView reloadData];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 @end

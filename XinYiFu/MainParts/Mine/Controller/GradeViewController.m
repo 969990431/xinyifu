@@ -22,15 +22,37 @@
     [self prepareViews];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:18]};
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(119,119,119)];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont systemFontOfSize:18]};
+}
+
 - (void)prepareViews {
+    self.title = @"等级/费率";
+    
     UIImageView *backImageV = [[UIImageView alloc]initWithImage:GetImage(@"dengjibeijing")];
     backImageV.backgroundColor = RandomColor;
     [self.view addSubview:backImageV];
     [backImageV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+
     
     UIView *whiteBackView = [[UIView alloc]init];
+    whiteBackView.layer.cornerRadius = 8;
+    whiteBackView.layer.masksToBounds = YES;
     whiteBackView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:whiteBackView];
     [whiteBackView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -45,7 +67,7 @@
     [gradeImageV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(15);
         make.left.mas_equalTo(15);
-        make.size.mas_equalTo(CGSizeMake(16, 25));
+        make.size.mas_equalTo(CGSizeMake(29, 40));
     }];
     
     UILabel *gradeTitleLabel = [UILabel labelWithTextColor:WordCloseBlack font:14 aligment:NSTextAlignmentLeft];
@@ -76,7 +98,7 @@
         make.width.mas_equalTo(gradeTitleLabel);
     }];
     
-    self.rateLabel = [UILabel labelWithTextColor:UIColorFromRGB(126,88,74) font:18 aligment:NSTextAlignmentLeft];
+    self.rateLabel = [UILabel labelWithTextColor:UIColorFromRGB(240,77,26) font:18 aligment:NSTextAlignmentLeft];
     self.rateLabel.text = @"12%";
     [whiteBackView addSubview:self.rateLabel];
     [self.rateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -95,20 +117,21 @@
     }];
     
     self.allGradeImageV = [[UIImageView alloc]initWithImage:GetImage(@"dengji1")];
+    self.allGradeImageV.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:self.allGradeImageV];
     [self.allGradeImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
-        make.top.mas_equalTo(textLabel1.mas_bottom).offset(16);
-        make.height.mas_equalTo((SCREEN_WIDTH-30)/2);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.top.mas_equalTo(textLabel1.mas_bottom).offset(0);
+        make.height.mas_equalTo(SCREEN_WIDTH*474/775);
     }];
     
     UILabel *textLabel2 = [UILabel labelWithTextColor:[UIColor whiteColor] font:16 aligment:NSTextAlignmentLeft];
-    textLabel2.text = @"什么是用户等级";
+    textLabel2.text = @"什么是用户等级?";
     [self.view addSubview:textLabel2];
     [textLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(self.allGradeImageV.mas_bottom).offset(20);
+        make.top.mas_equalTo(self.allGradeImageV.mas_bottom).offset(10);
         make.height.mas_equalTo(20);
     }];
     
@@ -117,7 +140,7 @@
     [self.view addSubview:textLabel3];
     [textLabel3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
-        make.top.mas_equalTo(textLabel2.mas_bottom).offset(27);
+        make.top.mas_equalTo(textLabel2.mas_bottom).offset(6);
         make.height.mas_equalTo(20);
         make.right.mas_equalTo(-15);
     }];
@@ -127,6 +150,7 @@
     [self.view addSubview:textLabel4];
     [textLabel4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
         make.bottom.mas_equalTo(self.view.mas_bottom).offset(-20);
         make.height.mas_equalTo(20);
     }];

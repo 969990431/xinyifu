@@ -87,6 +87,7 @@
             self.headerImageV.layer.cornerRadius = 50;
             self.headerImageV.layer.borderColor = [UIColor whiteColor].CGColor;
             self.headerImageV.layer.borderWidth = 2;
+        self.headerImageV.userInteractionEnabled = 1;
             [self addSubview:self.headerImageV];
             self.headerImageV.backgroundColor = RandomColor;
             [self.headerImageV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,6 +95,8 @@
                 make.bottom.mas_equalTo(self.backView.mas_top).offset(50);
                 make.size.mas_equalTo(100);
             }];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeader)];
+        [self.headerImageV addGestureRecognizer:tap];
         
         self.statusLabel = [UILabel labelWithTextColor:[UIColor whiteColor] font:13 aligment:NSTextAlignmentCenter];
         self.statusLabel.layer.cornerRadius = 3;
@@ -519,6 +522,12 @@
         
         self.moneyLabel.hidden = 0;
         self.moneyTextLabel.hidden = 0;
+    }
+}
+
+- (void)clickHeader {
+    if ([self.delegate respondsToSelector:@selector(clickTheHeader)]) {
+        [self.delegate clickTheHeader];
     }
 }
 @end

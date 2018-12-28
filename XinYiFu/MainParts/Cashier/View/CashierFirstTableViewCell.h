@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol CashierFirstTableViewCellDelegate <NSObject>
-
+- (void)clickTheHeader;
 - (void)authenWithType: (NSInteger)type;
 
 - (void)setMoney;

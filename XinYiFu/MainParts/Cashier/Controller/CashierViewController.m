@@ -19,7 +19,7 @@
 #import "SetMoneyViewController.h"
 #import "AuthStatusViewController.h"
 
-@interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate>
+@interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 /**
  显示类型
@@ -32,7 +32,7 @@
 @property (nonatomic, assign)NSInteger type;
 
 @property (nonatomic, strong)UITableView *backTableView;
-@property (nonatomic, strong)UIImageView *headerImageV;
+@property (nonatomic, strong)UIImage *headerImage;
 @end
 
 @implementation CashierViewController
@@ -149,7 +149,7 @@
 }
 //保存首款吗
 - (void)savePic {
-    
+    [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
 }
 //收款记录
 - (void)gotoRecord {
@@ -162,5 +162,49 @@
     [self.navigationController pushViewController:view animated:YES];
 //    AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
 //    [self.navigationController pushViewController:authVC animated:YES];
+}
+//点击头像
+- (void)clickTheHeader {
+    [self addImage];
+}
+
+
+- (void)addImage{
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+        picker.mediaTypes = temp_MediaTypes;
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"照相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+            picker.mediaTypes = temp_MediaTypes;
+            picker.delegate = self;
+            picker.allowsEditing = NO;
+        }
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+        
+    }]];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    self.headerImage = info[@"UIImagePickerControllerOriginalImage"];
+    [self.backTableView reloadData];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 @end

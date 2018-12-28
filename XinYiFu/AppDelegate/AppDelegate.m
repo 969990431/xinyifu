@@ -17,6 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD setMaximumDismissTimeInterval:2];
     self.window.rootViewController = [[MainTabViewController alloc]init];
     // Override point for customization after application launch.
     return YES;

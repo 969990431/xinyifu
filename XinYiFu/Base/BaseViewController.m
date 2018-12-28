@@ -27,6 +27,7 @@
         self.navigationItem.backBarButtonItem=backItem;
     }
     if (self.naviType == 1) {
+//        透明
         
     }
     if (self.naviType == 2) {

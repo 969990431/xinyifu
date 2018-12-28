@@ -14,7 +14,7 @@
 @property (nonatomic, strong)UIImageView *nextImageV;
 @end
 @implementation UserHeaderTableViewCell
-+ (instancetype)cellWithTableView:(UITableView *)tableView {
++ (instancetype)cellWithTableView:(UITableView *)tableView headerImage: (UIImage *)image{
     UserHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserHeaderTableViewCell"];
     if (!cell) {
         cell = [[UserHeaderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UserHeaderTableViewCell"];
@@ -23,6 +23,7 @@
     
     cell.titleLabel.text = @"头像";
     [cell.headerImageV sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:GetImage(@"touxiang")];
+    [cell.headerImageV setImage:image];
     
     return cell;
 }
@@ -39,6 +40,8 @@
         }];
         
         self.headerImageV = [[UIImageView alloc]init];
+        self.headerImageV.layer.masksToBounds = 1;
+        self.headerImageV.layer.cornerRadius = 22.5;
         [self addSubview:self.headerImageV];
         [self.headerImageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-26);

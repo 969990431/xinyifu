@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UserHeaderTableViewCell : UITableViewCell
-+ (instancetype)cellWithTableView: (UITableView *)tableView;
++ (instancetype)cellWithTableView: (UITableView *)tableView headerImage: (UIImage *)image;
 @end
 
 NS_ASSUME_NONNULL_END
