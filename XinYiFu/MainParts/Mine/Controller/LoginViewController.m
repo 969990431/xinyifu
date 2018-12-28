@@ -222,4 +222,8 @@
     [self presentViewController:[[RegisterViewController alloc]init] animated:YES completion:nil];
 }
 
+- (void)loginAction {
+
+}
+
 @end
