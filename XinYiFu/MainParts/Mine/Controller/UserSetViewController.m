@@ -9,6 +9,7 @@
 #import "UserSetViewController.h"
 #import "UserSetTableViewCell.h"
 #import "ChangePhoneOldViewController.h"
+#import "AboutUsViewController.h"
 
 @interface UserSetViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -76,6 +77,7 @@
     }else {
         if (indexPath.row == 0) {
 //关于
+            [self.navigationController pushViewController:[[AboutUsViewController alloc] init] animated:YES];
         }else {
 //            联系客服
             return;

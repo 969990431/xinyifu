@@ -12,6 +12,7 @@
 
 #import "UserInfoViewController.h"
 #import "UserSetViewController.h"
+#import "UserAuthTypeViewController.h"
 #import "FeedbackProblemViewController.h"
 #import "MessageCenterViewController.h"
 
@@ -103,7 +104,11 @@
     return [MineTableViewCell cellWithTableView:tableView indexPath:indexPath imageName:self.titleImageNameArray[indexPath.row+1] title:self.titleArray[indexPath.row+1]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2) {
+    if (indexPath.row == 0) {
+        UserAuthTypeViewController *vc = [[UserAuthTypeViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 2) {
         FeedbackProblemViewController *vc = [[FeedbackProblemViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];

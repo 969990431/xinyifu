@@ -18,6 +18,8 @@
 		181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */; };
 		181BFF9A21D485FF00B8AB37 /* MoneyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */; };
 		181BFFA921D4C67800B8AB37 /* FeedbackProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */; };
+		18243FA921D5B1700001576F /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18243FA821D5B1700001576F /* AboutUsViewController.m */; };
+		18243FAC21D5B8DA0001576F /* UserAuthTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18243FAB21D5B8DA0001576F /* UserAuthTypeViewController.m */; };
 		184A59E321D07F87008900D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A59E221D07F87008900D5 /* AppDelegate.m */; };
 		184A59E921D07F87008900D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A59E721D07F87008900D5 /* Main.storyboard */; };
 		184A59EB21D07F89008900D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A59EA21D07F89008900D5 /* Assets.xcassets */; };
@@ -120,6 +122,10 @@
 		181BFF9921D485FF00B8AB37 /* MoneyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailViewController.m; sourceTree = "<group>"; };
 		181BFFA721D4C67800B8AB37 /* FeedbackProblemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackProblemViewController.h; sourceTree = "<group>"; };
 		181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackProblemViewController.m; sourceTree = "<group>"; };
+		18243FA721D5B1700001576F /* AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		18243FA821D5B1700001576F /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		18243FAA21D5B8DA0001576F /* UserAuthTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAuthTypeViewController.h; sourceTree = "<group>"; };
+		18243FAB21D5B8DA0001576F /* UserAuthTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAuthTypeViewController.m; sourceTree = "<group>"; };
 		184A59DE21D07F87008900D5 /* XinYiFu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XinYiFu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A59E121D07F87008900D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184A59E221D07F87008900D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -407,9 +413,9 @@
 				189C48F121D4BE4D004B256A /* MessageCenterViewController.h */,
 				189C48F221D4BE4D004B256A /* MessageCenterViewController.m */,
 				1801255F21D4CD4A000919E1 /* MessageContentViewController.h */,
+				1801256021D4CD4A000919E1 /* MessageContentViewController.m */,
 				1801257621D4DA29000919E1 /* GradeViewController.h */,
 				1801257721D4DA29000919E1 /* GradeViewController.m */,
-				1801256021D4CD4A000919E1 /* MessageContentViewController.m */,
 				189C48DC21D4A0CA004B256A /* UserInfoViewController.h */,
 				189C48DD21D4A0CA004B256A /* UserInfoViewController.m */,
 				189C48E521D4AA66004B256A /* UserSetViewController.h */,
@@ -430,6 +436,8 @@
 				1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */,
 				181BFFA721D4C67800B8AB37 /* FeedbackProblemViewController.h */,
 				181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */,
+				18243FA721D5B1700001576F /* AboutUsViewController.h */,
+				18243FA821D5B1700001576F /* AboutUsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -449,6 +457,8 @@
 			children = (
 				184A5A2F21D08590008900D5 /* CashierViewController.h */,
 				184A5A3021D08590008900D5 /* CashierViewController.m */,
+				18243FAA21D5B8DA0001576F /* UserAuthTypeViewController.h */,
+				18243FAB21D5B8DA0001576F /* UserAuthTypeViewController.m */,
 				18B0747F21D3594D00B8804B /* PersonalAuthViewController.h */,
 				18B0748021D3594D00B8804B /* PersonalAuthViewController.m */,
 				18B0748A21D3698700B8804B /* CompanyAuthenViewController.h */,
@@ -885,6 +895,7 @@
 				184A5A7821D08F98008900D5 /* SetVerticalLabel.m in Sources */,
 				184A5A8821D0AC2B008900D5 /* RequestTool.m in Sources */,
 				184A5A3421D0859B008900D5 /* MineViewController.m in Sources */,
+				18243FAC21D5B8DA0001576F /* UserAuthTypeViewController.m in Sources */,
 				18B0746C21D1FD8200B8804B /* RegisterViewController.m in Sources */,
 				184A5A8121D08F98008900D5 /* UIView+tool.m in Sources */,
 				189C48ED21D4AF52004B256A /* ChangePhoneOldViewController.m in Sources */,
@@ -912,6 +923,7 @@
 				184A5A8D21D0AC96008900D5 /* BaseResponse.m in Sources */,
 				18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */,
 				184A5A7421D08F98008900D5 /* UIColor+StringColor.m in Sources */,
+				18243FA921D5B1700001576F /* AboutUsViewController.m in Sources */,
 				184A5A7D21D08F98008900D5 /* NSString+MD5.m in Sources */,
 				18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */,
 				184A5A7221D08F98008900D5 /* UIButton+tool.m in Sources */,
