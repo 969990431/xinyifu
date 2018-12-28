@@ -40,7 +40,7 @@
     
     
     NSMutableDictionary *generalParam = [NSMutableDictionary new];
-    NSArray *digestArray = @[@"app", @"userLogin", [NSString convertToJsonData:params], @"1545655591864", @"Jg9eWSEllo"];
+    NSArray *digestArray = @[@"app", @"userLogin", [self sortParams:params], @"1545655591864", @"Jg9eWSEllo"];
     NSString *md5Digest = [NSString stringToMD5:[digestArray componentsJoinedByString:@""]];
     NSString *base64Digest = [[md5Digest dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];
 //    NSString *digest = [[[NSString stringToMD5:[digestArray componentsJoinedByString:@""]] dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];;
@@ -279,6 +279,27 @@ static void main_view_queue(void (^block)(void))
     
 }
 
-
+- (NSString *)sortParams:(NSDictionary *)dic{
+    NSArray *keysArr = [NSArray arrayWithArray:[dic allKeys]];
+    NSMutableArray *lowerMutArr = [NSMutableArray arrayWithCapacity:0];
+    NSMutableDictionary *lowerMutDic = [[NSMutableDictionary alloc]init];
+    for (NSString *s in keysArr) {
+        if ([dic[s] isKindOfClass:[NSString class]]) {
+            if ([dic[s] isEqualToString:@""]) { // 为空不参与加密计算
+                continue;
+            }
+        }
+        [lowerMutArr addObject:[s lowercaseString]];
+        [lowerMutDic setObject:dic[s] forKey:[s lowercaseString]];
+    }
+    NSArray *sortedArr = [lowerMutArr sortedArrayUsingSelector:@selector(compare:)];
+    NSMutableString *mutStr = [[NSMutableString alloc] initWithString:@"{"];;
+    for (int i = 0; i < sortedArr.count; i ++) {
+        NSString *key = sortedArr[i];
+        
+        [mutStr appendString:[NSString stringWithFormat:@"\"%@\":\"%@\",",key,lowerMutDic[key]]];
+    }
+    return [NSString stringWithFormat:@"%@}",[mutStr substringWithRange:NSMakeRange(0, mutStr.length - 1)]];
+}
 
 @end
