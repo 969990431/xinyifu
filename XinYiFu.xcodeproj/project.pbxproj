@@ -13,6 +13,7 @@
 		1801256B21D4D426000919E1 /* MoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801256521D4D426000919E1 /* MoneyDetailCell.m */; };
 		1801256C21D4D426000919E1 /* IncomeRecordHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801256621D4D426000919E1 /* IncomeRecordHeadCell.m */; };
 		1801257821D4DA29000919E1 /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801257721D4DA29000919E1 /* GradeViewController.m */; };
+		1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811DA5921D703AA0084AD76 /* NoNetworkView.m */; };
 		1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */; };
 		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
 		181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */; };
@@ -113,6 +114,8 @@
 		1801256921D4D426000919E1 /* IncomeRecordContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordContentCell.h; sourceTree = "<group>"; };
 		1801257621D4DA29000919E1 /* GradeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeViewController.h; sourceTree = "<group>"; };
 		1801257721D4DA29000919E1 /* GradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
+		1811DA5821D703AA0084AD76 /* NoNetworkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoNetworkView.h; sourceTree = "<group>"; };
+		1811DA5921D703AA0084AD76 /* NoNetworkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoNetworkView.m; sourceTree = "<group>"; };
 		1819D9DB21D31BC7009CC7E1 /* ChooseAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAddressViewController.h; sourceTree = "<group>"; };
 		1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressViewController.m; sourceTree = "<group>"; };
 		1819D9E221D323A3009CC7E1 /* XYFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYFAlertView.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 			children = (
 				1819D9E221D323A3009CC7E1 /* XYFAlertView.h */,
 				1819D9E321D323A3009CC7E1 /* XYFAlertView.m */,
+				1811DA5821D703AA0084AD76 /* NoNetworkView.h */,
+				1811DA5921D703AA0084AD76 /* NoNetworkView.m */,
 			);
 			path = CommonFunction;
 			sourceTree = "<group>";
@@ -934,6 +939,7 @@
 				18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */,
 				184A5A7221D08F98008900D5 /* UIButton+tool.m in Sources */,
 				184A5A7521D08F98008900D5 /* UINavigationController+BackButtonHandler.m in Sources */,
+				1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */,
 				184A5A3A21D08628008900D5 /* NavViewController.m in Sources */,
 				18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */,
 				184A5A7E21D08F98008900D5 /* ModelToJson.m in Sources */,

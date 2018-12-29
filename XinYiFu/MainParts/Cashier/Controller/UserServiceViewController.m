@@ -252,8 +252,7 @@
 
 - (void)submitBtnAction:(UIButton *)sender{
     if (selectedButton == self.item0) {
-        XYFAlertView *view = [[XYFAlertView alloc] initAlertViewWithTitle:@"恭喜您，领取成功" content:@"您的订单已收到，会尽快给您发货！" buttonTitle:@"确定"];
-        [view show];
+        [XYFAlertView showAlertViewWithTitle:@"恭喜您，领取成功" content:@"您的订单已收到，会尽快给您发货！" buttonTitle:@"确定"];
     }
 }
 

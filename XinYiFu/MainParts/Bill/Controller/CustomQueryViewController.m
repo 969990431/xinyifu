@@ -22,7 +22,6 @@
 
 @property (nonatomic ,strong) UIView *datePickerBackView;
 @property (nonatomic ,strong) UIDatePicker *datePicker;
-@property (nonatomic ,strong) NSDate *lastDate;
 @end
 
 @implementation CustomQueryViewController
@@ -43,6 +42,16 @@
     [self.backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+    
+    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
+    UILabel *tipsLabel = [UILabel labelWithTextColor:AlertGray font:16 aligment:NSTextAlignmentLeft];
+    tipsLabel.text = @"目前仅支持开始时间起30日内的查询";
+    [tableHeaderView addSubview:tipsLabel];
+    [tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(tableHeaderView);
+        make.left.mas_equalTo(16);
+    }];
+    self.backTableView.tableHeaderView = tableHeaderView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -113,16 +122,16 @@
             self.chooseTF = self.startTime;
             [self createDatePickerView];
         }else if(indexPath.row == 1) {
-            self.chooseTF = self.endTime;
-            [self createDatePickerView];
-        }else if (indexPath.row == 2) {
-            if ([self.endDate compare:self.startDate] >= 0) {
-                self.getResult = YES;
-                [tableView reloadData];
+            if (self.startDate) {
+                self.chooseTF = self.endTime;
+                [self createDatePickerView];
             }else{
-                [SVProgressHUD showInfoWithStatus:@"截止时间需晚于开始时间"];
+                [SVProgressHUD showInfoWithStatus:@"请先选择开始时间"];
                 [SVProgressHUD dismissWithDelay:2];
             }
+        }else if (indexPath.row == 2) {
+            self.getResult = YES;
+            [tableView reloadData];
         }
     }
 }
@@ -172,12 +181,33 @@
     self.datePicker.backgroundColor = [UIColor whiteColor];
     self.datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    if (self.lastDate) {
-        [self.datePicker setDate:self.lastDate];
+
+    if (self.chooseTF == self.startTime && self.startDate) {
+        [self.datePicker setDate:self.startDate];
+    }else if (self.chooseTF == self.endTime) {
+        if (self.endDate) {
+            [self.datePicker setDate:self.endDate];
+        }else{
+            [self.datePicker setDate:self.startDate];
+        }
     }else{
-        [self.datePicker setDate:[NSDate date] animated:YES];
+        [self.datePicker setDate:[NSDate date]];
     }
-    [self.datePicker setMaximumDate:[NSDate date]];
+    
+    if (self.startDate && self.chooseTF == self.endTime) {
+        [self.datePicker setMinimumDate:self.startDate];
+        
+        NSDate *date =  [NSDate dateWithTimeInterval:24*60*60*30 sinceDate:self.startDate];
+        if ([date timeIntervalSince1970] > [[NSDate date] timeIntervalSince1970]) {
+            [self.datePicker setMaximumDate:[NSDate date]];
+        }else{
+            [self.datePicker setMaximumDate:date];
+        }
+    }else{
+        [self.datePicker setMaximumDate:[NSDate date]];
+    }
+    
+
     [self.datePickerBackView addSubview:self.datePicker];
     
     UIView *toolBar = [[UIView alloc] init];
@@ -217,46 +247,44 @@
 }
 
 - (void)submitTime:(id)sender{
-    self.lastDate = self.datePicker.date;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     self.chooseTF.text = [dateFormat stringFromDate:self.datePicker.date];
     if (self.chooseTF == self.startTime) {
         self.startDate = self.datePicker.date;
+
+        if (self.endTime) {
+            if ([self.endDate timeIntervalSince1970] < [self.startDate timeIntervalSince1970]) {
+                self.endTime.text = nil;
+                self.endDate = nil;
+            }else{
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                //利用NSCalendar比较日期的差异
+                NSCalendar *calendar = [NSCalendar currentCalendar];
+                /**
+                 * 要比较的时间单位,常用如下,可以同时传：
+                 *    NSCalendarUnitDay : 天
+                 *    NSCalendarUnitYear : 年
+                 *    NSCalendarUnitMonth : 月
+                 *    NSCalendarUnitHour : 时
+                 *    NSCalendarUnitMinute : 分
+                 *    NSCalendarUnitSecond : 秒
+                 */
+                NSCalendarUnit unit = NSCalendarUnitDay;//只比较天数差异
+                //比较的结果是NSDateComponents类对象
+                NSDateComponents *delta = [calendar components:unit fromDate:self.startDate toDate:self.endDate options:0];
+                if (delta.day > 30) {
+                    self.endTime.text = nil;
+                    self.endDate = nil;
+                }
+            }
+        }
+
     }else{
         self.endDate = self.datePicker.date;
     }
     [self.datePickerBackView removeFromSuperview];
-}
-
-
-- (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-    
-    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
-    
-    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
-    
-    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
-    
-    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
-    
-    NSComparisonResult result = [dateA compare:dateB];
-    
-    if (result == NSOrderedDescending) {
-        //NSLog(@"oneDay比 anotherDay时间晚");
-        return 1;
-    }
-    else if (result == NSOrderedAscending){
-        //NSLog(@"oneDay比 anotherDay时间早");
-        return -1;
-    }
-    //NSLog(@"两者时间是同一个时间");
-    return 0;
-    
 }
 
 /*
