@@ -150,9 +150,8 @@
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(segLine2.mas_bottom).offset(40);
     }];
-
-    XYFAlertView *view = [[XYFAlertView alloc] initAlertViewWithTitle:@"设置成功" content:@"密码设置成功，请重新登录密码设置成功，请重新登录密码设置成功，请重新登录" buttonTitle:@"现在登录"];
-    [view show];
+    
+    [XYFAlertView showAlertViewWithTitle:@"设置成功" content:@"密码设置成功，请重新登录密码设置成功，请重新登录密码设置成功，请重新登录" buttonTitle:@"现在登录"];
 }
 
 - (void)textfieldChanged: (UITextField *)textField {

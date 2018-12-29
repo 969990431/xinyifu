@@ -18,6 +18,11 @@
 }
 */
 
++ (void)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle{
+    XYFAlertView *view = [[XYFAlertView alloc] initAlertViewWithTitle:title content:content buttonTitle:buttonTitle];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+}
+
 - (UIView *)initAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle{
     if (self = [super initWithFrame:[UIApplication sharedApplication].keyWindow.frame]) {
         self.backgroundColor = UIColorFromRGBWithAlpha(0, .5);

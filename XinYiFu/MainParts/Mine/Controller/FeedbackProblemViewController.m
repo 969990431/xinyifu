@@ -8,7 +8,7 @@
 
 #import "FeedbackProblemViewController.h"
 
-@interface FeedbackProblemViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface FeedbackProblemViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,NoNetworkViewDelegate>
 @property (nonatomic ,strong) UITableView *backTableView;
 
 @property (nonatomic ,strong) UITextView *textView;
@@ -23,6 +23,11 @@
     [super viewDidLoad];
     self.title = @"反馈问题";
     [self prepareViews];
+    [NoNetworkView showWithDelegate:self];
+}
+
+- (void)refreshData{
+    NSLog(@"1");
 }
 
 - (void)prepareViews{

@@ -31,6 +31,7 @@
 #import "UITextField+tool.h"
 #import "UIControl+indexPath.h"
 #import "XYFAlertView.h"
+#import "NoNetworkView.h"
 #import "RequestTool.h"
 
 #endif /* XinYiFu_PrefixHeader_pch */
