@@ -38,7 +38,7 @@
 @implementation CashierViewController
 - (NSInteger)type {
     if (!_type) {
-        _type = 0;
+        _type = 1;
     }
     return _type;
 }
@@ -75,6 +75,8 @@
     [self.backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+    
+    self.backTableView.showsVerticalScrollIndicator = NO;
     
 
 }

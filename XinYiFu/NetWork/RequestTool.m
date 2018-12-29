@@ -53,7 +53,7 @@
 
     NSLog(@"md5Digest========%@\nbase64Digest===========%@\nparameter ====== %@", md5Digest, base64Digest, generalParam);
     
-    [[RequestManage shareHTTPManage] POST:formatAPI parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+    [[RequestManage shareHTTPManage] POST:formatAPI parameters:generalParam progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

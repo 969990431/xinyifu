@@ -53,6 +53,7 @@
 		184A5A8A21D0AC2B008900D5 /* RequestManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A5A8621D0AC2B008900D5 /* RequestManage.m */; };
 		184A5A8D21D0AC96008900D5 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A5A8B21D0AC95008900D5 /* BaseResponse.m */; };
 		184A5A9021D0C3E6008900D5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A5A8F21D0C3E6008900D5 /* LoginViewController.m */; };
+		184C0A6421D7055C00ECD7EC /* UserPreferenceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C0A6321D7055C00ECD7EC /* UserPreferenceModel.m */; };
 		1851F0ED21D21643009F23BD /* UserServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851F0EC21D21643009F23BD /* UserServiceViewController.m */; };
 		1851F0F021D233C3009F23BD /* AddAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851F0EF21D233C3009F23BD /* AddAddressViewController.m */; };
 		1888555C21D0F02C00DF2CDC /* FoundPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */; };
@@ -195,6 +196,8 @@
 		184A5A8C21D0AC96008900D5 /* BaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
 		184A5A8E21D0C3E6008900D5 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		184A5A8F21D0C3E6008900D5 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		184C0A6221D7055C00ECD7EC /* UserPreferenceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPreferenceModel.h; sourceTree = "<group>"; };
+		184C0A6321D7055C00ECD7EC /* UserPreferenceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPreferenceModel.m; sourceTree = "<group>"; };
 		1851F0EB21D21643009F23BD /* UserServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserServiceViewController.h; sourceTree = "<group>"; };
 		1851F0EC21D21643009F23BD /* UserServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserServiceViewController.m; sourceTree = "<group>"; };
 		1851F0EE21D233C3009F23BD /* AddAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddAddressViewController.h; sourceTree = "<group>"; };
@@ -572,6 +575,8 @@
 				184A5A3921D08628008900D5 /* NavViewController.m */,
 				184A5A3B21D0864A008900D5 /* GuideViewController.h */,
 				184A5A3C21D0864A008900D5 /* GuideViewController.m */,
+				184C0A6221D7055C00ECD7EC /* UserPreferenceModel.h */,
+				184C0A6321D7055C00ECD7EC /* UserPreferenceModel.m */,
 			);
 			path = Entrance;
 			sourceTree = "<group>";
@@ -893,6 +898,7 @@
 				18B0748721D35CA700B8804B /* EditInfoTableViewCell.m in Sources */,
 				189C48DE21D4A0CA004B256A /* UserInfoViewController.m in Sources */,
 				184A5A7821D08F98008900D5 /* SetVerticalLabel.m in Sources */,
+				184C0A6421D7055C00ECD7EC /* UserPreferenceModel.m in Sources */,
 				184A5A8821D0AC2B008900D5 /* RequestTool.m in Sources */,
 				184A5A3421D0859B008900D5 /* MineViewController.m in Sources */,
 				18243FAC21D5B8DA0001576F /* UserAuthTypeViewController.m in Sources */,
