@@ -72,6 +72,7 @@
     self.backTableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.backTableView];
     self.backTableView.separatorStyle = NO;
+    self.backTableView.showsVerticalScrollIndicator = NO;
     [self.backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
