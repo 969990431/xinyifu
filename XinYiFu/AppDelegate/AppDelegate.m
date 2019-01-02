@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "MainTabViewController.h"
+#import "LoginViewController.h"
+#import "NavViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +22,13 @@
     
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD setMaximumDismissTimeInterval:2];
-    self.window.rootViewController = [[MainTabViewController alloc]init];
+    if ([UserPreferenceModel shareManager].token) {
+        self.window.rootViewController = [[MainTabViewController alloc]init];
+    }else {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        self.window.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
+    }
+    
     // Override point for customization after application launch.
     return YES;
 }

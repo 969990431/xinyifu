@@ -81,7 +81,16 @@
 }
 //退出登录
 - (void)loginOutAction {
-    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"退出登录" message:@"确定退出登录？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UserPreferenceModel shareManager]loginOut];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alert addAction:sureAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)addImage{

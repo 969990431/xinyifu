@@ -32,11 +32,8 @@
     //不处理cookie
     [RequestManage shareHTTPManage].requestSerializer.HTTPShouldHandleCookies = NO;
     NSString *baseUrl = [RequestManage shareHTTPManage].baseURL.absoluteString;
-    NSString *formatAPI = [NSString stringWithFormat:@"%@.htm",requestAPI];
     //清除Response
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    //请求
-    VDLog(@"\nRequest=====>URl:%@%@\nparams:%@",baseUrl,formatAPI,[params my_description]);
     
     
     NSMutableDictionary *generalParam = [NSMutableDictionary new];
@@ -52,51 +49,51 @@
     [generalParam setObject:base64Digest forKey:@"digest"];
 
     NSLog(@"md5Digest========%@\nbase64Digest===========%@\nparameter ====== %@", md5Digest, base64Digest, generalParam);
-    
-    [[RequestManage shareHTTPManage] POST:formatAPI parameters:generalParam progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSLog(@"------------%@------%@", [NSString stringWithFormat:@"%@%@", baseUrl,requestAPI], [baseUrl isEqualToString:@"http://118.31.79.1:8081"] ? params: generalParam);
+    [[RequestManage shareHTTPManage] POST:[NSString stringWithFormat:@"%@%@", baseUrl,requestAPI] parameters:[baseUrl isEqualToString:@"http://118.31.79.1:8081"] ? params: generalParam progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         //响应
-        VDLog(@"\nResponse=====>URL:%@%@\nresult:%@",baseUrl,formatAPI,[responseObject my_description]);
+        VDLog(@"\nResponse=====>URL:%@%@\nresult:%@",baseUrl,requestAPI,[responseObject my_description]);
         
-        typedef void (^RequestResponse)(id response, BOOL isError , NSString *errorMessage,NSInteger errorCode);
+        typedef void (^RequestResponse)(id response, NSString *errorMessage,NSInteger errorCode);
         
         if (className) {
             Class classVC = NSClassFromString(className);
             BaseResponse *baseResponse = [[classVC alloc]initWithDictionary:(NSDictionary *)responseObject error:nil];
             if (baseResponse) {
-                response(baseResponse,NO,baseResponse.errorMessage,[baseResponse.flag integerValue]);
+                response(baseResponse,baseResponse.msg,[baseResponse.code integerValue]);
             }
             else{
                 VDLog(@"请查看您的Model结构^_^");
-                response(nil,YES,@"解析出错",-10000);
+                response(nil,@"解析出错",-10000);
             }
         }
         else{
-            response(responseObject,NO,responseObject[@"errorMessage"],[[responseObject valueForKey:@"flag"] integerValue]);
+            response(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
         }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         VDLog(@"failure error:%@",error);
         if (error.code == -1009) {
-            response(nil,YES,@"互联网的连接似乎已经断开",error.code);
+            response(nil,@"互联网的连接似乎已经断开",error.code);
         }
         else if(error.code == -1001){
-            response(nil,YES,@"请求超时,请检查下网络",error.code);
+            response(nil,@"请求超时,请检查下网络",error.code);
         }
         else if(error.code == -1011){
-            response(nil,YES,@"不支持该响应类型",error.code);
+            response(nil,@"不支持该响应类型",error.code);
         }
         else if(error.code == -3840){
-            response(nil,YES,@"槽糕！貌似掉进异次元了",error.code);
+            response(nil,@"槽糕！貌似掉进异次元了",error.code);
         }
         else if(error.code == -1005){
-            response(nil,YES,@"网络状况貌似不太好",error.code);
+            response(nil,@"网络状况貌似不太好",error.code);
         }
         else{
-            response(nil,YES,@"服务器需要休息片刻",error.code);
+            response(nil,@"服务器需要休息片刻",error.code);
         }
         
     }];

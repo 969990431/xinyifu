@@ -7,6 +7,8 @@
 //
 
 #import "UserPreferenceModel.h"
+#import "LoginViewController.h"
+#import "NavViewController.h"
 
 @implementation UserPreferenceModel
 + (instancetype)shareManager {
@@ -17,6 +19,12 @@
     });
     return model;
 }
+- (void)loginOut {
+    self.token = nil;
+    
+    LoginViewController *loginVC = [[LoginViewController alloc]init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
+}
 //引导页隐藏属性
 - (void)setGuideViewHidden:(BOOL)guideViewHidden {
     [self saveObjWithKey:@"guideHidden" andValue:[NSString stringWithFormat:@"%d", guideViewHidden]];
@@ -24,6 +32,32 @@
 - (BOOL)guideViewHidden {
     return [[self getObjWithKey:@"guideHidden"]boolValue];
 }
+
+//用户token
+- (void)setToken:(NSString *)token {
+    [self archiveString:token withKey:@"token"];
+}
+- (NSString *)token {
+    return [self unArchiveWithKey:@"token"];
+}
+
+- (void)setAccount:(NSString *)account {
+    [self archiveString:account withKey:@"account"];
+}
+- (NSString *)account {
+    return [self unArchiveWithKey:@"account"];
+}
+
+- (void)setPassword:(NSString *)password {
+    [self archiveString:password withKey:@"password"];
+}
+- (NSString *)password {
+    return [self unArchiveWithKey:@"password"];
+}
+
+
+
+
 
 
 //存入字符串

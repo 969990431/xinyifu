@@ -38,7 +38,7 @@
 @implementation CashierViewController
 - (NSInteger)type {
     if (!_type) {
-        _type = 1;
+        _type = 4;
     }
     return _type;
 }

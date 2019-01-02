@@ -9,12 +9,12 @@
 
 @interface BaseResponse : JSONModel
 /**
- *  错误码
+ *  错误码 1成功 0失败
  */
-@property (nonatomic, strong)NSString *flag;
+@property (nonatomic, strong)NSString *code;
 /**
  *  错误信息
  */
-@property (nonatomic, strong)NSString *errorMessage;
+@property (nonatomic, strong)NSString *msg;
 
 @end

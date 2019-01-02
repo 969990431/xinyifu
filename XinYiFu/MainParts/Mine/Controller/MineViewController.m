@@ -124,9 +124,7 @@
     
     
     if (indexPath.row == 3) {
-        [[RequestTool shareManager]sendRequestWithAPI:@"" withVC:self withParams:@{@"mobile":@"13111111111", @"password":@"test123", @"version":@"1.0.1"} withClassName:nil responseBlock:^(id response, BOOL isError, NSString *errorMessage, NSInteger errorCode) {
-            
-        }];
+        
     }
 }
 

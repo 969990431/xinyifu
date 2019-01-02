@@ -12,8 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UserPreferenceModel : NSObject
 + (instancetype)shareManager;
+- (void)loginOut;
 
 @property (nonatomic, assign)BOOL guideViewHidden;//是否显示引导页
+@property (nonatomic, copy)NSString *token;//用户token
+
+@property (nonatomic, copy)NSString *account;
+@property (nonatomic, copy)NSString *password;
 @end
 
 NS_ASSUME_NONNULL_END

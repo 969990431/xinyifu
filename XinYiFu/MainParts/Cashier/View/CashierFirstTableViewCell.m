@@ -51,6 +51,7 @@
         cell.selectionStyle = NO;
     }
     if (type == 4) {
+        [cell.setMoneyBtn setTitle:@"取消金额" forState:UIControlStateNormal];
         cell.backView.frame = CGRectMake(20, 113, SCREEN_WIDTH-40, 538);
         [cell.middleSepLine mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(cell);

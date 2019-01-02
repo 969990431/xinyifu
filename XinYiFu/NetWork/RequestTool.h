@@ -4,7 +4,7 @@
 #import <UIKit/UIKit.h>
 
 /*普通请求回调*/
-typedef void (^RequestResponse)(id response, BOOL isError , NSString *errorMessage,NSInteger errorCode);
+typedef void (^RequestResponse)(id response, NSString *errorMessage,NSInteger errorCode);
 
 /*任务进度回调*/
 typedef void (^TaskProgress)(float progress,NSString *taskDesc);

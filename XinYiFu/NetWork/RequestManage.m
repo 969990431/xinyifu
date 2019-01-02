@@ -2,9 +2,9 @@
 
 #import "RequestManage.h"
 //正式环境
-static NSString *baseUrl = @"";
+static NSString *baseUrl = @"http://118.31.79.1:8081";
 //测试环境
-//static NSString *baseUrl = @"";
+//static NSString *baseUrl = @"http://118.31.79.1:8081";
 
 @implementation RequestManage
 

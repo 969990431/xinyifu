@@ -25,6 +25,7 @@
 
 @property (nonatomic, strong)UIButton *codeBtn;
 @property (nonatomic, strong)UIButton *completeBtn;
+@property (nonatomic , assign) int time;
 @end
 
 @implementation RegisterViewController
@@ -33,7 +34,14 @@
     [super viewDidLoad];
     [self prepareViews];
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
 - (void)prepareViews {
     
     
@@ -51,7 +59,7 @@
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
         make.top.mas_equalTo(33);
-        make.size.mas_equalTo(CGSizeMake(8, 16));
+        make.size.mas_equalTo(CGSizeMake(10, 20));
     }];
     
     UIButton *bigBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -140,6 +148,7 @@
     }];
     
     self.codeBtn = [UIButton buttonWithTitle:@"获取验证码" font:15 titleColor:WordGreen backGroundColor:nil aligment:UIControlContentHorizontalAlignmentRight];
+    [self.codeBtn addTarget:self action:@selector(sendCode:) forControlEvents:UIControlEventTouchUpInside];
     [self.backTableView addSubview:self.codeBtn];
     [self.codeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(segLine2.mas_right).offset(-20);
@@ -165,9 +174,41 @@
     
 }
 - (void)backClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)sendCode: (UIButton *)sender {
+    if (self.phoneTF.text.length != 11) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
+        return;
+    }
+    sender.enabled = NO;
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        
+    }];
+}
+
+- (void)getCodeAction:(UIButton *)sender{
+    [sender setTitle:@"60s" forState:UIControlStateNormal];
+    sender.titleLabel.text = @"60s";
+    sender.userInteractionEnabled = NO;
+    self.time = 60;
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+        self.time--;
+        [sender setTitle:[NSString stringWithFormat:@"%ds",self.time] forState:UIControlStateNormal];
+        if (self.time <= 0) {
+            [timer invalidate];
+            timer = nil;
+            sender.userInteractionEnabled = YES;
+            [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
+        }
+    }];
+}
+
 - (void)textfieldChanged: (UITextField *)textField {
+    if (self.phoneTF.text.length>=11) {
+        [self.codeTF becomeFirstResponder];
+    }
     if (![self.phoneTF.text isNullString] && ![self.codeTF.text isNullString]) {
         [self.completeBtn setBackgroundImage:GetImage(@"jianbianda") forState:UIControlStateNormal];
         [self.completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
