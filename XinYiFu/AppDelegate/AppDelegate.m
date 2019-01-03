@@ -22,12 +22,12 @@
     
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD setMaximumDismissTimeInterval:2];
-    if ([UserPreferenceModel shareManager].token) {
+//    if ([UserPreferenceModel shareManager].token) {
         self.window.rootViewController = [[MainTabViewController alloc]init];
-    }else {
-        LoginViewController *loginVC = [[LoginViewController alloc]init];
-        self.window.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
-    }
+//    }else {
+//        LoginViewController *loginVC = [[LoginViewController alloc]init];
+//        self.window.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
+//    }
     
     // Override point for customization after application launch.
     return YES;

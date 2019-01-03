@@ -57,6 +57,7 @@
 		184C0A6421D7055C00ECD7EC /* UserPreferenceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C0A6321D7055C00ECD7EC /* UserPreferenceModel.m */; };
 		1851F0ED21D21643009F23BD /* UserServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851F0EC21D21643009F23BD /* UserServiceViewController.m */; };
 		1851F0F021D233C3009F23BD /* AddAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851F0EF21D233C3009F23BD /* AddAddressViewController.m */; };
+		1886472D21DDA30F00522233 /* GeneralWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1886472C21DDA30F00522233 /* GeneralWebViewController.m */; };
 		1888555C21D0F02C00DF2CDC /* FoundPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */; };
 		1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */; };
 		189C48D821D46510004B256A /* MineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C48D721D46510004B256A /* MineTableViewCell.m */; };
@@ -205,6 +206,8 @@
 		1851F0EC21D21643009F23BD /* UserServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserServiceViewController.m; sourceTree = "<group>"; };
 		1851F0EE21D233C3009F23BD /* AddAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddAddressViewController.h; sourceTree = "<group>"; };
 		1851F0EF21D233C3009F23BD /* AddAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddAddressViewController.m; sourceTree = "<group>"; };
+		1886472B21DDA30F00522233 /* GeneralWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralWebViewController.h; sourceTree = "<group>"; };
+		1886472C21DDA30F00522233 /* GeneralWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneralWebViewController.m; sourceTree = "<group>"; };
 		1888555A21D0F02C00DF2CDC /* FoundPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundPasswordViewController.h; sourceTree = "<group>"; };
 		1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundPasswordViewController.m; sourceTree = "<group>"; };
 		1888555D21D0F17300DF2CDC /* SetNewPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetNewPasswordViewController.h; sourceTree = "<group>"; };
@@ -593,6 +596,8 @@
 				184A5A8B21D0AC95008900D5 /* BaseResponse.m */,
 				184A5A3F21D089D0008900D5 /* BaseViewController.h */,
 				184A5A4021D089D0008900D5 /* BaseViewController.m */,
+				1886472B21DDA30F00522233 /* GeneralWebViewController.h */,
+				1886472C21DDA30F00522233 /* GeneralWebViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -944,6 +949,7 @@
 				18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */,
 				184A5A7E21D08F98008900D5 /* ModelToJson.m in Sources */,
 				184A5A7921D08F98008900D5 /* UIButton+CreatBtn.m in Sources */,
+				1886472D21DDA30F00522233 /* GeneralWebViewController.m in Sources */,
 				1801256C21D4D426000919E1 /* IncomeRecordHeadCell.m in Sources */,
 				189C48F021D4AF70004B256A /* ChangePhoneNewViewController.m in Sources */,
 				189C48EA21D4AB00004B256A /* UserSetTableViewCell.m in Sources */,
