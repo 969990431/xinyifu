@@ -12,6 +12,8 @@
 @interface ChooseAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) UITableView *backTableView;
 @property (nonatomic , strong) UIButton *submitBtn;
+
+@property (nonatomic , strong) NSMutableArray *dataArray;
 @end
 
 @implementation ChooseAddressViewController
@@ -20,6 +22,14 @@
     [super viewDidLoad];
     self.title = @"选择地址";
     [self prepareViews];
+    self.dataArray = [NSMutableArray arrayWithObjects:@1,@1,nil];
+}
+
+- (id)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
 }
 
 - (void)prepareViews{
@@ -52,7 +62,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -79,7 +89,7 @@
         make.left.mas_equalTo(name.mas_right).offset(18);
         make.height.mas_equalTo(22);
     }];
-
+    
     UILabel *address = [UILabel labelWithTextColor:WordDeepGray font:14 aligment:NSTextAlignmentLeft];
     address.text = @"江苏省无锡市新吴区机场路100号原日报社";
     [cell.contentView addSubview:address];
@@ -89,6 +99,13 @@
         make.height.mas_equalTo(20);
     }];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.dataArray removeObjectAtIndex:indexPath.section];
+        [tableView reloadData];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -105,13 +122,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
