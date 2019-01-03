@@ -59,6 +59,20 @@
 		1851F0F021D233C3009F23BD /* AddAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851F0EF21D233C3009F23BD /* AddAddressViewController.m */; };
 		1888555C21D0F02C00DF2CDC /* FoundPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */; };
 		1888555F21D0F17300DF2CDC /* SetNewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */; };
+		1895153221DDA0D00019F9CC /* Chinese_And_English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 1895152721DDA0D00019F9CC /* Chinese_And_English_Text.dat */; };
+		1895153321DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 1895152B21DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat */; };
+		1895153521DDA10D0019F9CC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895153421DDA10D0019F9CC /* CoreTelephony.framework */; };
+		1895153721DDA1140019F9CC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895153621DDA1140019F9CC /* CoreLocation.framework */; };
+		1895153921DDA11D0019F9CC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895153821DDA11C0019F9CC /* CFNetwork.framework */; };
+		1895153B21DDA1220019F9CC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895153A21DDA1220019F9CC /* AVFoundation.framework */; };
+		1895153D21DDA1290019F9CC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895153C21DDA1290019F9CC /* AudioToolbox.framework */; };
+		1895153F21DDA1310019F9CC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895153E21DDA1310019F9CC /* SystemConfiguration.framework */; };
+		1895154121DDA13D0019F9CC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895154021DDA13D0019F9CC /* GLKit.framework */; };
+		1895154321DDA1470019F9CC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895154221DDA1470019F9CC /* libc++.tbd */; };
+		1895154521DDA14E0019F9CC /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895154421DDA14E0019F9CC /* libiconv.2.4.0.tbd */; };
+		1895154721DDA1570019F9CC /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895154621DDA1570019F9CC /* libz.1.2.5.tbd */; };
+		1895154921DDA15D0019F9CC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895154821DDA15D0019F9CC /* libsqlite3.0.tbd */; };
+		1895154B21DDA1E30019F9CC /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1895154A21DDA1E30019F9CC /* libBaiduSpeechSDK.a */; };
 		189C48D821D46510004B256A /* MineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C48D721D46510004B256A /* MineTableViewCell.m */; };
 		189C48DB21D46ED0004B256A /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C48DA21D46ED0004B256A /* MineHeaderView.m */; };
 		189C48DE21D4A0CA004B256A /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C48DD21D4A0CA004B256A /* UserInfoViewController.m */; };
@@ -209,6 +223,30 @@
 		1888555B21D0F02C00DF2CDC /* FoundPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundPasswordViewController.m; sourceTree = "<group>"; };
 		1888555D21D0F17300DF2CDC /* SetNewPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetNewPasswordViewController.h; sourceTree = "<group>"; };
 		1888555E21D0F17300DF2CDC /* SetNewPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetNewPasswordViewController.m; sourceTree = "<group>"; };
+		1895152621DDA0D00019F9CC /* BDSSynthesizerStatusNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerStatusNotifications.h; sourceTree = "<group>"; };
+		1895152721DDA0D00019F9CC /* Chinese_And_English_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Text.dat; sourceTree = "<group>"; };
+		1895152821DDA0D00019F9CC /* BDSSpeechSynthesizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerDelegate.h; sourceTree = "<group>"; };
+		1895152921DDA0D00019F9CC /* BDS_EttsModelManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDS_EttsModelManagerInterface.h; sourceTree = "<group>"; };
+		1895152A21DDA0D00019F9CC /* BDSBuiltInPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSBuiltInPlayer.h; sourceTree = "<group>"; };
+		1895152B21DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_And_English_Speech_Female.dat; sourceTree = "<group>"; };
+		1895152C21DDA0D00019F9CC /* BDSMixedModeSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSMixedModeSynthesizer.h; sourceTree = "<group>"; };
+		1895152D21DDA0D00019F9CC /* BDSSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizer.h; sourceTree = "<group>"; };
+		1895152E21DDA0D00019F9CC /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
+		1895152F21DDA0D00019F9CC /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
+		1895153021DDA0D00019F9CC /* BDSTTSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSTTSEventManager.h; sourceTree = "<group>"; };
+		1895153121DDA0D00019F9CC /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
+		1895153421DDA10D0019F9CC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1895153621DDA1140019F9CC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1895153821DDA11C0019F9CC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1895153A21DDA1220019F9CC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1895153C21DDA1290019F9CC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1895153E21DDA1310019F9CC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1895154021DDA13D0019F9CC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		1895154221DDA1470019F9CC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		1895154421DDA14E0019F9CC /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		1895154621DDA1570019F9CC /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		1895154821DDA15D0019F9CC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1895154A21DDA1E30019F9CC /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduSpeechSDK.a; sourceTree = "<group>"; };
 		189C48D621D46510004B256A /* MineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableViewCell.h; sourceTree = "<group>"; };
 		189C48D721D46510004B256A /* MineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTableViewCell.m; sourceTree = "<group>"; };
 		189C48D921D46ED0004B256A /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
@@ -265,6 +303,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1895154921DDA15D0019F9CC /* libsqlite3.0.tbd in Frameworks */,
+				1895154721DDA1570019F9CC /* libz.1.2.5.tbd in Frameworks */,
+				1895154B21DDA1E30019F9CC /* libBaiduSpeechSDK.a in Frameworks */,
+				1895154521DDA14E0019F9CC /* libiconv.2.4.0.tbd in Frameworks */,
+				1895154321DDA1470019F9CC /* libc++.tbd in Frameworks */,
+				1895154121DDA13D0019F9CC /* GLKit.framework in Frameworks */,
+				1895153F21DDA1310019F9CC /* SystemConfiguration.framework in Frameworks */,
+				1895153D21DDA1290019F9CC /* AudioToolbox.framework in Frameworks */,
+				1895153B21DDA1220019F9CC /* AVFoundation.framework in Frameworks */,
+				1895153921DDA11D0019F9CC /* CFNetwork.framework in Frameworks */,
+				1895153721DDA1140019F9CC /* CoreLocation.framework in Frameworks */,
+				1895153521DDA10D0019F9CC /* CoreTelephony.framework in Frameworks */,
 				359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +401,7 @@
 				184A5A2621D082A6008900D5 /* Libs */,
 				184A5A2521D08265008900D5 /* AppDelegate */,
 				184A5A3E21D089BC008900D5 /* Base */,
+				1895152421DDA0D00019F9CC /* SDK */,
 				184A59E721D07F87008900D5 /* Main.storyboard */,
 				184A59EA21D07F89008900D5 /* Assets.xcassets */,
 				184A59EC21D07F89008900D5 /* LaunchScreen.storyboard */,
@@ -597,6 +648,34 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		1895152421DDA0D00019F9CC /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				1895152521DDA0D00019F9CC /* TTS */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		1895152521DDA0D00019F9CC /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				1895152621DDA0D00019F9CC /* BDSSynthesizerStatusNotifications.h */,
+				1895152721DDA0D00019F9CC /* Chinese_And_English_Text.dat */,
+				1895152821DDA0D00019F9CC /* BDSSpeechSynthesizerDelegate.h */,
+				1895152921DDA0D00019F9CC /* BDS_EttsModelManagerInterface.h */,
+				1895152A21DDA0D00019F9CC /* BDSBuiltInPlayer.h */,
+				1895152B21DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat */,
+				1895152C21DDA0D00019F9CC /* BDSMixedModeSynthesizer.h */,
+				1895152D21DDA0D00019F9CC /* BDSSpeechSynthesizer.h */,
+				1895152E21DDA0D00019F9CC /* BDSSpeechSynthesizerParams.h */,
+				1895152F21DDA0D00019F9CC /* BDSSynthesizerLogLevel.h */,
+				1895153021DDA0D00019F9CC /* BDSTTSEventManager.h */,
+				1895153121DDA0D00019F9CC /* BDSSpeechSynthesizerErrors.h */,
+				1895154A21DDA1E30019F9CC /* libBaiduSpeechSDK.a */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
 		189C48D421D4647E004B256A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,6 +725,17 @@
 		93833E6D59554D29778C56EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1895154821DDA15D0019F9CC /* libsqlite3.0.tbd */,
+				1895154621DDA1570019F9CC /* libz.1.2.5.tbd */,
+				1895154421DDA14E0019F9CC /* libiconv.2.4.0.tbd */,
+				1895154221DDA1470019F9CC /* libc++.tbd */,
+				1895154021DDA13D0019F9CC /* GLKit.framework */,
+				1895153E21DDA1310019F9CC /* SystemConfiguration.framework */,
+				1895153C21DDA1290019F9CC /* AudioToolbox.framework */,
+				1895153A21DDA1220019F9CC /* AVFoundation.framework */,
+				1895153821DDA11C0019F9CC /* CFNetwork.framework */,
+				1895153621DDA1140019F9CC /* CoreLocation.framework */,
+				1895153421DDA10D0019F9CC /* CoreTelephony.framework */,
 				BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */,
 				C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */,
 				97FFF61D8F0A105C3B6AFDE9 /* libPods-XinYiFuUITests.a */,
@@ -775,6 +865,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				184A59EE21D07F89008900D5 /* LaunchScreen.storyboard in Resources */,
+				1895153221DDA0D00019F9CC /* Chinese_And_English_Text.dat in Resources */,
+				1895153321DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat in Resources */,
 				184A59EB21D07F89008900D5 /* Assets.xcassets in Resources */,
 				184A59E921D07F87008900D5 /* Main.storyboard in Resources */,
 			);
@@ -1128,6 +1220,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XinYiFu/SDK/TTS",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XinYiFu/MainParts/Mine/Controller/XinYiFu-Bridging-Header.h";
@@ -1151,6 +1247,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XinYiFu/SDK/TTS",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";

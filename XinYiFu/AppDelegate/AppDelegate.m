@@ -10,6 +10,9 @@
 #import "MainTabViewController.h"
 #import "LoginViewController.h"
 #import "NavViewController.h"
+#import "BDSSpeechSynthesizer.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface AppDelegate ()
 
@@ -17,9 +20,31 @@
 
 @implementation AppDelegate
 
+-(void)configureBDS{
+    //    [BDSSpeechSynthesizer setLogLevel:BDS_PUBLIC_LOG_VERBOSE];
+    [[BDSSpeechSynthesizer sharedInstance] setSynthesizerDelegate:self];
+    
+    //configureOnlineTTS
+    [[BDSSpeechSynthesizer sharedInstance] setApiKey:@"rAhdMLuyaoEMxGwRfGaTMINK" withSecretKey:@"Adb5QnVZTU4vWUXPpWPNPPypjrN4eVes"];
+    [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    //configureOfflineTTS
+    NSError *err = nil;
+    // 在这里选择不同的离线音库（请在XCode中Add相应的资源文件），同一时间只能load一个离线音库。根据网络状况和配置，SDK可能会自动切换到离线合成。
+    NSString* offlineEngineSpeechData = [[NSBundle mainBundle] pathForResource:@"Chinese_And_English_Speech_Female" ofType:@"dat"];
+    
+    NSString* offlineChineseAndEnglishTextData = [[NSBundle mainBundle] pathForResource:@"Chinese_And_English_Text" ofType:@"dat"];
+    
+    err = [[BDSSpeechSynthesizer sharedInstance] loadOfflineEngine:offlineChineseAndEnglishTextData speechDataPath:offlineEngineSpeechData licenseFilePath:nil withAppCode:@"15260621"];
+    if(err){
+        //        [self displayError:err withTitle:@"Offline TTS init failed"];
+        return;
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self configureBDS];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD setMaximumDismissTimeInterval:2];
     if ([UserPreferenceModel shareManager].token) {
