@@ -293,7 +293,7 @@
     [SVProgressHUD showWithStatus:@"登录中"];
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/login" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"password":self.passWordTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         
-        if (errorCode == 0) {
+        if (errorCode == 1) {
             [UserPreferenceModel shareManager].token = response[@"token"];
 //            记住帐号 密码
             if (self.isMemory) {
@@ -311,5 +311,7 @@
         [SVProgressHUD dismiss];
     }];
 }
+
+
 
 @end

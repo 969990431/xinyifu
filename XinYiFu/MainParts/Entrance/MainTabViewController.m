@@ -12,6 +12,8 @@
 #import "MineViewController.h"
 #import "NavViewController.h"
 #import "UserPreferenceModel.h"
+#import "LoginViewController.h"
+#import "NavViewController.h"
 
 @interface MainTabViewController ()
 @property (nonatomic, strong)UIScrollView *scrollView;
@@ -55,11 +57,15 @@
 }
 - (void)gotoMain {
     [self.scrollView removeFromSuperview];
+    
+    if (![UserPreferenceModel shareManager].token) {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
+    }
 }
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     [super viewDidLoad];
     [self setChildVc:[[CashierViewController alloc]init] title:@"收银" image:@"shouyin2" selectImage:@"shouyin1"];
     [self setChildVc:[[BillViewController alloc]init] title:@"账单" image:@"zhangdan2" selectImage:@"zhangdan1"];

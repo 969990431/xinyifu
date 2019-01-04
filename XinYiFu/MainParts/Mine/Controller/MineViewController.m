@@ -16,6 +16,7 @@
 #import "FeedbackProblemViewController.h"
 #import "MessageCenterViewController.h"
 #import "GradeViewController.h"
+#import "GeneralWebViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -124,7 +125,11 @@
     
     
     if (indexPath.row == 3) {
-        
+        GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
+        webVC.hidesBottomBarWhenPushed = 1;
+        webVC.url = @"http://xyfapi.ycw580.com/question.html";
+        webVC.title = @"帮助中心";
+        [self.navigationController pushViewController:webVC animated:YES];
     }
 }
 
