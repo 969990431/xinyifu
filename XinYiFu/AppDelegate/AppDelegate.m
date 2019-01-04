@@ -14,7 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<BDSSpeechSynthesizerDelegate>
 
 @end
 
@@ -42,9 +42,17 @@
     }
 }
 
+- (void)playVideo{
+    NSAttributedString* string = [[NSAttributedString alloc] initWithString:@"薪易付已到账1.23元"];
+    NSError* err = nil;
+    [[BDSSpeechSynthesizer sharedInstance] speakSentence:[string string] withError:&err];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [self configureBDS];
+    
+    [self playVideo];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD setMaximumDismissTimeInterval:2];
     if ([UserPreferenceModel shareManager].token) {
