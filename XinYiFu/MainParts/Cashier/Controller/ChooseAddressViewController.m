@@ -8,6 +8,7 @@
 
 #import "ChooseAddressViewController.h"
 #import "AddAddressViewController.h"
+#import "AddressCell.h"
 
 @interface ChooseAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) UITableView *backTableView;
@@ -18,11 +19,14 @@
 
 @implementation ChooseAddressViewController
 
+#define NAME @"1"
+#define PHONENUM @"2"
+#define ADDRESS @"3"
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"选择地址";
     [self prepareViews];
-    self.dataArray = [NSMutableArray arrayWithObjects:@1,@1,nil];
+    self.dataArray = [NSMutableArray arrayWithObjects:@{NAME:@"李梦龙",PHONENUM:@"15061473870",ADDRESS:@"江苏省无锡市新吴区机场路100号原日报社"},@{NAME:@"李龙",PHONENUM:@"15061473871",ADDRESS:@"江苏省无锡市新吴区机场路101号原日报社"},nil];
 }
 
 - (id)dataArray{
@@ -70,42 +74,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    NSDictionary *dataDic = self.dataArray[indexPath.section];
     
-    UILabel *name = [UILabel labelWithTextColor:WordCloseBlack font:18 aligment:NSTextAlignmentLeft];
-    name.text = @"李梦龙";
-    [cell.contentView addSubview:name];
-    [name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(6);
-        make.left.mas_equalTo(16);
-        make.height.mas_equalTo(26);
-    }];
-    
-    UILabel *phone = [UILabel labelWithTextColor:WordCloseBlack font:16 aligment:NSTextAlignmentLeft];
-    phone.text = @"15061473870";
-    [cell.contentView addSubview:phone];
-    [phone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(name);
-        make.left.mas_equalTo(name.mas_right).offset(18);
-        make.height.mas_equalTo(22);
-    }];
-    
-    UILabel *address = [UILabel labelWithTextColor:WordDeepGray font:14 aligment:NSTextAlignmentLeft];
-    address.text = @"江苏省无锡市新吴区机场路100号原日报社";
-    [cell.contentView addSubview:address];
-    [address mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(name.mas_bottom).offset(6);
-        make.left.mas_equalTo(16);
-        make.height.mas_equalTo(20);
-    }];
-    return cell;
+    return [AddressCell cellWithTableView:tableView indexPath:indexPath name:dataDic[NAME] phoneNum:dataDic[PHONENUM] address:dataDic[ADDRESS]];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.dataArray removeObjectAtIndex:indexPath.section];
-        [tableView reloadData];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您确定删除该地址吗？" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+            [self.dataArray removeObjectAtIndex:indexPath.section];
+            [tableView reloadData];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

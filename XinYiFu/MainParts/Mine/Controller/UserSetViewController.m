@@ -10,6 +10,7 @@
 #import "UserSetTableViewCell.h"
 #import "ChangePhoneOldViewController.h"
 #import "AboutUsViewController.h"
+#import "ResetPasswordViewController.h"
 
 @interface UserSetViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -68,6 +69,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
 //            密码设置
+            vc = [[ResetPasswordViewController alloc] init];
         }else {
 //            更换手机号
             vc = [[ChangePhoneOldViewController alloc]init];
@@ -77,7 +79,7 @@
     }else {
         if (indexPath.row == 0) {
 //关于
-            [self.navigationController pushViewController:[[AboutUsViewController alloc] init] animated:YES];
+            vc = [[AboutUsViewController alloc] init];
         }else {
 //            联系客服
             return;

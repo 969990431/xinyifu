@@ -33,6 +33,18 @@
     [self prepareViews];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = nil;
+}
+
 - (void)prepareViews{
     self.backTableView = [[UITableView alloc]init];
     [self.view addSubview:self.backTableView];
@@ -46,7 +58,7 @@
     [self.backTableView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
-        make.top.mas_equalTo(76);
+        make.top.mas_equalTo(14);
         make.height.mas_equalTo(34);
     }];
 
@@ -60,6 +72,7 @@
     }];
     
     self.phoneTF = [UITextField textFieldWithPlaceHolder:@"请输入手机号"];
+    self.phoneTF.keyboardType = UIKeyboardTypePhonePad;
     [self.phoneTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.backTableView addSubview:self.phoneTF];
     [self.phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,6 +110,10 @@
         make.right.mas_equalTo(self.view.mas_right).offset(-120);
         make.height.mas_equalTo(43);
     }];
+    if (@available(iOS 12.0, *)) {
+        self.codeTF.textContentType = UITextContentTypeOneTimeCode;
+    }
+    self.codeTF.keyboardType = UIKeyboardTypeNumberPad;
     
     UILabel *segLine2 = [[UILabel alloc]init];
     segLine2.backgroundColor = SegGray;
@@ -133,7 +150,13 @@
 }
 
 - (void)textfieldChanged: (UITextField *)textField {
-    if (![self.phoneTF.text isNullString] && ![self.codeTF.text isNullString]) {
+    if (self.phoneTF.text.length >= 11) {
+        [self.codeTF becomeFirstResponder];
+    }
+    if (self.codeTF.text.length >= 6) {
+        [self.codeTF resignFirstResponder];
+    }
+    if (self.phoneTF.text.length == 11 && self.codeTF.text.length == 6) {
         [self.nextStepBtn setBackgroundImage:GetImage(@"jianbianda") forState:UIControlStateNormal];
         [self.nextStepBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.nextStepBtn.userInteractionEnabled = YES;
@@ -159,10 +182,31 @@
             [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
         }
     }];
+    
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        
+        if (errorCode == 1) {
+            
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+        [SVProgressHUD dismiss];
+    }];
+
 }
 
 - (void)nextStepAction:(UIButton *)sender{
-    [self presentViewController:[[SetNewPasswordViewController alloc] init] animated:YES completion:nil];
+//    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+//
+//        if (errorCode == 1) {
+//            [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
+//        }else {
+//            [SVProgressHUD showErrorWithStatus:errorMessage];
+//        }
+//        [SVProgressHUD dismiss];
+//    }];
+
+    [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
 }
 
 @end
