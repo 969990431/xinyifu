@@ -18,6 +18,7 @@
 
 #import "SetMoneyViewController.h"
 #import "AuthStatusViewController.h"
+#import "NavViewController.h"
 
 @interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -51,6 +52,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    if (![UserPreferenceModel shareManager].token) {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
+    }
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -82,13 +87,15 @@
 }
 
 - (void)loadData {
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/home_page" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-        if (errorCode == 1) {
-            
-        }else {
-            [SVProgressHUD showWithStatus:errorMessage];
-        }
-    }];
+    if ([UserPreferenceModel shareManager].token) {
+        [[RequestTool shareManager]sendRequestWithAPI:@"/api/home_page" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+            if (errorCode == 1) {
+                
+            }else {
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+            }
+        }];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
