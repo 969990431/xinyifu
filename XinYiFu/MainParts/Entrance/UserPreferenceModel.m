@@ -56,8 +56,33 @@
 }
 
 
+- (void)setName:(NSString *)name {
+    [self archiveString:name withKey:@"name"];
+}
+- (NSString *)name {
+    return [self unArchiveWithKey:@"name"];
+}
 
+- (void)setMobile:(NSString *)mobile {
+    [self archiveString:mobile withKey:@"mobile"];
+}
+- (NSString *)mobile {
+    return [self unArchiveWithKey:@"mobile"];
+}
 
+- (void)setUserName:(NSString *)userName {
+    [self archiveString:userName withKey:@"userName"];
+}
+- (NSString *)userName {
+    return [self unArchiveWithKey:@"userName"];
+}
+
+- (void)setCashQr:(NSString *)cashQr {
+    [self archiveString:cashQr withKey:@"cashQr"];
+}
+-(NSString *)cashQr {
+    return [self unArchiveWithKey:@"cashQr"];
+}
 
 
 //存入字符串
