@@ -14,6 +14,7 @@
 		1801256C21D4D426000919E1 /* IncomeRecordHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801256621D4D426000919E1 /* IncomeRecordHeadCell.m */; };
 		1801257821D4DA29000919E1 /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801257721D4DA29000919E1 /* GradeViewController.m */; };
 		1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811DA5921D703AA0084AD76 /* NoNetworkView.m */; };
+		1814E6F221E3069A00C75BFB /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814E6F121E3069A00C75BFB /* ResetPasswordViewController.m */; };
 		1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */; };
 		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
 		181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */; };
@@ -131,6 +132,8 @@
 		1801257721D4DA29000919E1 /* GradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
 		1811DA5821D703AA0084AD76 /* NoNetworkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoNetworkView.h; sourceTree = "<group>"; };
 		1811DA5921D703AA0084AD76 /* NoNetworkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoNetworkView.m; sourceTree = "<group>"; };
+		1814E6F021E3069A00C75BFB /* ResetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
+		1814E6F121E3069A00C75BFB /* ResetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
 		1819D9DB21D31BC7009CC7E1 /* ChooseAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAddressViewController.h; sourceTree = "<group>"; };
 		1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressViewController.m; sourceTree = "<group>"; };
 		1819D9E221D323A3009CC7E1 /* XYFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYFAlertView.h; sourceTree = "<group>"; };
@@ -500,6 +503,8 @@
 				181BFFA821D4C67800B8AB37 /* FeedbackProblemViewController.m */,
 				18243FA721D5B1700001576F /* AboutUsViewController.h */,
 				18243FA821D5B1700001576F /* AboutUsViewController.m */,
+				1814E6F021E3069A00C75BFB /* ResetPasswordViewController.h */,
+				1814E6F121E3069A00C75BFB /* ResetPasswordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1005,6 +1010,7 @@
 				184A5A3421D0859B008900D5 /* MineViewController.m in Sources */,
 				18243FAC21D5B8DA0001576F /* UserAuthTypeViewController.m in Sources */,
 				18B0746C21D1FD8200B8804B /* RegisterViewController.m in Sources */,
+				1814E6F221E3069A00C75BFB /* ResetPasswordViewController.m in Sources */,
 				184A5A8121D08F98008900D5 /* UIView+tool.m in Sources */,
 				189C48ED21D4AF52004B256A /* ChangePhoneOldViewController.m in Sources */,
 				189C48E121D4A180004B256A /* UserHeaderTableViewCell.m in Sources */,

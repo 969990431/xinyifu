@@ -281,8 +281,7 @@
 }
 
 - (void)forgetPasswordAction:(UIButton *)sender{
-    [self presentViewController:[[FoundPasswordViewController alloc]init] animated:YES completion:nil];
-//    [self.navigationController pushViewController:[[FoundPasswordViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[FoundPasswordViewController alloc]init] animated:YES];
 }
 
 - (void)clickRegister {

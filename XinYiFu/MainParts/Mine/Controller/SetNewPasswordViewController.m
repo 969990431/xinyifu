@@ -31,6 +31,18 @@
     [self prepareViews];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = nil;
+}
+
 - (void)prepareViews{
     self.backTableView = [[UITableView alloc]init];
     [self.view addSubview:self.backTableView];
@@ -44,7 +56,7 @@
     [self.backTableView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
-        make.top.mas_equalTo(76);
+        make.top.mas_equalTo(14);
         make.height.mas_equalTo(34);
     }];
     
@@ -167,7 +179,7 @@
 }
 
 - (void)submitBtnAction:(UIButton *)sender{
-    if ([self checkIsHaveNumAndLetter:self.passwordTF.text] != 3) {
+    if ([self checkIsHaveNumAndLetter:self.passwordTF.text] != 3 || self.passwordTF.text.length < 8 || self.passwordTF.text.length > 16) {
         [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
         [self.submitBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
         [self.submitBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -181,7 +193,7 @@
         self.submitBtn.userInteractionEnabled = NO;
         return;
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(int)checkIsHaveNumAndLetter:(NSString*)password{
