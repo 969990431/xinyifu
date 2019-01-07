@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface UserPreferenceModel : NSObject
 + (instancetype)shareManager;
@@ -19,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy)NSString *account;
 @property (nonatomic, copy)NSString *password;
+
+@property (nonatomic, copy)NSString *name;
+@property (nonatomic, copy)NSString *mobile;
+@property (nonatomic, copy)NSString *userName;
+@property (nonatomic, copy)NSString *cashQr;
+
 @end
 
-NS_ASSUME_NONNULL_END

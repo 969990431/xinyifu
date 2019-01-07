@@ -45,8 +45,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
-    
+    [self loadData];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -78,8 +79,16 @@
     }];
     
     self.backTableView.showsVerticalScrollIndicator = NO;
-    
+}
 
+- (void)loadData {
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/home_page" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            
+        }else {
+            [SVProgressHUD showWithStatus:errorMessage];
+        }
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

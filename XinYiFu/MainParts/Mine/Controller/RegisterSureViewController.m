@@ -35,6 +35,15 @@
     [self prepareViews];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (void)prepareViews {
     
     
@@ -170,6 +179,7 @@
     }];
     
     self.completeBtn = [UIButton buttonWithTitle:@"确定" font:18 titleColor:[UIColor grayColor] backGroundColor:nil aligment:0];
+    self.completeBtn.enabled = NO;
     self.completeBtn.layer.masksToBounds = 1;
     self.completeBtn.layer.cornerRadius = 20;
     [self.completeBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
@@ -188,17 +198,29 @@
     if (![self.passwdTF.text isNullString] && ![self.passwdAgainTF.text isNullString]) {
         [self.completeBtn setBackgroundImage:GetImage(@"jianbianda") forState:UIControlStateNormal];
         [self.completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.completeBtn.enabled = YES;
     }else {
         [self.completeBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
         [self.completeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        self.completeBtn.enabled = NO;
     }
 }
 
 - (void)backClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
 - (void)completeClick: (UIButton *)button {
+    if (![self.passwdTF.text isEqualToString:self.passwdAgainTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"两次密码不一致"];
+    }
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/register" withVC:self withParams:@{@"mobile":self.mobile, @"password":self.passwdTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else {
+            [SVProgressHUD showWithStatus:errorMessage];
+        }
+    }];
 }
 @end

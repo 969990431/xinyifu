@@ -17,6 +17,7 @@
 #import "MessageCenterViewController.h"
 #import "GradeViewController.h"
 #import "GeneralWebViewController.h"
+#import "BDSSpeechSynthesizer.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -130,6 +131,8 @@
         webVC.url = @"http://xyfapi.ycw580.com/question.html";
         webVC.title = @"帮助中心";
         [self.navigationController pushViewController:webVC animated:YES];
+        
+//        [[BDSSpeechSynthesizer sharedInstance]speakSentence:@"123123123123" withError:nil];
     }
 }
 

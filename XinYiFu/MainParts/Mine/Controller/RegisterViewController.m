@@ -159,6 +159,7 @@
     
     
     self.completeBtn = [UIButton buttonWithTitle:@"下一步" font:18 titleColor:[UIColor grayColor] backGroundColor:nil aligment:0];
+    self.completeBtn.enabled = NO;
     [self.completeBtn addTarget:self action:@selector(completeClick:) forControlEvents:UIControlEventTouchUpInside];
     self.completeBtn.layer.masksToBounds = 1;
     self.completeBtn.layer.cornerRadius = 20;
@@ -212,14 +213,25 @@
     if (![self.phoneTF.text isNullString] && ![self.codeTF.text isNullString]) {
         [self.completeBtn setBackgroundImage:GetImage(@"jianbianda") forState:UIControlStateNormal];
         [self.completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.completeBtn.enabled = YES;
     }else {
         [self.completeBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
         [self.completeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        self.completeBtn.enabled = NO;
     }
 }
 
 - (void)completeClick: (UIButton *)button {
-    [self presentViewController:[[RegisterSureViewController alloc]init] animated:YES completion:nil];
+    
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            RegisterSureViewController *registerVC = [[RegisterSureViewController alloc]init];
+            registerVC.mobile = self.phoneTF.text;
+            [self presentViewController:registerVC animated:YES completion:nil];
+        }else {
+            [SVProgressHUD showWithStatus:errorMessage];
+        }
+    }];
 }
 
 @end
