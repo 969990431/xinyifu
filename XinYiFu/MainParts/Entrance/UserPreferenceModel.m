@@ -22,6 +22,7 @@
 - (void)loginOut {
     self.token = nil;
     
+    
     LoginViewController *loginVC = [[LoginViewController alloc]init];
     [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
 }
