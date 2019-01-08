@@ -7,10 +7,19 @@
 //
 
 #import "AddAddressViewController.h"
+#import "YAddressPickerView.h"
 
-@interface AddAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic , strong) UITableView *backTableView;
-@property (nonatomic , strong) UIButton *submitBtn;
+@interface AddAddressViewController ()<UITableViewDelegate,UITableViewDataSource,AddressViewDelegate>
+@property (nonatomic ,strong) UITableView *backTableView;
+@property (nonatomic ,strong) UIButton *submitBtn;
+
+@property (nonatomic ,strong) UITextField *nameTF;
+@property (nonatomic ,strong) UITextField *mobileTF;
+@property (nonatomic ,strong) UITextField *areaTF;
+@property (nonatomic ,strong) UITextField *addressTF;
+
+@property (nonatomic ,strong) NSMutableDictionary *addressDict;
+@property (nonatomic, strong) YAddressPickerView *addressPickerView;
 @end
 
 @implementation AddAddressViewController
@@ -19,6 +28,23 @@
     [super viewDidLoad];
     self.title = @"添加收货地址";
     [self prepareViews];
+}
+
+- (void)requestAddressData{
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"moble":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"City":self.addressDict[@"City"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
+
+- (NSMutableDictionary *)addressDict{
+    if (!_addressDict) {
+        _addressDict = [[NSMutableDictionary alloc] init];
+    }
+    return _addressDict;
 }
 
 - (void)prepareViews{
@@ -40,6 +66,7 @@
     
     self.submitBtn = [UIButton buttonWithTitle:@"确定" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
     [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
+    [self.submitBtn addTarget:self action:@selector(addAddressAction:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:self.submitBtn];
     [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
@@ -47,6 +74,10 @@
         make.top.mas_equalTo(22);
         make.height.mas_equalTo(40);
     }];
+    
+    self.addressPickerView = [[YAddressPickerView alloc]init];
+    [self.view addSubview:self.addressPickerView];
+    self.addressPickerView.delegate = self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -60,12 +91,41 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        
+        UILabel *titleLabel = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentLeft];
+        [cell.contentView addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(cell.contentView);
+            make.left.mas_equalTo(16);
+            make.height.mas_equalTo(22);
+        }];
+        
         if (indexPath.row == 0) {
-            cell = [self cellWithTitle:@"收件人" placeHolder:@"收件人姓名"];
+            titleLabel.text = @"收件人";
+            self.nameTF = [UITextField textFieldWithPlaceHolder:@"收件人姓名"];
+            self.nameTF.font = [UIFont systemFontOfSize:16.f];
+            [cell.contentView addSubview:self.nameTF];
+            [self.nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(cell.contentView);
+                make.left.mas_equalTo(100);
+                make.right.mas_equalTo(cell.contentView.mas_right).offset(-10);
+            }];
             [self addsegLine:cell];
         }else{
-            cell = [self cellWithTitle:@"手机号" placeHolder:@"收件人手机号"];
+            titleLabel.text = @"手机号";
+            self.mobileTF = [UITextField textFieldWithPlaceHolder:@"收件人手机号"];
+            self.mobileTF.font = [UIFont systemFontOfSize:16.f];
+            self.mobileTF.keyboardType = UIKeyboardTypePhonePad;
+            [cell.contentView addSubview:self.mobileTF];
+            [self.mobileTF mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(cell.contentView);
+                make.left.mas_equalTo(100);
+                make.right.mas_equalTo(cell.contentView.mas_right).offset(-10);
+            }];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }else{
         if (indexPath.row == 0) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -79,18 +139,39 @@
                 make.height.mas_equalTo(22);
             }];
             
-            UILabel *content = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"cccccc"] font:16 aligment:NSTextAlignmentLeft];
-            content.tag = 1001;
-            content.text = @"请选择";
-            [cell.contentView addSubview:content];
-            [content mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.areaTF = [UITextField textFieldWithPlaceHolder:@"请选择"];
+            self.areaTF.enabled = NO;
+            self.areaTF.font = [UIFont systemFontOfSize:16.f];
+            [cell.contentView addSubview:self.areaTF];
+            [self.areaTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(cell.contentView);
                 make.left.mas_equalTo(100);
+                make.right.mas_equalTo(cell.contentView.mas_right).offset(-10);
             }];
+
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [self addsegLine:cell];
         }else{
-            cell = [self cellWithTitle:@"详细地址" placeHolder:@"如楼层、门牌等"];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            
+            UILabel *titleLabel = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentLeft];
+            titleLabel.text = @"详细地址";
+            [cell.contentView addSubview:titleLabel];
+            [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(cell.contentView);
+                make.left.mas_equalTo(16);
+                make.height.mas_equalTo(22);
+            }];
+            
+            self.addressTF = [UITextField textFieldWithPlaceHolder:@"如楼层、门牌等"];
+            self.addressTF.font = [UIFont systemFontOfSize:16.f];
+            [cell.contentView addSubview:self.addressTF];
+            [self.addressTF mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(cell.contentView);
+                make.left.mas_equalTo(100);
+                make.right.mas_equalTo(cell.contentView.mas_right).offset(-10);
+            }];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     }
     return cell;
@@ -98,34 +179,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        [self.view endEditing:YES];
+        if (self.addressDict.count) {
+            [self.addressPickerView setCurrentProvince:self.addressDict[@"custProv"]];
+            [self.addressPickerView setCurrentCity:self.addressDict[@"City"]];
+            [self.addressPickerView setCurrentArea:self.addressDict[@"custArea"]];
+        }
+        
+        [self.addressPickerView show];
+    }
+}
+
+- (void)cancelOnclick{//取消选择
+    [self.addressPickerView hide];
+}
+
+- (void)viewDisappearance{//视图隐藏（包括点击取消按钮和点击空白处收起PickerView）
+    
+}
+
+- (void)completingTheSelection:(NSString *)province city:(NSString *)city area:(NSString *)area{
+    [self.addressDict setObject:province forKey:@"custProv"];
+    [self.addressDict setObject:city forKey:@"City"];
+    [self.addressDict setObject:area forKey:@"custArea"];
+    self.areaTF.text = [NSString stringWithFormat:@"%@ %@ %@",province,city,area];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 48.f;
-}
-
-- (UITableViewCell *)cellWithTitle:(NSString *)title placeHolder:(NSString *)placeHolder{
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    
-    UILabel *titleLabel = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentLeft];
-    titleLabel.text = title;
-    [cell.contentView addSubview:titleLabel];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(cell.contentView);
-        make.left.mas_equalTo(16);
-        make.height.mas_equalTo(22);
-    }];
-    
-    UITextField *contentTF = [UITextField textFieldWithPlaceHolder:placeHolder];
-    contentTF.font = [UIFont systemFontOfSize:16.f];
-    [cell.contentView addSubview:contentTF];
-    [contentTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(cell.contentView);
-        make.left.mas_equalTo(100);
-        make.right.mas_equalTo(cell.contentView.mas_right).offset(-10);
-    }];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
 }
 
 - (void)addsegLine:(UITableViewCell *)cell{
@@ -140,6 +222,32 @@
     }];
 }
 
+- (void)addAddressAction:(UIButton *)sender{
+    [self.view endEditing:YES];
+    if (!self.nameTF.text.length) {
+        [SVProgressHUD showInfoWithStatus:@"请填写收件人姓名"];
+        return;
+    }
+    if (!self.mobileTF.text.length) {
+        [SVProgressHUD showInfoWithStatus:@"请填写收件人手机号"];
+        return;
+    }
+    if (!self.areaTF.text.length) {
+        [SVProgressHUD showInfoWithStatus:@"请选择收货地区"];
+        return;
+    }
+    if (!self.addressTF.text.length) {
+        [SVProgressHUD showInfoWithStatus:@"请填写详细地址"];
+        return;
+    }
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"moble":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"City":self.addressDict[@"City"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
 
 /*
 #pragma mark - Navigation

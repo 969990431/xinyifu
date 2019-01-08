@@ -190,20 +190,17 @@
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
-        [SVProgressHUD dismiss];
     }];
 
 }
 
 - (void)nextStepAction:(UIButton *)sender{
 //    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-//
 //        if (errorCode == 1) {
 //            [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
 //        }else {
 //            [SVProgressHUD showErrorWithStatus:errorMessage];
 //        }
-//        [SVProgressHUD dismiss];
 //    }];
 
     [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];

@@ -13,14 +13,16 @@
 @interface UserServiceViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIButton *selectedButton;
 }
-@property (nonatomic , strong) UITableView *backTableView;
+@property (nonatomic ,strong) UITableView *backTableView;
 
-@property (nonatomic , strong) UIView *headerView;
-@property (nonatomic , strong) UIImageView *headerImgView;
+@property (nonatomic ,strong) UIView *headerView;
+@property (nonatomic ,strong) UIImageView *headerImgView;
 
-@property (nonatomic , strong) UIView *tabbar;
-@property (nonatomic , strong) UIButton *item0;
-@property (nonatomic , strong) UIButton *item1;
+@property (nonatomic ,strong) UIView *tabbar;
+@property (nonatomic ,strong) UIButton *item0;
+@property (nonatomic ,strong) UIButton *item1;
+
+@property (nonatomic ,strong) NSDictionary *dataDict;
 @end
 
 @implementation UserServiceViewController
@@ -29,6 +31,20 @@
     [super viewDidLoad];
     self.title = @"商家服务";
     [self prepareViews];
+}
+
+- (void)requestData{
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            NSArray *dataList = response[@"dataList"];
+            if (dataList.count) {
+                self.dataDict = dataList[0];
+            }
+            [self.backTableView reloadData];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 - (void)prepareViews{
@@ -119,34 +135,34 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"state0"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        UILabel *namephone = [UILabel labelWithTextColor:WordCloseBlack font:16 aligment:NSTextAlignmentLeft];
-        namephone.text = @"李梦龙 15062347667";
-        [cell.contentView addSubview:namephone];
-        [namephone mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
-            make.left.mas_equalTo(16);
-            make.height.mas_equalTo(22);
-        }];
-        
-        UILabel *address = [UILabel labelWithTextColor:WordDeepGray font:14 aligment:NSTextAlignmentLeft];
-        address.text = @"江苏省无锡市新吴区机场路100号原日报社";
-        [cell.contentView addSubview:address];
-        [address mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(namephone.mas_bottom).offset(4);
-            make.left.mas_equalTo(16);
-            make.height.mas_equalTo(20);
-        }];
-        
-        UILabel *addAddress = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentRight];
-        addAddress.text = @"添加收货地址";
-        [cell.contentView addSubview:addAddress];
-        [addAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(cell.contentView);
-            make.right.mas_equalTo(10);
-            make.height.mas_equalTo(22);
-        }];
-
-
+        if (self.dataDict) {
+            UILabel *namephone = [UILabel labelWithTextColor:WordCloseBlack font:16 aligment:NSTextAlignmentLeft];
+            namephone.text = [NSString stringWithFormat:@"%@ %@",self.dataDict[@"name"],self.dataDict[@"mobile"]];
+            [cell.contentView addSubview:namephone];
+            [namephone mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(10);
+                make.left.mas_equalTo(16);
+                make.height.mas_equalTo(22);
+            }];
+            
+            UILabel *address = [UILabel labelWithTextColor:WordDeepGray font:14 aligment:NSTextAlignmentLeft];
+            address.text = self.dataDict[@"address"];
+            [cell.contentView addSubview:address];
+            [address mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(namephone.mas_bottom).offset(4);
+                make.left.mas_equalTo(16);
+                make.height.mas_equalTo(20);
+            }];
+        }else{
+            UILabel *addAddress = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentRight];
+            addAddress.text = @"添加收货地址";
+            [cell.contentView addSubview:addAddress];
+            [addAddress mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(cell.contentView);
+                make.right.mas_equalTo(10);
+                make.height.mas_equalTo(22);
+            }];
+        }
     }else{
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"state1"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -185,8 +201,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (selectedButton == self.item0) {
-//        [self.navigationController pushViewController:[[AddAddressViewController alloc] init] animated:YES];
-        [self.navigationController pushViewController:[[ChooseAddressViewController alloc] init] animated:YES];
+        if (self.dataDict) {
+            [self.navigationController pushViewController:[[ChooseAddressViewController alloc] init] animated:YES];
+        }else{
+            [self.navigationController pushViewController:[[AddAddressViewController alloc] init] animated:YES];
+        }
     }
 }
 
@@ -253,8 +272,30 @@
 - (void)submitBtnAction:(UIButton *)sender{
     if (selectedButton == self.item0) {
         [XYFAlertView showAlertViewWithTitle:@"恭喜您，领取成功" content:@"您的订单已收到，会尽快给您发货！" buttonTitle:@"确定"];
+    }else{
+        [SVProgressHUD showWithStatus:@"正在保存二维码"];
+        [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+            [SVProgressHUD dismiss];
+            if (errorCode == 1) {
+                UIImageWriteToSavedPhotosAlbum(GetImage(@"guanfangshoukuanma"), self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            }else {
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+            }
+        }];
     }
 }
+
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+        [SVProgressHUD showErrorWithStatus:@"保存失败,请重试"];
+    }else{
+        msg = @"保存图片成功" ;
+        [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
+    }
+}
+
 
 /*
 #pragma mark - Navigation

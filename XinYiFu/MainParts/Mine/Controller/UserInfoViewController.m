@@ -75,7 +75,7 @@
     return indexPath.section == 0 ? [UserHeaderTableViewCell cellWithTableView:tableView headerImage:self.headerImage]:[UserInfoTableViewCell cellWithTableView:tableView indexPath:indexPath];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         [self addImage];
     }
 }

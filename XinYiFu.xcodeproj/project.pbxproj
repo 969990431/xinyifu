@@ -95,6 +95,10 @@
 		18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */; };
 		18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748E21D379F300B8804B /* SetMoneyViewController.m */; };
 		18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0749121D3883100B8804B /* AuthStatusViewController.m */; };
+		18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19B21E486B300C482DD /* YAddressPickerView.m */; };
+		18F9A1A321E486B300C482DD /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19C21E486B300C482DD /* CityModel.m */; };
+		18F9A1A421E486B300C482DD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F9A19D21E486B300C482DD /* city.json */; };
+		18F9A1A521E486B300C482DD /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19F21E486B300C482DD /* ProvinceModel.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
 		2F91AE5421D3878300ACF08C /* IncomeRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
@@ -294,6 +298,13 @@
 		18B0748E21D379F300B8804B /* SetMoneyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetMoneyViewController.m; sourceTree = "<group>"; };
 		18B0749021D3883100B8804B /* AuthStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthStatusViewController.h; sourceTree = "<group>"; };
 		18B0749121D3883100B8804B /* AuthStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthStatusViewController.m; sourceTree = "<group>"; };
+		18F9A19B21E486B300C482DD /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
+		18F9A19C21E486B300C482DD /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		18F9A19D21E486B300C482DD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
+		18F9A19E21E486B300C482DD /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
+		18F9A19F21E486B300C482DD /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
+		18F9A1A021E486B300C482DD /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		18F9A1A121E486B300C482DD /* YAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAddressPickerView.h; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2F91AE5221D3878300ACF08C /* IncomeRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeRecordViewController.h; sourceTree = "<group>"; };
 		2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordViewController.m; sourceTree = "<group>"; };
@@ -664,6 +675,7 @@
 		1895152421DDA0D00019F9CC /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				18F9A19A21E486B300C482DD /* YQLAddressPickerView */,
 				1895152521DDA0D00019F9CC /* TTS */,
 			);
 			path = SDK;
@@ -735,6 +747,20 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		18F9A19A21E486B300C482DD /* YQLAddressPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				18F9A19D21E486B300C482DD /* city.json */,
+				18F9A1A121E486B300C482DD /* YAddressPickerView.h */,
+				18F9A19B21E486B300C482DD /* YAddressPickerView.m */,
+				18F9A19C21E486B300C482DD /* CityModel.m */,
+				18F9A19E21E486B300C482DD /* ProvinceModel.h */,
+				18F9A19F21E486B300C482DD /* ProvinceModel.m */,
+				18F9A1A021E486B300C482DD /* CityModel.h */,
+			);
+			path = YQLAddressPickerView;
 			sourceTree = "<group>";
 		};
 		93833E6D59554D29778C56EC /* Frameworks */ = {
@@ -879,6 +905,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F9A1A421E486B300C482DD /* city.json in Resources */,
 				184A59EE21D07F89008900D5 /* LaunchScreen.storyboard in Resources */,
 				1895153221DDA0D00019F9CC /* Chinese_And_English_Text.dat in Resources */,
 				1895153321DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat in Resources */,
@@ -1024,6 +1051,7 @@
 				189C48D821D46510004B256A /* MineTableViewCell.m in Sources */,
 				184A59E321D07F87008900D5 /* AppDelegate.m in Sources */,
 				1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */,
+				18F9A1A521E486B300C482DD /* ProvinceModel.m in Sources */,
 				1801256A21D4D426000919E1 /* IncomeRecordContentCell.m in Sources */,
 				184A5A7C21D08F98008900D5 /* UITextField+tool.m in Sources */,
 				1801257821D4DA29000919E1 /* GradeViewController.m in Sources */,
@@ -1048,8 +1076,10 @@
 				18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */,
 				184A5A7221D08F98008900D5 /* UIButton+tool.m in Sources */,
 				184A5A7521D08F98008900D5 /* UINavigationController+BackButtonHandler.m in Sources */,
+				18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */,
 				1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */,
 				184A5A3A21D08628008900D5 /* NavViewController.m in Sources */,
+				18F9A1A321E486B300C482DD /* CityModel.m in Sources */,
 				18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */,
 				184A5A7E21D08F98008900D5 /* ModelToJson.m in Sources */,
 				184A5A7921D08F98008900D5 /* UIButton+CreatBtn.m in Sources */,
