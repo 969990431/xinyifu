@@ -164,9 +164,17 @@
         self.submitBtn.userInteractionEnabled = NO;
     }
 }
+
 - (void)submitAction: (UIButton *)sender {
-    AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
-    [self.navigationController pushViewController:authVC animated:YES];
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/company/infoSubmit" withVC:self withParams:@{@"legalPersonName":self.name, @"legalCertId":self.idNumber, @"companyCode":self.creditNumber, @"companyBankNo":self.bankNumber, @"companyBankMobile":self.telNumber} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
+            [self.navigationController pushViewController:authVC animated:YES];
+        }else {
+            [SVProgressHUD showWithStatus:errorMessage];
+        }
+    }];
+    
 }
 
 @end

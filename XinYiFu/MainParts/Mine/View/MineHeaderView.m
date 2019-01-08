@@ -87,7 +87,7 @@
         self.setImageV = [[UIImageView alloc]initWithImage:GetImage(@"shezhi")];
         [self addSubview:self.setImageV];
         [self.setImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(31);
+            make.top.mas_equalTo(iPhoneX ? 40 : 31);
             make.right.mas_equalTo(-57);
             make.size.mas_equalTo(18);
         }];
@@ -163,7 +163,7 @@
         [setBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(0);
             make.top.mas_equalTo(0);
-            make.size.mas_equalTo(CGSizeMake(100, 60));
+            make.size.mas_equalTo(CGSizeMake(100, 80));
         }];
     }
     return self;

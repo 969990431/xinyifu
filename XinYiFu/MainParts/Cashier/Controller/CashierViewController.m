@@ -39,7 +39,7 @@
 @implementation CashierViewController
 - (NSInteger)type {
     if (!_type) {
-        _type = 4;
+        _type = 0;
     }
     return _type;
 }
@@ -55,8 +55,23 @@
     if (![UserPreferenceModel shareManager].token) {
         LoginViewController *loginVC = [[LoginViewController alloc]init];
         [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
+    }else {
+//        [self loadUserData];
     }
 }
+//用户信息请求
+- (void)loadUserData {
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/" withVC:self withParams:nil withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            
+        }else {
+            [SVProgressHUD showWithStatus:errorMessage];
+        }
+    }];
+}
+
+
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];

@@ -126,7 +126,14 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
-    
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/edit/amount" withVC:self withParams:@{@"sum":self.money, @"remark":self.remark ? self.remark:@""} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 @end

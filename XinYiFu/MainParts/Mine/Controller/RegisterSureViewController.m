@@ -35,13 +35,16 @@
     [self prepareViews];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
-- (void)viewWillDisappear:(BOOL)animated {
+
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = nil;
 }
 
 - (void)prepareViews {
@@ -54,24 +57,24 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
-    self.backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.backBtn setBackgroundImage:GetImage(@"back") forState:UIControlStateNormal];
-    [self.backTableView addSubview:self.backBtn];
-    [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
-        make.top.mas_equalTo(33);
-        make.size.mas_equalTo(CGSizeMake(8, 16));
-    }];
-    
-    UIButton *bigBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bigBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
-    //    bigBtn.backgroundColor = RandomColor;
-    [self.backTableView addSubview:bigBtn];
-    [bigBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(0);
-        make.size.mas_equalTo(100);
-    }];
+//    self.backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.backBtn setBackgroundImage:GetImage(@"back") forState:UIControlStateNormal];
+//    [self.backTableView addSubview:self.backBtn];
+//    [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(20);
+//        make.top.mas_equalTo(33);
+//        make.size.mas_equalTo(CGSizeMake(8, 16));
+//    }];
+//
+//    UIButton *bigBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [bigBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+//    //    bigBtn.backgroundColor = RandomColor;
+//    [self.backTableView addSubview:bigBtn];
+//    [bigBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.top.mas_equalTo(0);
+//        make.size.mas_equalTo(100);
+//    }];
     
     self.titleLabel = [UILabel labelWithTextColor:[UIColor blackColor] font:24 aligment:NSTextAlignmentLeft];
     self.titleLabel.text = @"注册";
