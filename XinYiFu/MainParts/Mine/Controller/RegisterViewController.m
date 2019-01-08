@@ -232,7 +232,7 @@
             registerVC.mobile = self.phoneTF.text;
             [self presentViewController:registerVC animated:YES completion:nil];
         }else {
-            [SVProgressHUD showWithStatus:errorMessage];
+            [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
 }

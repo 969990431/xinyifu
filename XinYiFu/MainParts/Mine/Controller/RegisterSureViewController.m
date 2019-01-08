@@ -222,7 +222,7 @@
         if (errorCode == 1) {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else {
-            [SVProgressHUD showWithStatus:errorMessage];
+            [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
 }

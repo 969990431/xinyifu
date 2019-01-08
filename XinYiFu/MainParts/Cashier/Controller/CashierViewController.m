@@ -102,6 +102,13 @@
 }
 
 - (void)loadData {
+//    [[RequestTool shareManager]sendRequestWithAPI:@"/api/home_page" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+//        if (errorCode == 1) {
+//            
+//        }else {
+//            [SVProgressHUD showErrorWithStatus:errorMessage];
+//        }
+//    }];
     if ([UserPreferenceModel shareManager].token) {
         [[RequestTool shareManager]sendRequestWithAPI:@"/api/home_page" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
             if (errorCode == 1) {
