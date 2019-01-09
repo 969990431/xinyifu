@@ -13,7 +13,6 @@
 		1801256B21D4D426000919E1 /* MoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801256521D4D426000919E1 /* MoneyDetailCell.m */; };
 		1801256C21D4D426000919E1 /* IncomeRecordHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801256621D4D426000919E1 /* IncomeRecordHeadCell.m */; };
 		1801257821D4DA29000919E1 /* GradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801257721D4DA29000919E1 /* GradeViewController.m */; };
-		180562FB21E5CF42006A3FA5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180562FA21E5CF41006A3FA5 /* UserNotifications.framework */; };
 		1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811DA5921D703AA0084AD76 /* NoNetworkView.m */; };
 		1814E6F221E3069A00C75BFB /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814E6F121E3069A00C75BFB /* ResetPasswordViewController.m */; };
 		1814E6F521E32F3700C75BFB /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814E6F421E32F3700C75BFB /* AddressCell.m */; };
@@ -136,8 +135,6 @@
 		1801256921D4D426000919E1 /* IncomeRecordContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordContentCell.h; sourceTree = "<group>"; };
 		1801257621D4DA29000919E1 /* GradeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeViewController.h; sourceTree = "<group>"; };
 		1801257721D4DA29000919E1 /* GradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
-		180562FA21E5CF41006A3FA5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
-		180562FC21E5CFF1006A3FA5 /* XinYiFu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinYiFu.entitlements; sourceTree = "<group>"; };
 		1811DA5821D703AA0084AD76 /* NoNetworkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoNetworkView.h; sourceTree = "<group>"; };
 		1811DA5921D703AA0084AD76 /* NoNetworkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoNetworkView.m; sourceTree = "<group>"; };
 		1814E6F021E3069A00C75BFB /* ResetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
@@ -326,7 +323,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180562FB21E5CF42006A3FA5 /* UserNotifications.framework in Frameworks */,
 				1895154921DDA15D0019F9CC /* libsqlite3.0.tbd in Frameworks */,
 				1895154721DDA1570019F9CC /* libz.1.2.5.tbd in Frameworks */,
 				1886473121DE0CB700522233 /* libBaiduSpeechSDK.a in Frameworks */,
@@ -418,7 +414,6 @@
 		184A59E021D07F87008900D5 /* XinYiFu */ = {
 			isa = PBXGroup;
 			children = (
-				180562FC21E5CFF1006A3FA5 /* XinYiFu.entitlements */,
 				184A5A2A21D0832B008900D5 /* NetWork */,
 				184A5A2921D08316008900D5 /* Config Files */,
 				184A5A2821D082D2008900D5 /* MainParts */,
@@ -771,7 +766,6 @@
 		93833E6D59554D29778C56EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				180562FA21E5CF41006A3FA5 /* UserNotifications.framework */,
 				1895154821DDA15D0019F9CC /* libsqlite3.0.tbd */,
 				1895154621DDA1570019F9CC /* libz.1.2.5.tbd */,
 				1895154421DDA14E0019F9CC /* libiconv.2.4.0.tbd */,
@@ -877,7 +871,6 @@
 						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1271,10 +1264,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = XinYiFu/XinYiFu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2U5L8EXZDH;
-				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "XinYiFu/Config Files/XinYiFu_PrefixHeader.pch";
 				INFOPLIST_FILE = XinYiFu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1286,7 +1277,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XinYiFu/SDK/TTS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111;
+				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XinYiFu/MainParts/Mine/Controller/XinYiFu-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1301,10 +1292,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = XinYiFu/XinYiFu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2U5L8EXZDH;
-				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "XinYiFu/Config Files/XinYiFu_PrefixHeader.pch";
 				INFOPLIST_FILE = XinYiFu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1316,7 +1305,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XinYiFu/SDK/TTS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111;
+				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XinYiFu/MainParts/Mine/Controller/XinYiFu-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
