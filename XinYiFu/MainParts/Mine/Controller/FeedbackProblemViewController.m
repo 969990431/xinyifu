@@ -116,6 +116,7 @@
     [self reloadImageWall];
     
     self.submitBtn = [UIButton buttonWithTitle:@"提交" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
+    self.submitBtn.userInteractionEnabled = YES;
     [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
     [self.backTableView addSubview:self.submitBtn];
     [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {

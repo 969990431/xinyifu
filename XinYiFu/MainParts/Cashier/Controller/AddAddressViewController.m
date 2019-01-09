@@ -65,6 +65,7 @@
     self.backTableView.tableFooterView = footerView;
     
     self.submitBtn = [UIButton buttonWithTitle:@"确定" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
+    self.submitBtn.userInteractionEnabled = NO;
     [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
     [self.submitBtn addTarget:self action:@selector(addAddressAction:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:self.submitBtn];
