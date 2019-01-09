@@ -8,13 +8,15 @@
 
 #import "FeedbackProblemViewController.h"
 
-@interface FeedbackProblemViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,NoNetworkViewDelegate>
+@interface FeedbackProblemViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,NoNetworkViewDelegate,UITextViewDelegate>
 @property (nonatomic ,strong) UITableView *backTableView;
 
 @property (nonatomic ,strong) UITextView *textView;
 
 @property (nonatomic ,strong) UIView *imageWallView;
 @property (nonatomic ,strong) NSMutableArray *imageArray;
+
+@property (nonatomic ,strong) UIButton *submitBtn;
 @end
 
 @implementation FeedbackProblemViewController
@@ -65,6 +67,7 @@
         make.height.mas_equalTo(180);
     }];
     self.textView = [[UITextView alloc] init];
+    self.textView.delegate = self;
     UILabel *placeHolderLabel = [[UILabel alloc] init];
     placeHolderLabel.text = @"请留下您对我们的不满以及您对我们软件的改良意见";
     placeHolderLabel.numberOfLines = 0;
@@ -112,10 +115,10 @@
     
     [self reloadImageWall];
     
-    UIButton *submitButton = [UIButton buttonWithTitle:@"提交" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
-    [submitButton setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
-    [self.backTableView addSubview:submitButton];
-    [submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.submitBtn = [UIButton buttonWithTitle:@"提交" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
+    [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+    [self.backTableView addSubview:self.submitBtn];
+    [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.imageWallView.mas_bottom).offset(36);
         make.left.mas_equalTo(16);
         make.right.mas_equalTo(self.view.mas_right).offset(-16);
@@ -206,6 +209,16 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)textViewDidChange:(UITextView *)textView{
+    if (self.textView.text.length) {
+        [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
+        self.submitBtn.userInteractionEnabled = YES;
+    }else{
+        [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+        self.submitBtn.userInteractionEnabled = NO;
+    }
 }
 
 /*

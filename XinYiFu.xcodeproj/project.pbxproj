@@ -869,6 +869,11 @@
 					184A59DD21D07F87008900D5 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					184A59F521D07F89008900D5 = {
 						CreatedOnToolsVersion = 10.1;

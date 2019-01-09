@@ -65,7 +65,7 @@
     self.backTableView.tableFooterView = footerView;
     
     self.submitBtn = [UIButton buttonWithTitle:@"确定" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
-    [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
+    [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
     [self.submitBtn addTarget:self action:@selector(addAddressAction:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:self.submitBtn];
     [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,6 +105,7 @@
             titleLabel.text = @"收件人";
             self.nameTF = [UITextField textFieldWithPlaceHolder:@"收件人姓名"];
             self.nameTF.font = [UIFont systemFontOfSize:16.f];
+            [self.nameTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
             [cell.contentView addSubview:self.nameTF];
             [self.nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(cell.contentView);
@@ -117,6 +118,7 @@
             self.mobileTF = [UITextField textFieldWithPlaceHolder:@"收件人手机号"];
             self.mobileTF.font = [UIFont systemFontOfSize:16.f];
             self.mobileTF.keyboardType = UIKeyboardTypePhonePad;
+            [self.mobileTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
             [cell.contentView addSubview:self.mobileTF];
             [self.mobileTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(cell.contentView);
@@ -142,6 +144,7 @@
             self.areaTF = [UITextField textFieldWithPlaceHolder:@"请选择"];
             self.areaTF.enabled = NO;
             self.areaTF.font = [UIFont systemFontOfSize:16.f];
+            [self.areaTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
             [cell.contentView addSubview:self.areaTF];
             [self.areaTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(cell.contentView);
@@ -165,6 +168,7 @@
             
             self.addressTF = [UITextField textFieldWithPlaceHolder:@"如楼层、门牌等"];
             self.addressTF.font = [UIFont systemFontOfSize:16.f];
+            [self.addressTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
             [cell.contentView addSubview:self.addressTF];
             [self.addressTF mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.mas_equalTo(cell.contentView);
@@ -224,22 +228,6 @@
 
 - (void)addAddressAction:(UIButton *)sender{
     [self.view endEditing:YES];
-    if (!self.nameTF.text.length) {
-        [SVProgressHUD showInfoWithStatus:@"请填写收件人姓名"];
-        return;
-    }
-    if (!self.mobileTF.text.length) {
-        [SVProgressHUD showInfoWithStatus:@"请填写收件人手机号"];
-        return;
-    }
-    if (!self.areaTF.text.length) {
-        [SVProgressHUD showInfoWithStatus:@"请选择收货地区"];
-        return;
-    }
-    if (!self.addressTF.text.length) {
-        [SVProgressHUD showInfoWithStatus:@"请填写详细地址"];
-        return;
-    }
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"moble":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"City":self.addressDict[@"City"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -247,6 +235,16 @@
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
+}
+
+- (void)textfieldChanged:(UITextField *)sender{
+    if (self.nameTF.text.length && self.mobileTF.text.length && self.areaTF.text.length && self.addressTF.text.length) {
+        [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
+        self.submitBtn.userInteractionEnabled = YES;
+    }else{
+        [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+        self.submitBtn.userInteractionEnabled = NO;
+    }
 }
 
 /*
