@@ -26,4 +26,8 @@ pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'MJExtension'
 
+pod 'UMCCommon'
+pod 'UMCPush'
+pod 'UMCSecurityPlugins'
+
 end
