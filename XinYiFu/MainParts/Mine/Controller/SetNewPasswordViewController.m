@@ -151,7 +151,7 @@
         make.size.mas_equalTo(CGSizeMake(22, 12));
     }];
     
-    self.submitBtn = [UIButton buttonWithTitle:@"确认" font:18 titleColor:WordDeepGray backGroundColor:nil aligment:0];
+    self.submitBtn = [UIButton buttonWithTitle:@"确认" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
     [self.submitBtn addTarget:self action:@selector(submitBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.submitBtn.userInteractionEnabled = NO;
     self.submitBtn.layer.masksToBounds = 1;
@@ -171,11 +171,9 @@
 - (void)textfieldChanged: (UITextField *)textField {
     if (![self.passwordTF.text isNullString] && ![self.checkoutTF.text isNullString]) {
         [self.submitBtn setBackgroundImage:GetImage(@"jianbianda") forState:UIControlStateNormal];
-        [self.submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = YES;
     }else {
         [self.submitBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.submitBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = NO;
     }
 }
@@ -184,14 +182,12 @@
     if ([self checkIsHaveNumAndLetter:self.passwordTF.text] != 3 || self.passwordTF.text.length < 8 || self.passwordTF.text.length > 16) {
         [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
         [self.submitBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.submitBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = NO;
         return;
     }
     if (![self.passwordTF.text isEqualToString:self.checkoutTF.text]) {
         [SVProgressHUD showInfoWithStatus:@"密码不一致，请重新输入"];
         [self.submitBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.submitBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = NO;
         return;
     }
