@@ -13,6 +13,8 @@
 
 @property (nonatomic ,retain) UITextField *passwordTF;
 @property (nonatomic ,retain) UITextField *checkoutTF;
+
+@property (nonatomic ,retain) UIButton *submitBtn;
 @end
 
 @implementation ResetPasswordViewController
@@ -38,12 +40,11 @@
     UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 80)];
     self.backTableView.tableFooterView = tableFooterView;
     
-    UIButton *button = [UIButton buttonWithTitle:@"保存" font:18 titleColor:[UIColor whiteColor] backGroundColor:[UIColor colorWithHexString:@"#FEAD94"] aligment:0];
-    [button addTarget:self action:@selector(saveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    button.layer.masksToBounds = YES;
-    button.layer.cornerRadius = 4;
-    [tableFooterView addSubview:button];
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.submitBtn = [UIButton buttonWithTitle:@"保存" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
+    [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+    [self.submitBtn addTarget:self action:@selector(saveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [tableFooterView addSubview:self.submitBtn];
+    [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.right.mas_equalTo(self.view.mas_right).offset(-16);
         make.top.mas_equalTo(40);
@@ -67,8 +68,8 @@
     
     UIButton *eyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [eyeBtn addTarget:self action:@selector(eyeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [eyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
-    [eyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateSelected];
+    [eyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+    [eyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateSelected];
     eyeBtn.tag = 20190107+indexPath.row;
     [cell.contentView addSubview:eyeBtn];
     [eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,6 +82,8 @@
         title.text = @"密码";
         self.passwordTF = [UITextField textFieldWithPlaceHolder:@"请输入旧密码"];
         self.passwordTF.font = [UIFont systemFontOfSize:16.f];
+        self.passwordTF.secureTextEntry = YES;
+        [self.passwordTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.passwordTF];
         [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(100);
@@ -91,6 +94,8 @@
         title.text = @"确认密码";
         self.checkoutTF = [UITextField textFieldWithPlaceHolder:@"请输入新密码"];
         self.checkoutTF.font = [UIFont systemFontOfSize:16.f];
+        self.checkoutTF.secureTextEntry = YES;
+        [self.checkoutTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.checkoutTF];
         [self.checkoutTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(100);
@@ -158,6 +163,15 @@
     }
 }
 
+- (void)textfieldChanged:(UITextField *)sender{
+    if (self.passwordTF.text.length && self.checkoutTF.text.length) {
+        [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
+        self.submitBtn.userInteractionEnabled = YES;
+    }else {
+        [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+        self.submitBtn.userInteractionEnabled = NO;
+    }
+}
 
 
 /*

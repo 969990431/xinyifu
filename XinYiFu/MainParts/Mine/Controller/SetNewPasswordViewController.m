@@ -70,6 +70,7 @@
     }];
     
     self.passwordTF = [UITextField textFieldWithPlaceHolder:@"请输入新密码"];
+    self.passwordTF.secureTextEntry = YES;
     [self.passwordTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.backTableView addSubview:self.passwordTF];
     [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,8 +92,8 @@
     
     self.eyeBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.eyeBtn1 addTarget:self action:@selector(eyeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.eyeBtn1 setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
-    [self.eyeBtn1 setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateSelected];
+    [self.eyeBtn1 setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+    [self.eyeBtn1 setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateSelected];
     [self.backTableView addSubview:self.eyeBtn1];
     [self.eyeBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(segLine1.mas_right).offset(-6);
@@ -119,6 +120,7 @@
     }];
 
     self.checkoutTF = [UITextField textFieldWithPlaceHolder:@"请再次输入新密码"];
+    self.checkoutTF.secureTextEntry = YES;
     [self.checkoutTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.backTableView addSubview:self.checkoutTF];
     [self.checkoutTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -140,8 +142,8 @@
     
     self.eyeBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.eyeBtn2 addTarget:self action:@selector(eyeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.eyeBtn2 setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
-    [self.eyeBtn2 setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateSelected];
+    [self.eyeBtn2 setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+    [self.eyeBtn2 setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateSelected];
     [self.backTableView addSubview:self.eyeBtn2];
     [self.eyeBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(segLine1.mas_right).offset(-6);
