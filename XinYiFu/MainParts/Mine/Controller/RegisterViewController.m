@@ -161,7 +161,7 @@
     
     
     
-    self.completeBtn = [UIButton buttonWithTitle:@"下一步" font:18 titleColor:[UIColor grayColor] backGroundColor:nil aligment:0];
+    self.completeBtn = [UIButton buttonWithTitle:@"下一步" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
     self.completeBtn.enabled = NO;
     [self.completeBtn addTarget:self action:@selector(completeClick:) forControlEvents:UIControlEventTouchUpInside];
     self.completeBtn.layer.masksToBounds = 1;
@@ -219,7 +219,7 @@
         self.completeBtn.enabled = YES;
     }else {
         [self.completeBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.completeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.completeBtn.enabled = NO;
     }
 }

@@ -98,6 +98,7 @@
     }];
     
     self.phoneTF = [UITextField textFieldWithPlaceHolder:@"请输入手机号"];
+    self.phoneTF.keyboardType = UIKeyboardTypeNumberPad;
     if ([UserPreferenceModel shareManager].account) {
         self.phoneTF.text = [UserPreferenceModel shareManager].account;
     }
@@ -130,6 +131,7 @@
     }];
     
     self.passWordTF = [UITextField textFieldWithPlaceHolder:@"请输入密码"];
+    self.passWordTF.keyboardType = UIKeyboardTypeNumberPad;
     if ([UserPreferenceModel shareManager].password) {
         self.passWordTF.text = [UserPreferenceModel shareManager].password;
     }
@@ -212,7 +214,7 @@
         self.loginBtn.enabled = YES;
     }else {
         [self.loginBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.loginBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.loginBtn.enabled = NO;
     }
     
@@ -275,7 +277,7 @@
         self.loginBtn.enabled = YES;
     }else {
         [self.loginBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.loginBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.loginBtn.enabled = NO;
     }
 }
