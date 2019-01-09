@@ -134,7 +134,7 @@
         make.size.mas_equalTo(CGSizeMake(85, 22));
     }];
 
-    self.nextStepBtn = [UIButton buttonWithTitle:@"下一步" font:18 titleColor:WordDeepGray backGroundColor:nil aligment:0];
+    self.nextStepBtn = [UIButton buttonWithTitle:@"下一步" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
     self.nextStepBtn.userInteractionEnabled = NO;
     self.nextStepBtn.layer.masksToBounds = 1;
     self.nextStepBtn.layer.cornerRadius = 20;
@@ -158,11 +158,9 @@
     }
     if (self.phoneTF.text.length == 11 && self.codeTF.text.length == 6) {
         [self.nextStepBtn setBackgroundImage:GetImage(@"jianbianda") forState:UIControlStateNormal];
-        [self.nextStepBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.nextStepBtn.userInteractionEnabled = YES;
     }else {
         [self.nextStepBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];
-        [self.nextStepBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         self.nextStepBtn.userInteractionEnabled = NO;
     }
 }
