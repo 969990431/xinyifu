@@ -98,6 +98,8 @@
 		18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0749121D3883100B8804B /* AuthStatusViewController.m */; };
 		18B6FD8A21E83A2B007E99D3 /* CashierStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */; };
 		18B6FD8D21E84ABE007E99D3 /* SelectProvinceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */; };
+		18B6FD9621E8833D007E99D3 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD9521E8833D007E99D3 /* NotificationService.m */; };
+		18B6FD9A21E8833D007E99D3 /* BackGroundAlert.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19B21E486B300C482DD /* YAddressPickerView.m */; };
 		18F9A1A321E486B300C482DD /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19C21E486B300C482DD /* CityModel.m */; };
 		18F9A1A421E486B300C482DD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F9A19D21E486B300C482DD /* city.json */; };
@@ -123,6 +125,13 @@
 			remoteGlobalIDString = 184A59DD21D07F87008900D5;
 			remoteInfo = XinYiFu;
 		};
+		18B6FD9821E8833D007E99D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184A59D621D07F87008900D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18B6FD9121E8833D007E99D3;
+			remoteInfo = BackGroundAlert;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,6 +141,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				18B6FD9A21E8833D007E99D3 /* BackGroundAlert.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +331,11 @@
 		18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierStatusModel.m; sourceTree = "<group>"; };
 		18B6FD8B21E84ABE007E99D3 /* SelectProvinceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectProvinceViewController.h; sourceTree = "<group>"; };
 		18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectProvinceViewController.m; sourceTree = "<group>"; };
+		18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BackGroundAlert.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		18B6FD9421E8833D007E99D3 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		18B6FD9521E8833D007E99D3 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		18B6FD9721E8833D007E99D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18B6FD9E21E884E6007E99D3 /* BackGroundAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackGroundAlert.entitlements; sourceTree = "<group>"; };
 		18F9A19B21E486B300C482DD /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
 		18F9A19C21E486B300C482DD /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		18F9A19D21E486B300C482DD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
@@ -378,6 +393,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18B6FD8F21E8833D007E99D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -420,6 +442,7 @@
 				184A59E021D07F87008900D5 /* XinYiFu */,
 				184A59F921D07F89008900D5 /* XinYiFuTests */,
 				184A5A0421D07F89008900D5 /* XinYiFuUITests */,
+				18B6FD9321E8833D007E99D3 /* BackGroundAlert */,
 				184A59DF21D07F87008900D5 /* Products */,
 				D99632B20896B00114081913 /* Pods */,
 				93833E6D59554D29778C56EC /* Frameworks */,
@@ -432,6 +455,7 @@
 				184A59DE21D07F87008900D5 /* XinYiFu.app */,
 				184A59F621D07F89008900D5 /* XinYiFuTests.xctest */,
 				184A5A0121D07F89008900D5 /* XinYiFuUITests.xctest */,
+				18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -779,6 +803,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		18B6FD9321E8833D007E99D3 /* BackGroundAlert */ = {
+			isa = PBXGroup;
+			children = (
+				18B6FD9E21E884E6007E99D3 /* BackGroundAlert.entitlements */,
+				18B6FD9421E8833D007E99D3 /* NotificationService.h */,
+				18B6FD9521E8833D007E99D3 /* NotificationService.m */,
+				18B6FD9721E8833D007E99D3 /* Info.plist */,
+			);
+			path = BackGroundAlert;
+			sourceTree = "<group>";
+		};
 		18F9A19A21E486B300C482DD /* YQLAddressPickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,6 +879,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				18B6FD9921E8833D007E99D3 /* PBXTargetDependency */,
 			);
 			name = XinYiFu;
 			productName = XinYiFu;
@@ -888,6 +924,23 @@
 			productReference = 184A5A0121D07F89008900D5 /* XinYiFuUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		18B6FD9121E8833D007E99D3 /* BackGroundAlert */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18B6FD9D21E8833D007E99D3 /* Build configuration list for PBXNativeTarget "BackGroundAlert" */;
+			buildPhases = (
+				18B6FD8E21E8833D007E99D3 /* Sources */,
+				18B6FD8F21E8833D007E99D3 /* Frameworks */,
+				18B6FD9021E8833D007E99D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BackGroundAlert;
+			productName = BackGroundAlert;
+			productReference = 18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -918,6 +971,14 @@
 						CreatedOnToolsVersion = 10.1;
 						TestTargetID = 184A59DD21D07F87008900D5;
 					};
+					18B6FD9121E8833D007E99D3 = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 184A59D921D07F87008900D5 /* Build configuration list for PBXProject "XinYiFu" */;
@@ -936,6 +997,7 @@
 				184A59DD21D07F87008900D5 /* XinYiFu */,
 				184A59F521D07F89008900D5 /* XinYiFuTests */,
 				184A5A0021D07F89008900D5 /* XinYiFuUITests */,
+				18B6FD9121E8833D007E99D3 /* BackGroundAlert */,
 			);
 		};
 /* End PBXProject section */
@@ -962,6 +1024,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		184A59FF21D07F89008900D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18B6FD9021E8833D007E99D3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1149,6 +1218,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18B6FD8E21E8833D007E99D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18B6FD9621E8833D007E99D3 /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1161,6 +1238,11 @@
 			isa = PBXTargetDependency;
 			target = 184A59DD21D07F87008900D5 /* XinYiFu */;
 			targetProxy = 184A5A0221D07F89008900D5 /* PBXContainerItemProxy */;
+		};
+		18B6FD9921E8833D007E99D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18B6FD9121E8833D007E99D3 /* BackGroundAlert */;
+			targetProxy = 18B6FD9821E8833D007E99D3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1435,6 +1517,48 @@
 			};
 			name = Release;
 		};
+		18B6FD9B21E8833D007E99D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BackGroundAlert/BackGroundAlert.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2U5L8EXZDH;
+				INFOPLIST_FILE = BackGroundAlert/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111.BackGroundAlert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18B6FD9C21E8833D007E99D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BackGroundAlert/BackGroundAlert.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2U5L8EXZDH;
+				INFOPLIST_FILE = BackGroundAlert/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111.BackGroundAlert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1470,6 +1594,15 @@
 			buildConfigurations = (
 				184A5A1121D07F89008900D5 /* Debug */,
 				184A5A1221D07F89008900D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18B6FD9D21E8833D007E99D3 /* Build configuration list for PBXNativeTarget "BackGroundAlert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18B6FD9B21E8833D007E99D3 /* Debug */,
+				18B6FD9C21E8833D007E99D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
