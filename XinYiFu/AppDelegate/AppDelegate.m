@@ -56,6 +56,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window.backgroundColor = [UIColor whiteColor];
     [NSThread sleepForTimeInterval:2.0];
     
     // 配置友盟SDK产品并并统一初始化

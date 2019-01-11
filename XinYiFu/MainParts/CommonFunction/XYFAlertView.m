@@ -86,4 +86,84 @@
     [self removeFromSuperview];
 }
 
+
+
+
++ (void)creatCallAlert {
+    XYFAlertView *view = [[XYFAlertView alloc]init];
+    [view callAlertSet];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+}
+- (void)callAlertSet {
+    self.userInteractionEnabled  = YES;
+    self.frame = [UIApplication sharedApplication].keyWindow.frame;
+    
+    self.backgroundColor = UIColorFromRGBWithAlpha(0, .5);
+    
+    UIView *alertView = [[UIView alloc] init];
+    alertView.userInteractionEnabled = YES;
+    alertView.backgroundColor = [UIColor whiteColor];
+    alertView.layer.masksToBounds = YES;
+    alertView.layer.cornerRadius = 3;
+    [self addSubview:alertView];
+    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(GetFloatWithPXSIX(293), GetFloatWithHightPXSIX(136)));
+        make.center.mas_equalTo(self);
+    }];
+    
+    UILabel *numberLabel = [UILabel labelWithTextColor:[UIColor blackColor] font:18 aligment:NSTextAlignmentCenter];
+    numberLabel.text = @"400-0888-2234";
+    [alertView addSubview:numberLabel];
+    [numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(38);
+        make.height.mas_equalTo(25);
+    }];
+    
+    
+    UIButton *cancel = [UIButton buttonWithTitle:@"取消" font:15 titleColor:WordDeepGray backGroundColor:nil aligment:0];
+    [alertView addSubview:cancel];
+    [cancel addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cancel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(39);
+        make.width.mas_equalTo(GetFloatWithPXSIX(293)/2);
+    }];
+    
+    UIButton *call = [UIButton buttonWithTitle:@"拨打" font:15 titleColor:WordGreen backGroundColor:nil aligment:0];
+    [call addTarget:self action:@selector(callClick:) forControlEvents:UIControlEventTouchUpInside];
+    [alertView addSubview:call];
+    [call mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(39);
+        make.width.mas_equalTo(GetFloatWithPXSIX(293)/2);
+    }];
+    
+    
+    UILabel *line1 = [[UILabel alloc]init];
+    [alertView addSubview:line1];
+    line1.backgroundColor = SegGray;;
+    [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(-39);
+        make.height.mas_equalTo(1);
+    }];
+    
+    UILabel *line2 = [[UILabel alloc]init];
+    [alertView addSubview:line2];
+    line2.backgroundColor = SegGray;;
+    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(alertView);
+        make.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(39);
+        make.width.mas_equalTo(1);
+    }];
+}
+
+- (void)callClick: (UIButton *)sender {
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"40008882234"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:nil completionHandler:nil];
+    
+}
+
 @end

@@ -11,6 +11,7 @@
 #import "ChangePhoneOldViewController.h"
 #import "AboutUsViewController.h"
 #import "ResetPasswordViewController.h"
+#import "XYFAlertView.h"
 
 @interface UserSetViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -82,6 +83,8 @@
             vc = [[AboutUsViewController alloc] init];
         }else {
 //            联系客服
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"40008882234"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:nil completionHandler:nil];
             return;
         }
     }
