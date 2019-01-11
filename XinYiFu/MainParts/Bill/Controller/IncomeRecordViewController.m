@@ -21,7 +21,25 @@
     [super viewDidLoad];
     self.title = @"收款记录";
     [self prepareViews];
-    // Do any additional setup after loading the view.
+    [self requestData];
+}
+
+- (void)requestData{
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/detail" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            if ([response[@"data"][@"list"] count]) {
+                [self loadData:response[@"data"][@"list"]];
+            }else{
+                [NoDataView showWithSuperView:self.view];
+            }
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
+
+- (void)loadData:(NSDictionary *)dict{
+    NSLog(@"加载数据");
 }
 
 - (void)prepareViews{

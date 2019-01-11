@@ -34,5 +34,6 @@
 #import "NoNetworkView.h"
 #import "RequestTool.h"
 #import "UserPreferenceModel.h"
+#import "NoDataView.h"
 
 #endif /* XinYiFu_PrefixHeader_pch */

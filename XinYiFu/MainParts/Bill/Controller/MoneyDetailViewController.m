@@ -21,8 +21,23 @@
     [super viewDidLoad];
     self.title = @"资金明细";
     [self prepareViews];
-    // Do any additional setup after loading the view.
+    [self requestDataWithType:1];
 }
+
+- (void)requestDataWithType:(NSInteger)type{
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/record" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"type":[NSNumber numberWithInteger:type]} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
+
+- (void)loadData:(NSDictionary *)dict{
+    NSLog(@"加载数据");
+}
+
 
 - (void)prepareViews{
     self.backTableView = [[UITableView alloc]init];
@@ -115,6 +130,7 @@
             self.selectedButton = sender;
         }
     }];
+    [self requestDataWithType:sender.tag - 1000];
 }
 
 /*

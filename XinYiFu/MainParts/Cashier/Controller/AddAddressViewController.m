@@ -28,12 +28,13 @@
     [super viewDidLoad];
     self.title = @"添加收货地址";
     [self prepareViews];
+    [self requestAddressData];
 }
 
 - (void)requestAddressData{
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"moble":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"City":self.addressDict[@"City"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/combo" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"type":@0} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            [self.navigationController popViewControllerAnimated:YES];
+
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
