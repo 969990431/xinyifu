@@ -182,6 +182,7 @@
     }];
     
     self.completeBtn = [UIButton buttonWithTitle:@"确定" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
+    [self.completeBtn addTarget:self action:@selector(completeClick:) forControlEvents:UIControlEventTouchUpInside];
     self.completeBtn.enabled = NO;
     self.completeBtn.layer.masksToBounds = 1;
     self.completeBtn.layer.cornerRadius = 20;

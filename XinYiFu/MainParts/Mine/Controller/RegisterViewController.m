@@ -188,7 +188,11 @@
     }
     sender.enabled = NO;
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-        
+        if (errorCode == 1) {
+            [self getCodeAction:self.codeBtn];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
     }];
 }
 
@@ -230,7 +234,7 @@
         if (errorCode == 1) {
             RegisterSureViewController *registerVC = [[RegisterSureViewController alloc]init];
             registerVC.mobile = self.phoneTF.text;
-            [self presentViewController:registerVC animated:YES completion:nil];
+            [self.navigationController pushViewController:registerVC animated:YES];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }

@@ -19,10 +19,11 @@
 @property (nonatomic, copy)NSString *account;
 @property (nonatomic, copy)NSString *password;
 
-@property (nonatomic, copy)NSString *name;
-@property (nonatomic, copy)NSString *mobile;
-@property (nonatomic, copy)NSString *userName;
-@property (nonatomic, copy)NSString *cashQr;
+@property (nonatomic, copy)NSString *name;//店铺名称
+@property (nonatomic, copy)NSString *mobile;//手机号
+@property (nonatomic, copy)NSString *userName;//用户姓名
+@property (nonatomic, copy)NSString *cashQr;//门店首款码
+@property (nonatomic, copy)NSString *agreementStatus;//'审核状态：0 未认证  1：认证中 2：认证失败 3：认证成功',
 
 @end
 

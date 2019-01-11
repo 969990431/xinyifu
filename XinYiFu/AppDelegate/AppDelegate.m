@@ -18,7 +18,7 @@
 #import <UMPush/UMessage.h>
 #import <UserNotifications/UserNotifications.h>
 
-#define UMAppKey @"5b06be93f43e485fae000077"
+#define UMAppKey @"5c36afe5b465f50b26000d7c"
 
 
 @interface AppDelegate ()<BDSSpeechSynthesizerDelegate,UNUserNotificationCenterDelegate>
@@ -122,15 +122,17 @@
 -(void)userNotificationCenter:(UNUserNotificationCenter*)center willPresentNotification:(UNNotification*)notification withCompletionHandler:(void(^)(UNNotificationPresentationOptions))completionHandler{
     
     NSDictionary* userInfo = notification.request.content.userInfo;
+    NSLog(@"====%@", userInfo);
     
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         
         //应用处于前台时的远程推送接受
         
         //关闭U-Push自带的弹出框
-        [UMessage setAutoAlert:NO];
+        [UMessage setAutoAlert:YES];
         //（前台、后台）的消息处理
         [UMessage didReceiveRemoteNotification:userInfo];
+        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
     }else{
         //应用处于前台时的本地推送接受
     }
@@ -140,8 +142,7 @@
 
 //iOS10新增：处理后台点击通知的代理方法
 
--(void)userNotificationCenter:(UNUserNotificationCenter*)center didReceiveNotificationResponse:(UNNotificationResponse*)response withCompletionHandler:(void(^)())completionHandler{
-    
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary* userInfo = response.notification.request.content.userInfo;
     
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
@@ -158,6 +159,7 @@
     else{ //应用处于后台时的本地推送接受
         
     }
+    
 }
 
 //打印设备注册码，需要在友盟测试设备上自己添加deviceToken

@@ -15,7 +15,7 @@ static NSString *baseUrl = @"http://118.31.79.1:8081";
         manager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:baseUrl]];
         manager.requestSerializer.timeoutInterval = 20.f;//设置超时时间
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+        manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
     });
     return manager;
 }

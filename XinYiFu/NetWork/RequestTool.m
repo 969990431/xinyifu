@@ -21,6 +21,9 @@
     });
     return shareManage;
 }
+
+
+
 - (void)sendRequestWithAPI:(NSString *)requestAPI
                     withVC:(UIViewController *)vc
                 withParams:(NSDictionary *)params
@@ -42,7 +45,9 @@
     NSString *base64Digest = [[md5Digest dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];
 //    NSString *digest = [[[NSString stringToMD5:[digestArray componentsJoinedByString:@""]] dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];;
     
-    [generalParam setObject:[NSString convertToJsonData:params] forKey:@"params"];
+    if (params) {
+        [generalParam setObject:[NSString convertToJsonData:params] forKey:@"params"];
+    }
     [generalParam setObject:@"app" forKey:@"appKey"];
     [generalParam setObject:@"userLogin" forKey:@"serviceCode"];
     [generalParam setObject:@"1545655591864" forKey:@"timestamp"];

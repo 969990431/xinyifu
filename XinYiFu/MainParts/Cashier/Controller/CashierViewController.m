@@ -19,6 +19,9 @@
 #import "SetMoneyViewController.h"
 #import "AuthStatusViewController.h"
 #import "NavViewController.h"
+#import "IncomeRecordViewController.h"
+
+#import "CashierStatusModel.h"
 
 @interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -34,6 +37,8 @@
 
 @property (nonatomic, strong)UITableView *backTableView;
 @property (nonatomic, strong)UIImage *headerImage;
+
+@property (nonatomic, strong)CashierStatusModel *model;
 @end
 
 @implementation CashierViewController
@@ -109,13 +114,23 @@
 //            [SVProgressHUD showErrorWithStatus:errorMessage];
 //        }
 //    }];
+    NSLog(@"========%@", [UserPreferenceModel shareManager].token);
     if ([UserPreferenceModel shareManager].token) {
-        [[RequestTool shareManager]sendRequestWithAPI:@"/api/home_page" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [[RequestTool shareManager]sendRequestWithAPI:@"/api/store/info" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
             if (errorCode == 1) {
+                self.model = [[CashierStatusModel alloc]initWithDictionary:response[@"data"] error:nil];
+                
+                [UserPreferenceModel shareManager].name = self.model.name;
+                [UserPreferenceModel shareManager].mobile = self.model.mobile;
+                [UserPreferenceModel shareManager].userName = self.model.userName;
+                [UserPreferenceModel shareManager].cashQr = self.model.cashQr;
+                [UserPreferenceModel shareManager].agreementStatus = self.model.agreementStatus;
                 
             }else {
                 [SVProgressHUD showErrorWithStatus:errorMessage];
             }
+            
+            [self.backTableView reloadData];
         }];
     }
 }
@@ -158,7 +173,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return [CashierFirstTableViewCell cellWithTableView:tableView indexPath:indexPath type:self.type delegate:self];
+        return [CashierFirstTableViewCell cellWithTableView:tableView indexPath:indexPath type:[UserPreferenceModel shareManager].agreementStatus.integerValue delegate:self];
     }else {
         return [[CashierSecondTableViewCell alloc]init];
     }
@@ -194,7 +209,9 @@
 }
 //收款记录
 - (void)gotoRecord {
-    
+    IncomeRecordViewController *vc = [[IncomeRecordViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = 1;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)userService{

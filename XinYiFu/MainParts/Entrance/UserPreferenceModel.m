@@ -85,6 +85,12 @@
     return [self unArchiveWithKey:@"cashQr"];
 }
 
+- (void)setAgreementStatus:(NSString *)agreementStatus {
+    [self archiveString:agreementStatus withKey:@"agreementStatus"];
+}
+- (NSString *)agreementStatus {
+    return [self unArchiveWithKey:@"agreementStatus"];
+}
 
 //存入字符串
 - (void)archiveString:(NSString *)str withKey:(NSString *)key {

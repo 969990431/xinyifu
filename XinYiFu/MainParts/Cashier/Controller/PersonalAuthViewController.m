@@ -10,6 +10,7 @@
 #import "EditInfoTableViewCell.h"
 #import "AuthStatusViewController.h"
 #import "AuthStatusViewController.h"
+#import "SelectProvinceViewController.h"
 
 @interface PersonalAuthViewController ()<UITableViewDelegate, UITableViewDataSource,EditInfoTableViewCellDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -148,6 +149,12 @@
     
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 4) {
+        SelectProvinceViewController *vc = [[SelectProvinceViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 - (void)textChange: (UITextField *)textField {
     if (textField.tag == 100) {
         self.name = textField.text;
@@ -172,7 +179,7 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/person/infoSubmit" withVC:self withParams:@{@"personRealName":self.name, @"personIdCard":self.idNumber, @"personBankCard":self.bankNumber, @"personMobile":self.telNumber, @"personCustProv":self.province, @"personCustAea":self.city} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/person/infoSubmit" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"personRealName":self.name, @"personIdCard":self.idNumber, @"personBankCard":self.bankNumber, @"personMobile":self.telNumber, @"personCustProv":@"河南", @"personCustAea":@"新乡市"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
             [self.navigationController pushViewController:authVC animated:YES];

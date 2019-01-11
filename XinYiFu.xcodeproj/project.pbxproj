@@ -95,6 +95,8 @@
 		18B0748C21D3698700B8804B /* CompanyAuthenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */; };
 		18B0748F21D379F300B8804B /* SetMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0748E21D379F300B8804B /* SetMoneyViewController.m */; };
 		18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0749121D3883100B8804B /* AuthStatusViewController.m */; };
+		18B6FD8A21E83A2B007E99D3 /* CashierStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */; };
+		18B6FD8D21E84ABE007E99D3 /* SelectProvinceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */; };
 		18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19B21E486B300C482DD /* YAddressPickerView.m */; };
 		18F9A1A321E486B300C482DD /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19C21E486B300C482DD /* CityModel.m */; };
 		18F9A1A421E486B300C482DD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F9A19D21E486B300C482DD /* city.json */; };
@@ -122,6 +124,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1805630E21E75897006A3FA5 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1801255C21D4C6DA000919E1 /* MessageCenterTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCenterTableViewCell.h; sourceTree = "<group>"; };
 		1801255D21D4C6DA000919E1 /* MessageCenterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCenterTableViewCell.m; sourceTree = "<group>"; };
@@ -135,6 +150,7 @@
 		1801256921D4D426000919E1 /* IncomeRecordContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeRecordContentCell.h; sourceTree = "<group>"; };
 		1801257621D4DA29000919E1 /* GradeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeViewController.h; sourceTree = "<group>"; };
 		1801257721D4DA29000919E1 /* GradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradeViewController.m; sourceTree = "<group>"; };
+		180562FD21E6F0D4006A3FA5 /* XinYiFu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinYiFu.entitlements; sourceTree = "<group>"; };
 		1811DA5821D703AA0084AD76 /* NoNetworkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoNetworkView.h; sourceTree = "<group>"; };
 		1811DA5921D703AA0084AD76 /* NoNetworkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoNetworkView.m; sourceTree = "<group>"; };
 		1814E6F021E3069A00C75BFB /* ResetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
@@ -298,6 +314,10 @@
 		18B0748E21D379F300B8804B /* SetMoneyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetMoneyViewController.m; sourceTree = "<group>"; };
 		18B0749021D3883100B8804B /* AuthStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthStatusViewController.h; sourceTree = "<group>"; };
 		18B0749121D3883100B8804B /* AuthStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthStatusViewController.m; sourceTree = "<group>"; };
+		18B6FD8821E83A2B007E99D3 /* CashierStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CashierStatusModel.h; sourceTree = "<group>"; };
+		18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierStatusModel.m; sourceTree = "<group>"; };
+		18B6FD8B21E84ABE007E99D3 /* SelectProvinceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectProvinceViewController.h; sourceTree = "<group>"; };
+		18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectProvinceViewController.m; sourceTree = "<group>"; };
 		18F9A19B21E486B300C482DD /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
 		18F9A19C21E486B300C482DD /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		18F9A19D21E486B300C482DD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
@@ -414,6 +434,7 @@
 		184A59E021D07F87008900D5 /* XinYiFu */ = {
 			isa = PBXGroup;
 			children = (
+				180562FD21E6F0D4006A3FA5 /* XinYiFu.entitlements */,
 				184A5A2A21D0832B008900D5 /* NetWork */,
 				184A5A2921D08316008900D5 /* Config Files */,
 				184A5A2821D082D2008900D5 /* MainParts */,
@@ -542,6 +563,8 @@
 				18243FAB21D5B8DA0001576F /* UserAuthTypeViewController.m */,
 				18B0747F21D3594D00B8804B /* PersonalAuthViewController.h */,
 				18B0748021D3594D00B8804B /* PersonalAuthViewController.m */,
+				18B6FD8B21E84ABE007E99D3 /* SelectProvinceViewController.h */,
+				18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */,
 				18B0748A21D3698700B8804B /* CompanyAuthenViewController.h */,
 				18B0748B21D3698700B8804B /* CompanyAuthenViewController.m */,
 				18B0748D21D379F300B8804B /* SetMoneyViewController.h */,
@@ -745,6 +768,8 @@
 		18B0747221D2194800B8804B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18B6FD8821E83A2B007E99D3 /* CashierStatusModel.h */,
+				18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -809,6 +834,7 @@
 				184A59DB21D07F87008900D5 /* Frameworks */,
 				184A59DC21D07F87008900D5 /* Resources */,
 				8E2B1207E94E7A16167D860A /* [CP] Copy Pods Resources */,
+				1805630E21E75897006A3FA5 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -863,6 +889,7 @@
 		184A59D621D07F87008900D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Original;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = apple;
 				TargetAttributes = {
@@ -871,6 +898,9 @@
 						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1022,6 +1052,7 @@
 				1888555C21D0F02C00DF2CDC /* FoundPasswordViewController.m in Sources */,
 				184A5A3121D08590008900D5 /* CashierViewController.m in Sources */,
 				184A5A8921D0AC2B008900D5 /* NSObject+Unicode.m in Sources */,
+				18B6FD8D21E84ABE007E99D3 /* SelectProvinceViewController.m in Sources */,
 				184A5A4121D089D0008900D5 /* BaseViewController.m in Sources */,
 				189C48E721D4AA67004B256A /* UserSetViewController.m in Sources */,
 				184A5A3721D085FB008900D5 /* MainTabViewController.m in Sources */,
@@ -1084,6 +1115,7 @@
 				18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */,
 				1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */,
 				184A5A3A21D08628008900D5 /* NavViewController.m in Sources */,
+				18B6FD8A21E83A2B007E99D3 /* CashierStatusModel.m in Sources */,
 				18F9A1A321E486B300C482DD /* CityModel.m in Sources */,
 				18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */,
 				184A5A7E21D08F98008900D5 /* ModelToJson.m in Sources */,
@@ -1264,6 +1296,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = XinYiFu/XinYiFu.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2U5L8EXZDH;
 				GCC_PREFIX_HEADER = "XinYiFu/Config Files/XinYiFu_PrefixHeader.pch";
@@ -1277,8 +1311,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XinYiFu/SDK/TTS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu;
+				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XinYiFu/MainParts/Mine/Controller/XinYiFu-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -1292,6 +1327,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = XinYiFu/XinYiFu.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2U5L8EXZDH;
 				GCC_PREFIX_HEADER = "XinYiFu/Config Files/XinYiFu_PrefixHeader.pch";
@@ -1305,8 +1342,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XinYiFu/SDK/TTS",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu;
+				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XinYiFu/MainParts/Mine/Controller/XinYiFu-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
