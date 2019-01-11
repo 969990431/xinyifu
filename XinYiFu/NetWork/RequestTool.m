@@ -23,6 +23,70 @@
 }
 
 
+- (void)sendNewRequestWithAPI:(NSString *)requestAPI
+                    withVC:(UIViewController *)vc
+                withParams:(NSDictionary *)params
+             withClassName:(NSString *)className
+             responseBlock:(RequestResponse)responseBlock{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    // 请求头
+    NSString *accessPath = [NSString stringWithFormat:@"%@%@?token=%@",[RequestTool shareManager].baseUrl,requestAPI,[UserPreferenceModel shareManager].token];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:accessPath parameters:params error:nil];
+    request.timeoutInterval = 10.f;
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSURLSessionDataTask *task = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NSLog(@"-----responseObject===%@+++++",responseObject);
+        if (!error) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                //响应
+
+                //                 请求成功数据处理
+            typedef void (^RequestResponse)(id response, NSString *errorMessage,NSInteger errorCode);
+
+            if (className) {
+                Class classVC = NSClassFromString(className);
+                BaseResponse *baseResponse = [[classVC alloc]initWithDictionary:(NSDictionary *)responseObject error:nil];
+                if (baseResponse) {
+                    responseBlock(baseResponse,baseResponse.msg,[baseResponse.code integerValue]);
+                }
+                else{
+                    VDLog(@"请查看您的Model结构^_^");
+                    responseBlock(nil,@"解析出错",-10000);
+                }
+            } else {
+                responseBlock(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
+            }
+        } else {
+            VDLog(@"failure error:%@",error);
+            if (error.code == -1009) {
+                responseBlock(nil,@"互联网的连接似乎已经断开",error.code);
+            }
+            else if(error.code == -1001){
+                responseBlock(nil,@"请求超时,请检查下网络",error.code);
+            }
+            else if(error.code == -1011){
+                responseBlock(nil,@"不支持该响应类型",error.code);
+            }
+            else if(error.code == -3840){
+                responseBlock(nil,@"槽糕！貌似掉进异次元了",error.code);
+            }
+            else if(error.code == -1005){
+                responseBlock(nil,@"网络状况貌似不太好",error.code);
+            }
+            else{
+                responseBlock(nil,@"服务器需要休息片刻",error.code);
+            }
+        }
+    }];
+        
+    [task resume];
+    
+}
 
 - (void)sendRequestWithAPI:(NSString *)requestAPI
                     withVC:(UIViewController *)vc
@@ -37,14 +101,14 @@
     NSString *baseUrl = [RequestManage shareHTTPManage].baseURL.absoluteString;
     //清除Response
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
-    
+
+
     NSMutableDictionary *generalParam = [NSMutableDictionary new];
     NSArray *digestArray = @[@"app", @"userLogin", [self sortParams:params], @"1545655591864", @"Jg9eWSEllo"];
     NSString *md5Digest = [NSString stringToMD5:[digestArray componentsJoinedByString:@""]];
     NSString *base64Digest = [[md5Digest dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];
 //    NSString *digest = [[[NSString stringToMD5:[digestArray componentsJoinedByString:@""]] dataUsingEncoding:NSUTF8StringEncoding]base64EncodedStringWithOptions:0];;
-    
+
     if (params) {
         [generalParam setObject:[NSString convertToJsonData:params] forKey:@"params"];
     }
@@ -56,14 +120,14 @@
     NSLog(@"md5Digest========%@\nbase64Digest===========%@\nparameter ====== %@", md5Digest, base64Digest, generalParam);
     NSLog(@"------------%@------%@", [NSString stringWithFormat:@"%@%@", baseUrl,requestAPI], [baseUrl isEqualToString:@"http://118.31.79.1:8081"] ? params: generalParam);
     [[RequestManage shareHTTPManage] POST:[NSString stringWithFormat:@"%@%@", baseUrl,requestAPI] parameters:[baseUrl isEqualToString:@"http://118.31.79.1:8081"] ? params: generalParam progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         //响应
         VDLog(@"\nResponse=====>URL:%@%@\nresult:%@",baseUrl,requestAPI,[responseObject my_description]);
-        
+
         typedef void (^RequestResponse)(id response, NSString *errorMessage,NSInteger errorCode);
-        
+
         if (className) {
             Class classVC = NSClassFromString(className);
             BaseResponse *baseResponse = [[classVC alloc]initWithDictionary:(NSDictionary *)responseObject error:nil];
@@ -78,8 +142,8 @@
         else{
             response(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
         }
-        
-        
+
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         VDLog(@"failure error:%@",error);
         if (error.code == -1009) {
@@ -100,9 +164,9 @@
         else{
             response(nil,@"服务器需要休息片刻",error.code);
         }
-        
+
     }];
-    
+
 }
 
 #pragma mark [下载和上传]

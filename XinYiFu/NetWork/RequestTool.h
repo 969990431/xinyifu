@@ -35,13 +35,31 @@ typedef void (^TaskResult)(id response,BOOL isError);
  *  @param vc         发送请求的视图控制器
  *  @param params     请求参数
  *  @param className  数据模型的类名(参数为空时:response为字典;参数不为空response为Model)
- *  @param response   请求的返回结果回调
+ *  @param responseBlock   请求的返回结果回调
  */
 - (void)sendRequestWithAPI:(NSString *)requestAPI
                     withVC:(UIViewController *)vc
                 withParams:(NSDictionary *)params
                  withClassName:(NSString *)className
-             responseBlock:(RequestResponse)response;
+             responseBlock:(RequestResponse)responseBlock;
+
+
+/**
+ *  发送请求
+ *
+ *  @param requestAPI 请求的API
+ *  @param vc         发送请求的视图控制器
+ *  @param params     请求参数
+ *  @param className  数据模型的类名(参数为空时:response为字典;参数不为空response为Model)
+ *  @param responseBlock   请求的返回结果回调
+ */
+- (void)sendNewRequestWithAPI:(NSString *)requestAPI
+                    withVC:(UIViewController *)vc
+                withParams:(NSDictionary *)params
+             withClassName:(NSString *)className
+             responseBlock:(RequestResponse)responseBlock;
+
+
 
 /**
  *  创建下载任务
