@@ -32,7 +32,7 @@
 }
 
 - (void)requestAddressData{
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/combo" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"type":@0} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/combo" withVC:self withParams:@{@"type":@0} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
 
         }else {
