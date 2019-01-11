@@ -31,6 +31,7 @@
     [super viewDidLoad];
     self.title = @"商家服务";
     [self prepareViews];
+    [self requestData];
 }
 
 - (void)requestData{

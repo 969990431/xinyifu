@@ -13,14 +13,14 @@
 @interface BillViewController ()
 @property (nonatomic ,strong) UITableView *backTableView;
 
-@property (nonatomic ,strong) UILabel *totalIncomeValue;
-@property (nonatomic ,strong) UILabel *customerCountValue;
-@property (nonatomic ,strong) UILabel *incomeCountVlaue;
-@property (nonatomic ,strong) UILabel *singleAverageValue;
+@property (nonatomic ,strong) UILabel *totalIncomeValue; //收款总额
+@property (nonatomic ,strong) UILabel *customerCountValue; //顾客人数
+@property (nonatomic ,strong) UILabel *incomeCountVlaue; //收款笔数
+@property (nonatomic ,strong) UILabel *singleAverageValue; //单笔均价
 
 @property (nonatomic ,strong) UILabel *totalIncomeValue1;
-@property (nonatomic ,strong) UILabel *serviceChargeValue;
-@property (nonatomic ,strong) UILabel *actualAmountValue;
+@property (nonatomic ,strong) UILabel *serviceChargeValue;//手续费
+@property (nonatomic ,strong) UILabel *actualAmountValue;//实际到账
 @end
 
 @implementation BillViewController
@@ -30,8 +30,31 @@
     [self prepareViews];
 }
 
+- (void)requestData{
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/all" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            NSDictionary *dict = response;
+            [self loadData:dict[@"data"]];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
+
+- (void)loadData:(NSDictionary *)dict{
+    self.totalIncomeValue.text = self.totalIncomeValue1.text = [NSString stringWithFormat:@"%@",dict[@"totalPayment"]];
+    self.customerCountValue.text = [NSString stringWithFormat:@"%@",dict[@"customerNum"]];
+    self.incomeCountVlaue.text = [NSString stringWithFormat:@"%@",dict[@"creditScore"]];
+    self.singleAverageValue.text = [NSString stringWithFormat:@"%@",dict[@"averagePrice"]];
+    
+    self.serviceChargeValue.text = [NSString stringWithFormat:@"%@",dict[@"serviceCharge"]];
+    self.actualAmountValue.text = [NSString stringWithFormat:@"%@",dict[@"actualAccount"]];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self requestData];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
@@ -91,7 +114,6 @@
     }];
     
     self.totalIncomeValue = [UILabel labelWithTextColor:[UIColor whiteColor] font:30 aligment:NSTextAlignmentLeft];
-    self.totalIncomeValue.text = @"18,325.20";
     [topBackView addSubview:self.totalIncomeValue];
     [self.totalIncomeValue  mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.mas_equalTo(todayIncome.mas_bottom).offset(2);
@@ -144,7 +166,6 @@
             case 0:
             {
                 self.customerCountValue = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#F3E7E7"] font:18 aligment:NSTextAlignmentCenter];
-                self.customerCountValue.text = @"1832";
                 [topBackView addSubview:self.customerCountValue];
                 [self.customerCountValue mas_makeConstraints:^(MASConstraintMaker *make){
                     make.top.mas_equalTo(tabItem.mas_bottom).offset(4);
@@ -156,7 +177,6 @@
             case 1:
             {
                 self.incomeCountVlaue = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#F3E7E7"] font:18 aligment:NSTextAlignmentCenter];
-                self.incomeCountVlaue.text = @"1765";
                 [topBackView addSubview:self.incomeCountVlaue];
                 [self.incomeCountVlaue mas_makeConstraints:^(MASConstraintMaker *make){
                     make.top.mas_equalTo(tabItem.mas_bottom).offset(4);
@@ -168,7 +188,6 @@
             default:
             {
                 self.singleAverageValue = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#F3E7E7"] font:18 aligment:NSTextAlignmentCenter];
-                self.singleAverageValue.text = @"8765464";
                 [topBackView addSubview:self.singleAverageValue];
                 [self.singleAverageValue mas_makeConstraints:^(MASConstraintMaker *make){
                     make.top.mas_equalTo(tabItem.mas_bottom).offset(4);
@@ -215,7 +234,6 @@
     }];
 
     self.totalIncomeValue1 = [UILabel labelWithTextColor:WordCloseBlack font:28 aligment:NSTextAlignmentLeft];
-    self.totalIncomeValue1.text = @"18,325.20";
     [bottomBackView addSubview:self.totalIncomeValue1];
     [self.totalIncomeValue1  mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.mas_equalTo(todayIncome.mas_bottom).offset(2);
@@ -258,7 +276,6 @@
             case 0:
             {
                 self.serviceChargeValue = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#666666"] font:18 aligment:NSTextAlignmentCenter];
-                self.serviceChargeValue.text = @"1832.90";
                 [bottomBackView addSubview:self.serviceChargeValue];
                 [self.serviceChargeValue mas_makeConstraints:^(MASConstraintMaker *make){
                     make.top.mas_equalTo(tabItem.mas_bottom).offset(4);
@@ -270,7 +287,6 @@
             default:
             {
                 self.actualAmountValue = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"#666666"] font:18 aligment:NSTextAlignmentCenter];
-                self.actualAmountValue.text = @"16768.34";
                 [bottomBackView addSubview:self.actualAmountValue];
                 [self.actualAmountValue mas_makeConstraints:^(MASConstraintMaker *make){
                     make.top.mas_equalTo(tabItem.mas_bottom).offset(4);

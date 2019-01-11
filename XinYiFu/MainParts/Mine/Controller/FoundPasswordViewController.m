@@ -166,26 +166,29 @@
 }
 
 - (void)getCodeAction:(UIButton *)sender{
-    [sender setTitle:@"60s" forState:UIControlStateNormal];
-    sender.titleLabel.text = @"60s";
+    [sender setTitle:@"发送中..." forState:UIControlStateNormal];
     sender.userInteractionEnabled = NO;
-    self.time = 60;
-    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
-        self.time--;
-        [sender setTitle:[NSString stringWithFormat:@"%ds",self.time] forState:UIControlStateNormal];
-        if (self.time <= 0) {
-            [timer invalidate];
-            timer = nil;
-            sender.userInteractionEnabled = YES;
-            [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
-        }
-    }];
     
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         
         if (errorCode == 1) {
-            
+            [sender setTitle:@"60s" forState:UIControlStateNormal];
+            sender.titleLabel.text = @"60s";
+            sender.userInteractionEnabled = NO;
+            self.time = 60;
+            [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+                self.time--;
+                [sender setTitle:[NSString stringWithFormat:@"%ds",self.time] forState:UIControlStateNormal];
+                if (self.time <= 0) {
+                    [timer invalidate];
+                    timer = nil;
+                    sender.userInteractionEnabled = YES;
+                    [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
+                }
+            }];
         }else {
+            [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
+            sender.userInteractionEnabled = YES;
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
@@ -193,15 +196,13 @@
 }
 
 - (void)nextStepAction:(UIButton *)sender{
-//    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-//        if (errorCode == 1) {
-//            [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
-//        }else {
-//            [SVProgressHUD showErrorWithStatus:errorMessage];
-//        }
-//    }];
-
-    [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 @end

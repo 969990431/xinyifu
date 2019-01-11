@@ -131,7 +131,15 @@
             }
         }else if (indexPath.row == 2) {
             self.getResult = YES;
-            [tableView reloadData];
+            
+            [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/time" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"startDate":self.startTime.text,@"endDate":self.endTime.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+                if (errorCode == 1) {
+                    [tableView reloadData];
+                }else {
+                    [SVProgressHUD showErrorWithStatus:errorMessage];
+                }
+            }];
+
         }
     }
 }
