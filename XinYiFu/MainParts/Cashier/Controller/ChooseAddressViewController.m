@@ -19,14 +19,31 @@
 
 @implementation ChooseAddressViewController
 
-#define NAME @"1"
-#define PHONENUM @"2"
-#define ADDRESS @"3"
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"选择地址";
     [self prepareViews];
-    self.dataArray = [NSMutableArray arrayWithObjects:@{NAME:@"李梦龙",PHONENUM:@"15061473870",ADDRESS:@"江苏省无锡市新吴区机场路100号原日报社"},@{NAME:@"李龙",PHONENUM:@"15061473871",ADDRESS:@"江苏省无锡市新吴区机场路101号原日报社"},nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestData];
+}
+
+- (void)requestData{
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            self.dataArray = response[@"data"];
+            [self.backTableView reloadData];
+            if (self.dataArray.count) {
+                [self.submitBtn setTitle:@"使用其他地址" forState:UIControlStateNormal];
+            }else{
+                [self.submitBtn setTitle:@"添加地址" forState:UIControlStateNormal];
+            }
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 - (id)dataArray{
@@ -76,15 +93,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dataDic = self.dataArray[indexPath.section];
     
-    return [AddressCell cellWithTableView:tableView indexPath:indexPath name:dataDic[NAME] phoneNum:dataDic[PHONENUM] address:dataDic[ADDRESS]];
+    return [AddressCell cellWithTableView:tableView indexPath:indexPath name:dataDic[@"name"] phoneNum:dataDic[@"mobile"] address:dataDic[@"address"]];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您确定删除该地址吗？" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
-            [self.dataArray removeObjectAtIndex:indexPath.section];
-            [tableView reloadData];
+            NSDictionary *dataDic = self.dataArray[indexPath.section];
+            [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/address/del" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"addressId":dataDic[@"addressId"]} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+                if (errorCode == 1) {
+                    if ([dataDic[@"addressId"] integerValue] == [self.chooseDict[@"addressId"] integerValue]) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"CHOOSEADDRESS" object:nil];
+                    }
+                    [self requestData];
+                }else {
+                    [SVProgressHUD showErrorWithStatus:errorMessage];
+                }
+            }];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
             
@@ -99,6 +125,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CHOOSEADDRESS" object:self.dataArray[indexPath.section]];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

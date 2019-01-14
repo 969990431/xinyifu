@@ -43,5 +43,5 @@
 - (void)hide;//默认有动画
 - (void)hide:(BOOL)animation;
 
-
+- (void)loadData:(NSArray *)cityList;
 @end

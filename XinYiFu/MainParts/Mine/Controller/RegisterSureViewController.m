@@ -219,7 +219,7 @@
     if (![self.passwdTF.text isEqualToString:self.passwdAgainTF.text]) {
         [SVProgressHUD showErrorWithStatus:@"两次密码不一致"];
     }
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/register" withVC:self withParams:@{@"mobile":self.mobile, @"password":self.passwdTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/register" withVC:self withParams:@{@"mobile":self.mobile, @"password":self.passwdTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else {

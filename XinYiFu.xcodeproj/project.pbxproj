@@ -785,10 +785,10 @@
 				18F9A19D21E486B300C482DD /* city.json */,
 				18F9A1A121E486B300C482DD /* YAddressPickerView.h */,
 				18F9A19B21E486B300C482DD /* YAddressPickerView.m */,
+				18F9A1A021E486B300C482DD /* CityModel.h */,
 				18F9A19C21E486B300C482DD /* CityModel.m */,
 				18F9A19E21E486B300C482DD /* ProvinceModel.h */,
 				18F9A19F21E486B300C482DD /* ProvinceModel.m */,
-				18F9A1A021E486B300C482DD /* CityModel.h */,
 			);
 			path = YQLAddressPickerView;
 			sourceTree = "<group>";

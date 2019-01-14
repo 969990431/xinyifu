@@ -53,7 +53,7 @@ static CGFloat titleViewOnButtonWidth = 80.f;
     self = [super init];
     if (self) {
         _provinceArray = [NSMutableArray array];
-        [self loadRequestData];
+//        [self loadRequestData];
         [self initSubViews];
     }
     return self;
@@ -168,27 +168,35 @@ static CGFloat titleViewOnButtonWidth = 80.f;
     return dic;
 }
 
-- (void)loadRequestData{
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"json"];
-    NSError *error;
-    NSString *fileString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        return;
-    }
-    NSDictionary *dicData = [self dictionaryWithJsonString:fileString];
-    if (!dicData) {
-        return;
-    }
-    //    省级数组
-    NSArray *arrayCityList = [dicData objectForKey:@"citylist"];
-   
-    for (NSDictionary *provinceDic in arrayCityList) {
+- (void)loadData:(NSArray *)cityList{
+    for (NSDictionary *provinceDic in cityList) {
         ProvinceModel *provinceModel = [[ProvinceModel alloc]initWithDictionary:provinceDic];
         [_provinceArray addObject:provinceModel];
     }
+    [self.addressPickerView reloadAllComponents];
 }
+
+//- (void)loadRequestData{
+//    
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"json"];
+//    NSError *error;
+//    NSString *fileString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+//    
+//    if (error) {
+//        return;
+//    }
+//    NSDictionary *dicData = [self dictionaryWithJsonString:fileString];
+//    if (!dicData) {
+//        return;
+//    }
+//    //    省级数组
+//    NSArray *arrayCityList = [dicData objectForKey:@"citylist"];
+//   
+//    for (NSDictionary *provinceDic in arrayCityList) {
+//        ProvinceModel *provinceModel = [[ProvinceModel alloc]initWithDictionary:provinceDic];
+//        [_provinceArray addObject:provinceModel];
+//    }
+//}
 
 #pragma mark - UIPickerDatasource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -196,24 +204,27 @@ static CGFloat titleViewOnButtonWidth = 80.f;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    if (component == 0) {
-        return _provinceArray.count;
+    if (self.provinceArray.count) {
+        if (component == 0) {
+            return _provinceArray.count;
+        }
+        else if (component == 1) {
+                NSInteger selectPIndex = [pickerView selectedRowInComponent:0];
+                ProvinceModel * p = _provinceArray[selectPIndex];
+                return p.citiesListModel.citiesArray.count;
+            
+        }
+        else if (component == 2) {
+                NSInteger selectPIndex = [pickerView selectedRowInComponent:0];
+                NSInteger selectCIndex = [pickerView selectedRowInComponent:1];
+                ProvinceModel * p = _provinceArray[selectPIndex];
+                CityModel *c = p.citiesListModel.citiesArray[selectCIndex];
+                return c.areaListArray.count;
+        }else{
+            return 0;
+        }
     }
-    else if (component == 1) {
-            NSInteger selectPIndex = [pickerView selectedRowInComponent:0];
-            ProvinceModel * p = _provinceArray[selectPIndex];
-            return p.citiesListModel.citiesArray.count;
-        
-    }
-    else if (component == 2) {
-            NSInteger selectPIndex = [pickerView selectedRowInComponent:0];
-            NSInteger selectCIndex = [pickerView selectedRowInComponent:1];
-            ProvinceModel * p = _provinceArray[selectPIndex];
-            CityModel *c = p.citiesListModel.citiesArray[selectCIndex];
-            return c.areaListArray.count;
-    }else{
-        return 0;
-    }
+    return 0;
 }
 
 #pragma mark - UIPickerViewDelegate

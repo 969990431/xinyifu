@@ -43,17 +43,13 @@
     if (self) {
         _citiesArray = [NSMutableArray array];
        CityModel *cityModel;
+        
         for (NSDictionary *cityDic in cityArray) {
-            if (![cityDic objectForKey:@"a"]) {
+            if (![cityDic[@"children"] isKindOfClass:[NSNull class]]) {
                 cityModel = [[CityModel alloc]initWithDictionary:cityDic province:pro];
                 cityModel.cityArray = cityArray;
                 [_citiesArray addObject:cityModel];
-                break;
-            }else{
-                cityModel = [[CityModel alloc]initWithDictionary:cityDic province:@""];
-                [_citiesArray addObject:cityModel];
             }
-            
         }
     }
     return self;

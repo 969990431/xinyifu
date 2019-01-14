@@ -131,7 +131,6 @@
     }];
     
     self.passWordTF = [UITextField textFieldWithPlaceHolder:@"请输入密码"];
-    self.passWordTF.keyboardType = UIKeyboardTypeNumberPad;
     if ([UserPreferenceModel shareManager].password) {
         self.passWordTF.text = [UserPreferenceModel shareManager].password;
     }
@@ -292,7 +291,7 @@
 
 - (void)loginAction {
     [SVProgressHUD showWithStatus:@"登录中"];
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/login" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"password":self.passWordTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/login" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"password":self.passWordTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         [SVProgressHUD dismiss];
         if (errorCode == 1) {
             [UserPreferenceModel shareManager].token = response[@"token"];
