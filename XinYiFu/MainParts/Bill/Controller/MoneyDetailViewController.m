@@ -13,6 +13,8 @@
 @property (nonatomic ,strong) UITableView *backTableView;
 @property (nonatomic ,strong) UIButton *selectedButton;
 @property (nonatomic ,strong) UIView *selectedBackView;
+
+@property (nonatomic ,strong) NSMutableArray *dataArray;
 @end
 
 @implementation MoneyDetailViewController
@@ -25,19 +27,15 @@
 }
 
 - (void)requestDataWithType:(NSInteger)type{
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/record" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"type":[NSNumber numberWithInteger:type]} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/statistics/record" withVC:self withParams:@{@"type":[NSNumber numberWithInteger:type]} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-
+            self.dataArray = response[@"data"][@"list"];
+            [self.backTableView reloadData];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
 }
-
-- (void)loadData:(NSDictionary *)dict{
-    NSLog(@"加载数据");
-}
-
 
 - (void)prepareViews{
     self.backTableView = [[UITableView alloc]init];
@@ -106,12 +104,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return [MoneyDetailCell cellWithTableView:tableView indexPath:indexPath time:@"2018年12月18日" totalMoney:@"￥23456.90" fee:@"￥234.90" actualMoney:@"￥23456.90"];
+    NSDictionary *dict = self.dataArray[indexPath.row];
+    NSString *time = dict[@"createTime"];
+    time = [time stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:@"年"];
+    time = [time stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:@"月"];
+    time = [time stringByAppendingString:@"日"];
+    return [MoneyDetailCell cellWithTableView:tableView indexPath:indexPath time:time totalMoney:[NSString stringWithFormat:@"￥%@",dict[@"transAmt"]] fee:[NSString stringWithFormat:@"￥%@",dict[@"feeAmt"]] actualMoney:[NSString stringWithFormat:@"￥%@",dict[@"actualAccount"]]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -131,6 +133,13 @@
         }
     }];
     [self requestDataWithType:sender.tag - 1000];
+}
+
+- (id)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
 }
 
 /*

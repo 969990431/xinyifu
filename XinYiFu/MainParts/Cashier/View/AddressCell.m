@@ -20,9 +20,9 @@
     if (!cell) {
         cell = [[AddressCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ADDRESSCELL"];
     }
-    cell.nameLabel.text = name;
-    cell.phoneNumLabel.text = phoneNum;
-    cell.addressLabel.text = address;
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@",name];
+    cell.phoneNumLabel.text = [NSString stringWithFormat:@"%@",phoneNum];
+    cell.addressLabel.text = [NSString stringWithFormat:@"%@",address];
     return cell;
 }
 

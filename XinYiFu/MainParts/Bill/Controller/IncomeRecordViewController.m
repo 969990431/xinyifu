@@ -13,6 +13,11 @@
 
 @interface IncomeRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *backTableView;
+
+@property (nonatomic ,strong) NSMutableArray *totalArray;
+@property (nonatomic ,strong) NSMutableArray *detailArray;
+
+@property (nonatomic ,assign) NSInteger currentPage;
 @end
 
 @implementation IncomeRecordViewController
@@ -20,12 +25,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"收款记录";
+    self.currentPage = 1;
     [self prepareViews];
     [self requestData];
 }
 
 - (void)requestData{
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/detail" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/statistics/detail" withVC:self withParams:@{@"page":[NSNumber numberWithInteger:self.currentPage],@"limit":@15} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [self.backTableView.mj_header endRefreshing];
+        [self.backTableView.mj_footer endRefreshing];
         if (errorCode == 1) {
             if ([response[@"data"][@"list"] count]) {
                 [self loadData:response[@"data"][@"list"]];
@@ -38,8 +46,26 @@
     }];
 }
 
-- (void)loadData:(NSDictionary *)dict{
-    NSLog(@"加载数据");
+
+- (void)loadData:(NSArray *)array{
+    for (NSDictionary *dict in array) {
+        if ([dict[@"sign"] integerValue] == 0) {
+            [self.totalArray addObject:dict];
+        }
+    }
+    for (int i = 0; i < self.totalArray.count; i++) {
+        NSMutableArray *subArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *subDic in array) {
+            if ([subDic[@"sign"] integerValue] == 1) {
+                NSDictionary *dict = self.totalArray[i];
+                if ([dict[@"dateTime"] isEqualToString:[subDic[@"creditTime"] substringToIndex:10]]) {
+                    [subArray addObject:subDic];
+                }
+            }
+        }
+        [self.detailArray addObject:subArray];
+    }
+    [self.backTableView reloadData];
 }
 
 - (void)prepareViews{
@@ -52,21 +78,35 @@
     [self.backTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+    
+    self.backTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.currentPage = 1;
+        [self.totalArray removeAllObjects];
+        [self.detailArray removeAllObjects];
+        [self requestData];
+    }];
+    
+    self.backTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.currentPage ++;
+        [self requestData];
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return self.totalArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return [self.detailArray[section] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return [IncomeRecordHeadCell cellWithTableView:tableView indexPath:indexPath count:@"2" total:@"￥23.00"];
+        NSDictionary *dict = self.totalArray[indexPath.section];
+        return [IncomeRecordHeadCell cellWithTableView:tableView indexPath:indexPath count:[NSString stringWithFormat:@"%@",dict[@"order_num"]] total:[NSString stringWithFormat:@"￥%@",dict[@"trans_amt"]]];
     }else {
-        return [IncomeRecordContentCell cellWithTableView:tableView indexPath:indexPath name:@"zk***夏天" time:@"13：00：89" money:@"￥20.00"];
+        NSDictionary *dict = self.detailArray[indexPath.section][indexPath.row-1];
+        return [IncomeRecordContentCell cellWithTableView:tableView indexPath:indexPath name:[NSString stringWithFormat:@"%@",dict[@"payType"]] time:[dict[@"creditTime"] substringWithRange:NSMakeRange(11, 8)] money:[NSString stringWithFormat:@"￥%@",dict[@"amount"]]];
     }
 }
 
@@ -80,8 +120,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     
+    NSDictionary *dict = self.totalArray[section];
     UILabel *timeLabel = [UILabel labelWithTextColor:AlertGray font:16 aligment:NSTextAlignmentLeft];
-    timeLabel.text = @"2018年12月18日";
+    NSString *time = dict[@"dateTime"];
+    time = [time stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:@"年"];
+    time = [time stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:@"月"];
+    time = [time stringByAppendingString:@"日"];
+    timeLabel.text = time;
     [backView addSubview:timeLabel];
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.mas_equalTo(backView);
@@ -123,6 +168,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (id)totalArray{
+    if (!_totalArray) {
+        _totalArray = [[NSMutableArray alloc] init];
+    }
+    return _totalArray;
+}
+
+- (id)detailArray{
+    if (!_detailArray) {
+        _detailArray = [[NSMutableArray alloc] init];
+    }
+    return _detailArray;
 }
 
 /*

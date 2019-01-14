@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChooseAddressViewController : BaseViewController
-
+@property (nonatomic ,weak) NSDictionary *chooseDict;
 @end
 
 NS_ASSUME_NONNULL_END

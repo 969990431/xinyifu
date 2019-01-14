@@ -34,7 +34,8 @@
 - (void)requestAddressData{
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/combo" withVC:self withParams:@{@"type":@0} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-
+            NSLog(@"%@",response[@"data"]);
+            [self.addressPickerView loadData:response[@"data"]];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
@@ -189,7 +190,7 @@
         [self.view endEditing:YES];
         if (self.addressDict.count) {
             [self.addressPickerView setCurrentProvince:self.addressDict[@"custProv"]];
-            [self.addressPickerView setCurrentCity:self.addressDict[@"City"]];
+            [self.addressPickerView setCurrentCity:self.addressDict[@"city"]];
             [self.addressPickerView setCurrentArea:self.addressDict[@"custArea"]];
         }
         
@@ -207,7 +208,7 @@
 
 - (void)completingTheSelection:(NSString *)province city:(NSString *)city area:(NSString *)area{
     [self.addressDict setObject:province forKey:@"custProv"];
-    [self.addressDict setObject:city forKey:@"City"];
+    [self.addressDict setObject:city forKey:@"city"];
     [self.addressDict setObject:area forKey:@"custArea"];
     self.areaTF.text = [NSString stringWithFormat:@"%@ %@ %@",province,city,area];
 }
@@ -230,7 +231,7 @@
 
 - (void)addAddressAction:(UIButton *)sender{
     [self.view endEditing:YES];
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"moble":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"City":self.addressDict[@"City"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"mobile":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"city":self.addressDict[@"city"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self.navigationController popViewControllerAnimated:YES];
         }else {

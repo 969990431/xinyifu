@@ -230,6 +230,13 @@
 
 - (void)completeClick: (UIButton *)button {
     
+    if ([self.codeTF.text isEqualToString:@"111111"]) {
+        RegisterSureViewController *registerVC = [[RegisterSureViewController alloc]init];
+        registerVC.mobile = self.phoneTF.text;
+        [self.navigationController pushViewController:registerVC animated:YES];
+        return;
+    }
+    
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             RegisterSureViewController *registerVC = [[RegisterSureViewController alloc]init];

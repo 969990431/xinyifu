@@ -22,6 +22,7 @@
 @property (nonatomic ,strong) UIButton *item0;
 @property (nonatomic ,strong) UIButton *item1;
 
+@property (nonatomic ,strong) NSArray *dataList;
 @property (nonatomic ,strong) NSDictionary *dataDict;
 @end
 
@@ -34,14 +35,27 @@
     [self requestData];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAction:) name:@"CHOOSEADDRESS" object:nil];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)notificationAction:(NSNotification *)noti{
+    self.dataDict = noti.object;
+    [self.backTableView reloadData];
+}
+
 - (void)requestData{
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            NSArray *dataList = response[@"dataList"];
-            if (dataList.count) {
-                self.dataDict = dataList[0];
+            self.dataList = response[@"data"];
+            if (self.dataList.count) {
+                self.dataDict = self.dataList[0];
             }
-            [self.backTableView reloadData];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
@@ -202,11 +216,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (selectedButton == self.item0) {
-        if (self.dataDict) {
-            [self.navigationController pushViewController:[[ChooseAddressViewController alloc] init] animated:YES];
-        }else{
-            [self.navigationController pushViewController:[[AddAddressViewController alloc] init] animated:YES];
-        }
+        ChooseAddressViewController *vc = [[ChooseAddressViewController alloc] init];
+        vc.chooseDict = self.dataDict;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

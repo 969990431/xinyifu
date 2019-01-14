@@ -12,8 +12,12 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dic{
     self = [super init];
     if (self) {
-        _province = [dic objectForKey:@"p"];
-        _citiesListModel = [[CityArrayModel alloc]initWithCity:[dic objectForKey:@"c"] province:_province];
+        _province = [dic objectForKey:@"name"];
+        if (![dic[@"children"] isKindOfClass:[NSNull class]]) {
+            _citiesListModel = [[CityArrayModel alloc]initWithCity:[dic objectForKey:@"children"] province:_province];
+        }else{
+            
+        }
     }
     return self;
 }
