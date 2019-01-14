@@ -1,20 +1,21 @@
 //
-//  SelectProvinceViewController.m
+//  SelectCityViewController.m
 //  XinYiFu
 //
 //  Created by apple on 2019/1/11.
 //  Copyright © 2019 apple. All rights reserved.
 //
 
-#import "SelectProvinceViewController.h"
-#import "PersonProvinceModel.h"
+#import "SelectCityViewController.h"
+#import "PersonCityModel.h"
 
-@interface SelectProvinceViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface SelectCityViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
 @property (nonatomic, strong)NSMutableArray *dataSource;
 @end
 
-@implementation SelectProvinceViewController
+@implementation SelectCityViewController
+
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
@@ -27,7 +28,7 @@
     [self loadData];
 }
 - (void)prepareViews {
-    self.title = @"选择省份";
+    self.title = @"选择城市";
     
     self.view.backgroundColor = UIColorFromRGB(248, 248, 248);
     
@@ -43,11 +44,11 @@
 }
 - (void)loadData {
     
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/get/by_reid" withVC:self withParams:@{@"id":@"0"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/get/by_reid" withVC:self withParams:@{@"id":self.pId} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             NSArray *array = response[@"data"];
             for (NSDictionary *dic in array) {
-                PersonProvinceModel *model = [[PersonProvinceModel alloc]initWithDictionary:dic error:nil];
+                PersonCityModel *model = [[PersonCityModel alloc]initWithDictionary:dic error:nil];
                 [self.dataSource addObject:model];
             }
         }else {
@@ -61,7 +62,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    return self.dataSource.count;;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 47;
@@ -85,15 +86,17 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.selectionStyle = NO;
     }
-    PersonProvinceModel *model = self.dataSource[indexPath.row];
+    PersonCityModel *model = self.dataSource[indexPath.row];
     cell.textLabel.text = model.name;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PersonProvinceModel *model = self.dataSource[indexPath.row];
+    PersonCityModel *model = self.dataSource[indexPath.row];
     if (self.callBack) {
-        self.callBack(model.name,model.id);
+        self.callBack(model.name);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 @end

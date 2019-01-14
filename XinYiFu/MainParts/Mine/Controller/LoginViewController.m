@@ -131,6 +131,7 @@
     }];
     
     self.passWordTF = [UITextField textFieldWithPlaceHolder:@"请输入密码"];
+//    self.passWordTF.keyboardType = UIKeyboardTypeNumberPad;
     if ([UserPreferenceModel shareManager].password) {
         self.passWordTF.text = [UserPreferenceModel shareManager].password;
     }

@@ -109,6 +109,9 @@
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo fetchCompletionHandler:(void(^)(UIBackgroundFetchResult))completionHandler
 
 {
+    [self configureBDS];
+    [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+    
     [UMessage setAutoAlert:NO];
     //统计点击数
     [UMessage didReceiveRemoteNotification:userInfo];
@@ -116,6 +119,7 @@
         [UMessage didReceiveRemoteNotification:userInfo];
         completionHandler(UIBackgroundFetchResultNewData);
     }
+    
 }
 
 //iOS10新增：处理前台收到通知的代理方法
@@ -132,7 +136,7 @@
         [UMessage setAutoAlert:YES];
         //（前台、后台）的消息处理
         [UMessage didReceiveRemoteNotification:userInfo];
-        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+//        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
     }else{
         //应用处于前台时的本地推送接受
     }

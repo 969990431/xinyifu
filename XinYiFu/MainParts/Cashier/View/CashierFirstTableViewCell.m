@@ -345,7 +345,7 @@
             make.size.mas_equalTo(CGSizeMake(168, 157));
         }];
         
-        self.bottomContentLabel = [UILabel labelWithTextColor:WordDeepGray font:14 aligment:NSTextAlignmentCenter];
+        self.bottomContentLabel = [UILabel labelWithTextColor:WordDeepGray font:14 aligment:NSTextAlignmentLeft];
         self.bottomContentLabel.numberOfLines = 0;
         [self.backView addSubview:self.bottomContentLabel];
         [self.bottomContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -355,7 +355,7 @@
             make.top.mas_equalTo(self.shenhezhongImageV.mas_bottom).offset(15);
         }];
         
-        self.bottomContentLabel.attributedText = [@"天上风筝渐渐多了，地上孩子也多了。城里乡下，家家户户，老老小小，也赶趟儿似的，一个个都出来了。舒活舒活筋骨，抖擞抖擞精神，各做各的一份事去。“一年之计在于春”，刚起头儿，有的是工夫，有的是希望"changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(10, 10) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(10, 10)];
+        self.bottomContentLabel.attributedText = [@"您的认证信息正在审核中，三个工作日内给您回复，请您耐心等待！如有疑问请联系客服400-000-890"changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(39, 11) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(39, 11)];
     }
     return self;
 }
@@ -398,7 +398,7 @@
 }
 
 - (void)setType:(NSInteger)type {
-    if (type == 0) {
+    if (type == 3) {
         //        已认证，可以扫码
         self.fingerLabel.text = @"扫一扫，向我付款";
         self.statusLabel.backgroundColor = StatusOrange;
@@ -424,7 +424,7 @@
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
         
-    }else if (type == 1) {
+    }else if (type == 0) {
         //        未认证
         self.fingerLabel.text = @"选择身份认证";
         self.statusLabel.backgroundColor = AlertGray;
@@ -449,7 +449,7 @@
         
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
-    }else if (type == 2) {
+    }else if (type == 1) {
         //        审核中
         self.fingerLabel.text = @"正在审核中…";
         self.statusLabel.backgroundColor = AlertGray;
@@ -474,13 +474,15 @@
         
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
-    }else if (type == 3) {
+    }else if (type == 2) {
         //        e审核失败
         self.fingerLabel.text = @"审核失败";
         self.statusLabel.backgroundColor = AlertGray;
         self.statusLabel.text = @"未认证";
         self.titlelabel.text = @"您尚未实名认证";
         self.contentLabel.text = @"只有认证才可以收钱哦！";
+        
+        self.bottomContentLabel.attributedText = [@"您认证的信息有误，导致认证失败，可先联系客服400-000-890或者重新选择身份认证"changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(22, 21) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(22, 21)];
         
         self.erweimaImageV.hidden = 1;
         self.setMoneyBtn.hidden = 1;

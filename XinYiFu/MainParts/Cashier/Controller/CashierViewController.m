@@ -27,10 +27,10 @@
 
 /**
  显示类型
- 0:已认证，可以扫码
- 1:未认证
- 2:审核中
- 3:审核失败
+ 0:未认证
+ 1:审核中
+ 2:审核失败
+ 3:已认证，可以扫码
  4:已认证，有二维码，有金额
  */
 @property (nonatomic, assign)NSInteger type;
@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
-    [self loadData];
+//    [self loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,6 +62,7 @@
         [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
     }else {
 //        [self loadUserData];
+        [self loadData];
     }
 }
 //用户信息请求
@@ -70,7 +71,7 @@
         if (errorCode == 1) {
             
         }else {
-            [SVProgressHUD showWithStatus:errorMessage];
+            [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
 }
@@ -125,6 +126,7 @@
                 [UserPreferenceModel shareManager].userName = self.model.userName;
                 [UserPreferenceModel shareManager].cashQr = self.model.cashQr;
                 [UserPreferenceModel shareManager].agreementStatus = self.model.agreementStatus;
+//                [UserPreferenceModel shareManager].agreementStatus = @"0";
                 
             }else {
                 [SVProgressHUD showErrorWithStatus:errorMessage];

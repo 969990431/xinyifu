@@ -9,9 +9,9 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^ProvinceIdBlock)(NSString *name, NSString *pId);
 @interface SelectProvinceViewController : BaseViewController
-
+@property (nonatomic, copy)ProvinceIdBlock callBack;
 @end
 
 NS_ASSUME_NONNULL_END
