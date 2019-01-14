@@ -11,6 +11,7 @@
 #import "AuthStatusViewController.h"
 #import "AuthStatusViewController.h"
 #import "SelectProvinceViewController.h"
+#import "SelectCityViewController.h"
 
 @interface PersonalAuthViewController ()<UITableViewDelegate, UITableViewDataSource,EditInfoTableViewCellDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -24,6 +25,7 @@
 @property (nonatomic, copy)NSString *bankNumber;
 @property (nonatomic, copy)NSString *telNumber;
 @property (nonatomic, copy)NSString *province;
+@property (nonatomic, copy)NSString *pId;
 @property (nonatomic, copy)NSString *city;
 
 @end
@@ -111,8 +113,9 @@
         [self.submitBtn addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
         self.submitBtn.layer.masksToBounds = YES;
         self.submitBtn.layer.cornerRadius = 4;
-        self.submitBtn.userInteractionEnabled = NO;
-        [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+        [self textChange:nil];
+//        self.submitBtn.userInteractionEnabled = NO;
+//        [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
         [footer addSubview:self.submitBtn];
         [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(20);
@@ -138,9 +141,15 @@
     }else if (indexPath.section == 3) {
         self.telNumber = cell.textField.text;
     }else if (indexPath.section == 4) {
+        if (self.province) {
+            cell.textField.text = self.province;
+        }
         self.province = cell.textField.text;
         cell.textField.enabled = NO;
     }else if (indexPath.section == 5) {
+        if (self.city) {
+            cell.textField.text = self.city;
+        }
         self.city = cell.textField.text;
         cell.textField.enabled = NO;
     }
@@ -152,6 +161,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 4) {
         SelectProvinceViewController *vc = [[SelectProvinceViewController alloc]init];
+        vc.callBack = ^(NSString *name, NSString *pId) {
+            self.province = name;
+            self.pId = pId;
+            [self textChange:nil];
+            [self.backTableView reloadData];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if (indexPath.section == 5) {
+        SelectCityViewController *vc = [[SelectCityViewController alloc]init];
+        vc.pId = self.pId;
+        vc.callBack = ^(NSString * name) {
+            self.city = name;
+            [self textChange:nil];
+            [self.backTableView reloadData];
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -165,9 +191,9 @@
     }else if (textField.tag == 103) {
         self.telNumber = textField.text;
     }else if (textField.tag == 104) {
-        self.province = textField.text;
+//        self.province = textField.text;
     }else if (textField.tag == 105) {
-        self.city = textField.text;
+//        self.city = textField.text;
     }
     
     if (![self.name isNullString] && ![self.idNumber isNullString] && ![self.bankNumber isNullString] && ![self.telNumber isNullString] && ![self.province isNullString] && ![self.city isNullString]) {
@@ -179,12 +205,12 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/person/infoSubmit" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"personRealName":self.name, @"personIdCard":self.idNumber, @"personBankCard":self.bankNumber, @"personMobile":self.telNumber, @"personCustProv":@"河南", @"personCustAea":@"新乡市"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/save/person" withVC:self withParams:@{@"personRealName":self.name, @"personIdCard":self.idNumber, @"personBankCard":self.bankNumber, @"personMobile":self.telNumber, @"personCustProv":self.province, @"personCustAea":self.city} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
             [self.navigationController pushViewController:authVC animated:YES];
         }else {
-            [SVProgressHUD showWithStatus:errorMessage];
+            [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
 }

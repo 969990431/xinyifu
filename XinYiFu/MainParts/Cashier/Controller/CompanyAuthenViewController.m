@@ -166,14 +166,15 @@
 }
 
 - (void)submitAction: (UIButton *)sender {
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/save/company" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"legalPersonName":self.name, @"legalCertId":self.idNumber, @"companyCode":self.creditNumber, @"companyBankNo":self.bankNumber, @"companyBankMobile":self.telNumber} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/save/company" withVC:self withParams:@{@"legalPersonName":self.name, @"legalCertId":self.idNumber, @"companyCode":self.creditNumber, @"companyBankNo":self.bankNumber, @"companyBankMobile":self.telNumber} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             AuthStatusViewController *authVC = [[AuthStatusViewController alloc]init];
             [self.navigationController pushViewController:authVC animated:YES];
         }else {
-            [SVProgressHUD showWithStatus:errorMessage];
+            [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
+    
     
 }
 

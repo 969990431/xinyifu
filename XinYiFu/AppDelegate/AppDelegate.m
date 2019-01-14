@@ -22,7 +22,6 @@
 
 
 @interface AppDelegate ()<BDSSpeechSynthesizerDelegate,UNUserNotificationCenterDelegate>
-@property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
 
 @end
 
@@ -99,26 +98,6 @@
         self.window.rootViewController = [[MainTabViewController alloc]init];
     }
     
-    NSError *error = NULL;
-    
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    
-    [session setCategory:AVAudioSessionCategoryPlayback error:&error];
-    
-    if(error) {
-        // Do some error handling
-        
-    }
-    
-    [session setActive:YES error:&error];
-    
-    if (error) {
-        // Do some error handling
-    }
-    
-    // 让app支持接受远程控制事件
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    
     // Override point for customization after application launch.
     return YES;
 }
@@ -130,6 +109,9 @@
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo fetchCompletionHandler:(void(^)(UIBackgroundFetchResult))completionHandler
 
 {
+    [self configureBDS];
+    [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+    
     [UMessage setAutoAlert:NO];
     //统计点击数
     [UMessage didReceiveRemoteNotification:userInfo];
@@ -137,6 +119,7 @@
         [UMessage didReceiveRemoteNotification:userInfo];
         completionHandler(UIBackgroundFetchResultNewData);
     }
+    
 }
 
 //iOS10新增：处理前台收到通知的代理方法
@@ -153,7 +136,7 @@
         [UMessage setAutoAlert:YES];
         //（前台、后台）的消息处理
         [UMessage didReceiveRemoteNotification:userInfo];
-        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+//        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
     }else{
         //应用处于前台时的本地推送接受
     }
@@ -205,54 +188,10 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // 开启后台处理多媒体事件
-    
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    
-    AVAudioSession *session=[AVAudioSession sharedInstance];
-    
-    [session setActive:YES error:nil];
-    
-    // 后台播放
-    
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    
-    // 这样做，可以在按home键进入后台后 ，播放一段时间，几分钟吧。但是不能持续播放网络歌曲，若需要持续播放网络歌曲，还需要申请后台任务id，具体做法是：
-    
-    _backgroundTaskIdentifier=[AppDelegate backgroundPlayerID:_backgroundTaskIdentifier];
-    
-    // 其中的_bgTaskId是后台任务UIBackgroundTaskIdentifier _bgTaskId;
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
 
-+(UIBackgroundTaskIdentifier)backgroundPlayerID:(UIBackgroundTaskIdentifier)backTaskId{
-    //设置并激活音频会话类别
-    
-    AVAudioSession *session=[AVAudioSession sharedInstance];
-    
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    
-    [session setActive:YES error:nil];
-    
-    //允许应用程序接收远程控制
-    
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    
-    //设置后台任务ID
-    
-    UIBackgroundTaskIdentifier newTaskId=UIBackgroundTaskInvalid;
-    
-    newTaskId=[[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
-    
-    if(newTaskId!=UIBackgroundTaskInvalid&&backTaskId!=UIBackgroundTaskInvalid){
-        
-        [[UIApplication sharedApplication] endBackgroundTask:backTaskId];
-        
-    }
-    
-    return newTaskId;
-}
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.

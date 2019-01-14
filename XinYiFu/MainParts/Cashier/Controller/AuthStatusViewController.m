@@ -7,6 +7,7 @@
 //
 
 #import "AuthStatusViewController.h"
+#import "UINavigationController+BackButtonHandler.h"
 
 @interface AuthStatusViewController ()
 @property (nonatomic, strong)UIImageView *imageV;
@@ -18,13 +19,17 @@
 @end
 
 @implementation AuthStatusViewController
-
+- (BOOL)navigationShouldPopOnBackButton {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    return NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
 }
 
 - (void)prepareViews {
+    
     self.type = 2;
     
     self.imageV = [[UIImageView alloc]init];
