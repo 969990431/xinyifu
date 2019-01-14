@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong)NSString *phoneNo;
 @property (nonatomic, strong)NSString *code;
+@property (nonatomic , assign) int time;
+
 
 @end
 
@@ -134,6 +136,7 @@
         }];
         
         self.codeBtn = [UIButton buttonWithTitle:@"获取验证码" font:15 titleColor:WordGreen backGroundColor:nil aligment:UIControlContentHorizontalAlignmentCenter];
+        [self.codeBtn addTarget:self action:@selector(sendCode:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:self.codeBtn];
         [self.codeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-20);
@@ -145,6 +148,10 @@
     return cell;
 }
 - (void)textChange: (UITextField *)textField {
+    if (self.phoneNoTF.text.length>=11) {
+        [self.codeTF becomeFirstResponder];
+    }
+    
     if (textField.tag == 100) {
         self.phoneNo = textField.text;
     }else {
@@ -159,8 +166,45 @@
         self.submitBtn.userInteractionEnabled = NO;
     }
 }
-- (void)submitAction: (UIButton *)sender {
+- (void)sendCode: (UIButton *)sender {
     
+    sender.userInteractionEnabled = NO;
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneNoTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [self getCodeAction:self.codeBtn];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
+
+- (void)getCodeAction:(UIButton *)sender{
+    [sender setTitle:@"60s" forState:UIControlStateNormal];
+    sender.titleLabel.text = @"60s";
+    sender.userInteractionEnabled = NO;
+    self.time = 60;
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+        self.time--;
+        [sender setTitle:[NSString stringWithFormat:@"%ds",self.time] forState:UIControlStateNormal];
+        if (self.time <= 0) {
+            [timer invalidate];
+            timer = nil;
+            sender.userInteractionEnabled = YES;
+            [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
+        }
+    }];
+}
+
+- (void)submitAction: (UIButton *)sender {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/reset/mobile" withVC:self withParams:@{@"mobile":self.phoneNoTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [SVProgressHUD showSuccessWithStatus:@"更换手机号成功"];
+            [UserPreferenceModel shareManager].mobile = self.phoneNoTF.text;
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 @end

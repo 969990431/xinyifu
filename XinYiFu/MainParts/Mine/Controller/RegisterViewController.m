@@ -186,8 +186,8 @@
         [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
         return;
     }
-    sender.enabled = NO;
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    sender.userInteractionEnabled = NO;
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self getCodeAction:self.codeBtn];
         }else {
@@ -230,7 +230,7 @@
 
 - (void)completeClick: (UIButton *)button {
     
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             RegisterSureViewController *registerVC = [[RegisterSureViewController alloc]init];
             registerVC.mobile = self.phoneTF.text;

@@ -19,6 +19,7 @@
 @property (nonatomic, strong)UIButton *codeBtn;
 
 @property (nonatomic, strong)NSString *code;
+@property (nonatomic , assign) int time;
 @end
 
 @implementation ChangePhoneOldViewController
@@ -101,7 +102,7 @@
         
         self.phoneNoTF = [UITextField textFieldWithPlaceHolder:@""];
         self.phoneNoTF.userInteractionEnabled = NO;
-        self.phoneNoTF.text = @"134322342423";
+        self.phoneNoTF.text = [UserPreferenceModel shareManager].account;
         [cell addSubview:self.phoneNoTF];
         [self.phoneNoTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(titlelabel.mas_right).offset(20);
@@ -133,6 +134,7 @@
         }];
         
         self.codeBtn = [UIButton buttonWithTitle:@"获取验证码" font:15 titleColor:WordGreen backGroundColor:nil aligment:UIControlContentHorizontalAlignmentCenter];
+        [self.codeBtn addTarget:self action:@selector(sendCode:) forControlEvents:UIControlEventTouchUpInside];
         [cell addSubview:self.codeBtn];
         [self.codeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-20);
@@ -143,6 +145,36 @@
     cell.selectionStyle = NO;
     return cell;
 }
+
+- (void)sendCode: (UIButton *)sender {
+    
+    sender.userInteractionEnabled = NO;
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneNoTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [self getCodeAction:self.codeBtn];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+}
+
+- (void)getCodeAction:(UIButton *)sender{
+    [sender setTitle:@"60s" forState:UIControlStateNormal];
+    sender.titleLabel.text = @"60s";
+    sender.userInteractionEnabled = NO;
+    self.time = 60;
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+        self.time--;
+        [sender setTitle:[NSString stringWithFormat:@"%ds",self.time] forState:UIControlStateNormal];
+        if (self.time <= 0) {
+            [timer invalidate];
+            timer = nil;
+            sender.userInteractionEnabled = YES;
+            [sender setTitle:@"获取验证码" forState:UIControlStateNormal];
+        }
+    }];
+}
+
 - (void)textChange: (UITextField *)textField {
     self.code = textField.text;
     
@@ -155,8 +187,16 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
-    ChangePhoneNewViewController *vc = [[ChangePhoneNewViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneNoTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            ChangePhoneNewViewController *vc = [[ChangePhoneNewViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
+    
+    
 }
 
 @end
