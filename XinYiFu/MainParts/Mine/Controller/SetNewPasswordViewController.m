@@ -191,15 +191,14 @@
         self.submitBtn.userInteractionEnabled = NO;
         return;
     }
-//    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-//        if (errorCode == 1) {
-//            [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
-//        }else {
-//            [SVProgressHUD showErrorWithStatus:errorMessage];
-//        }
-//    }];
-
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/forget/password" withVC:self withParams:@{@"mobile":self.mobile,@"password":self.checkoutTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 -(int)checkIsHaveNumAndLetter:(NSString*)password{

@@ -80,7 +80,7 @@
     }];
 
     if (indexPath.row == 0) {
-        title.text = @"密码";
+        title.text = @"旧密码";
         self.passwordTF = [UITextField textFieldWithPlaceHolder:@"请输入旧密码"];
         self.passwordTF.font = [UIFont systemFontOfSize:16.f];
         self.passwordTF.secureTextEntry = YES;
@@ -92,7 +92,7 @@
             make.right.mas_equalTo(cell.contentView.mas_right).offset(-50);
         }];
     }else{
-        title.text = @"确认密码";
+        title.text = @"新密码";
         self.checkoutTF = [UITextField textFieldWithPlaceHolder:@"请输入新密码"];
         self.checkoutTF.font = [UIFont systemFontOfSize:16.f];
         self.checkoutTF.secureTextEntry = YES;
@@ -124,10 +124,6 @@
 }
 
 - (void)saveButtonAction:(UIButton *)sender{
-    if (![self.passwordTF.text isEqualToString:[UserPreferenceModel shareManager].password]) {
-        [SVProgressHUD showInfoWithStatus:@"旧密码错误"];
-        return;
-    }
     if ([self checkIsHaveNumAndLetter:self.checkoutTF.text] != 3 || self.checkoutTF.text.length < 8 || self.checkoutTF.text.length > 16) {
         [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
         return;

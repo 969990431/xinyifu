@@ -7,7 +7,7 @@
 //
 
 #import "AddAddressViewController.h"
-#import "YAddressPickerView.h"
+#import "AddressPickerView.h"
 
 @interface AddAddressViewController ()<UITableViewDelegate,UITableViewDataSource,AddressViewDelegate>
 @property (nonatomic ,strong) UITableView *backTableView;
@@ -19,7 +19,8 @@
 @property (nonatomic ,strong) UITextField *addressTF;
 
 @property (nonatomic ,strong) NSMutableDictionary *addressDict;
-@property (nonatomic, strong) YAddressPickerView *addressPickerView;
+@property (nonatomic ,strong) NSArray *addressArray;
+@property (nonatomic ,strong) AddressPickerView *addressPicker;
 @end
 
 @implementation AddAddressViewController
@@ -34,8 +35,7 @@
 - (void)requestAddressData{
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/combo" withVC:self withParams:@{@"type":@0} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            NSLog(@"%@",response[@"data"]);
-            [self.addressPickerView loadData:response[@"data"]];
+            self.addressArray = response[@"data"];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
@@ -47,6 +47,13 @@
         _addressDict = [[NSMutableDictionary alloc] init];
     }
     return _addressDict;
+}
+
+- (id)addressArray{
+    if (!_addressArray) {
+        _addressArray = [[NSArray alloc] init];
+    }
+    return _addressArray;
 }
 
 - (void)prepareViews{
@@ -78,9 +85,6 @@
         make.height.mas_equalTo(40);
     }];
     
-    self.addressPickerView = [[YAddressPickerView alloc]init];
-    [self.view addSubview:self.addressPickerView];
-    self.addressPickerView.delegate = self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -188,29 +192,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1 && indexPath.row == 0) {
         [self.view endEditing:YES];
-        if (self.addressDict.count) {
-            [self.addressPickerView setCurrentProvince:self.addressDict[@"custProv"]];
-            [self.addressPickerView setCurrentCity:self.addressDict[@"city"]];
-            [self.addressPickerView setCurrentArea:self.addressDict[@"custArea"]];
-        }
         
-        [self.addressPickerView show];
+        [AddressPickerView showWithData:self.addressArray delegate:self];
     }
-}
-
-- (void)cancelOnclick{//取消选择
-    [self.addressPickerView hide];
-}
-
-- (void)viewDisappearance{//视图隐藏（包括点击取消按钮和点击空白处收起PickerView）
-    
 }
 
 - (void)completingTheSelection:(NSString *)province city:(NSString *)city area:(NSString *)area{
     [self.addressDict setObject:province forKey:@"custProv"];
     [self.addressDict setObject:city forKey:@"city"];
-    [self.addressDict setObject:area forKey:@"custArea"];
-    self.areaTF.text = [NSString stringWithFormat:@"%@ %@ %@",province,city,area];
+    NSString *text = [NSString stringWithFormat:@"%@ %@",province,city];
+    if (area) {
+        [self.addressDict setObject:area forKey:@"custArea"];
+        text = [text stringByAppendingString:[NSString stringWithFormat:@" %@",area]];
+    }
+    self.areaTF.text = text;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -231,7 +226,11 @@
 
 - (void)addAddressAction:(UIButton *)sender{
     [self.view endEditing:YES];
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/address/add" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"name":self.nameTF.text,@"mobile":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"city":self.addressDict[@"city"],@"custArea":self.addressDict[@"custArea"],@"address":self.addressTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"name":self.nameTF.text,@"mobile":self.mobileTF.text,@"custProv":self.addressDict[@"custProv"],@"city":self.addressDict[@"city"],@"address":self.addressTF.text}];
+    if (self.addressDict[@"custArea"]) {
+        [dict addEntriesFromDictionary:@{@"custArea":self.addressDict[@"custArea"]}];
+    }
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/address/add" withVC:self withParams:dict withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self.navigationController popViewControllerAnimated:YES];
         }else {

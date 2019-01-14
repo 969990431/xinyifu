@@ -17,6 +17,7 @@
 		1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811DA5921D703AA0084AD76 /* NoNetworkView.m */; };
 		1814E6F221E3069A00C75BFB /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814E6F121E3069A00C75BFB /* ResetPasswordViewController.m */; };
 		1814E6F521E32F3700C75BFB /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814E6F421E32F3700C75BFB /* AddressCell.m */; };
+		18179D3D21EC603B00732F5E /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18179D3C21EC603B00732F5E /* AddressPickerView.m */; };
 		1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */; };
 		1819D9E421D323A3009CC7E1 /* XYFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819D9E321D323A3009CC7E1 /* XYFAlertView.m */; };
 		181BFF9721D46E7A00B8AB37 /* CustomQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BFF9621D46E7A00B8AB37 /* CustomQueryViewController.m */; };
@@ -98,15 +99,9 @@
 		18B0749221D3883100B8804B /* AuthStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0749121D3883100B8804B /* AuthStatusViewController.m */; };
 		18B6FD8A21E83A2B007E99D3 /* CashierStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */; };
 		18B6FD8D21E84ABE007E99D3 /* SelectProvinceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */; };
-		18B6FD9621E8833D007E99D3 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD9521E8833D007E99D3 /* NotificationService.m */; };
-		18B6FD9A21E8833D007E99D3 /* BackGroundAlert.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18B6FDA421E8A7D0007E99D3 /* PersonProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FDA321E8A7D0007E99D3 /* PersonProvinceModel.m */; };
 		18B6FDA721E8A831007E99D3 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FDA621E8A831007E99D3 /* SelectCityViewController.m */; };
 		18B6FDAA21E8A8A6007E99D3 /* PersonCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FDA921E8A8A6007E99D3 /* PersonCityModel.m */; };
-		18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19B21E486B300C482DD /* YAddressPickerView.m */; };
-		18F9A1A321E486B300C482DD /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19C21E486B300C482DD /* CityModel.m */; };
-		18F9A1A421E486B300C482DD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F9A19D21E486B300C482DD /* city.json */; };
-		18F9A1A521E486B300C482DD /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19F21E486B300C482DD /* ProvinceModel.m */; };
 		236D991CB5F8C04F832C82D2 /* libPods-XinYiFuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51812E1B1773969AF0AC175 /* libPods-XinYiFuTests.a */; };
 		2F91AE5421D3878300ACF08C /* IncomeRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */; };
 		359CC5C1397C7E102918EDF9 /* libPods-XinYiFu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF033354134D5DFFC70C0EF7 /* libPods-XinYiFu.a */; };
@@ -128,13 +123,6 @@
 			remoteGlobalIDString = 184A59DD21D07F87008900D5;
 			remoteInfo = XinYiFu;
 		};
-		18B6FD9821E8833D007E99D3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 184A59D621D07F87008900D5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 18B6FD9121E8833D007E99D3;
-			remoteInfo = BackGroundAlert;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -144,7 +132,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				18B6FD9A21E8833D007E99D3 /* BackGroundAlert.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +160,8 @@
 		1814E6F121E3069A00C75BFB /* ResetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
 		1814E6F321E32F3700C75BFB /* AddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressCell.h; sourceTree = "<group>"; };
 		1814E6F421E32F3700C75BFB /* AddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressCell.m; sourceTree = "<group>"; };
+		18179D3B21EC603B00732F5E /* AddressPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressPickerView.h; sourceTree = "<group>"; };
+		18179D3C21EC603B00732F5E /* AddressPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressPickerView.m; sourceTree = "<group>"; };
 		1819D9DB21D31BC7009CC7E1 /* ChooseAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAddressViewController.h; sourceTree = "<group>"; };
 		1819D9DC21D31BC7009CC7E1 /* ChooseAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressViewController.m; sourceTree = "<group>"; };
 		1819D9E221D323A3009CC7E1 /* XYFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYFAlertView.h; sourceTree = "<group>"; };
@@ -334,24 +323,12 @@
 		18B6FD8921E83A2B007E99D3 /* CashierStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashierStatusModel.m; sourceTree = "<group>"; };
 		18B6FD8B21E84ABE007E99D3 /* SelectProvinceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectProvinceViewController.h; sourceTree = "<group>"; };
 		18B6FD8C21E84ABE007E99D3 /* SelectProvinceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectProvinceViewController.m; sourceTree = "<group>"; };
-		18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BackGroundAlert.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		18B6FD9421E8833D007E99D3 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
-		18B6FD9521E8833D007E99D3 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
-		18B6FD9721E8833D007E99D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18B6FD9E21E884E6007E99D3 /* BackGroundAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackGroundAlert.entitlements; sourceTree = "<group>"; };
 		18B6FDA221E8A7D0007E99D3 /* PersonProvinceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonProvinceModel.h; sourceTree = "<group>"; };
 		18B6FDA321E8A7D0007E99D3 /* PersonProvinceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonProvinceModel.m; sourceTree = "<group>"; };
 		18B6FDA521E8A831007E99D3 /* SelectCityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
 		18B6FDA621E8A831007E99D3 /* SelectCityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
 		18B6FDA821E8A8A6007E99D3 /* PersonCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonCityModel.h; sourceTree = "<group>"; };
 		18B6FDA921E8A8A6007E99D3 /* PersonCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonCityModel.m; sourceTree = "<group>"; };
-		18F9A19B21E486B300C482DD /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
-		18F9A19C21E486B300C482DD /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
-		18F9A19D21E486B300C482DD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
-		18F9A19E21E486B300C482DD /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
-		18F9A19F21E486B300C482DD /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
-		18F9A1A021E486B300C482DD /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
-		18F9A1A121E486B300C482DD /* YAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAddressPickerView.h; sourceTree = "<group>"; };
 		1EC9D8C7538D89AE195348CA /* Pods-XinYiFuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinYiFuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinYiFuUITests/Pods-XinYiFuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2F91AE5221D3878300ACF08C /* IncomeRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeRecordViewController.h; sourceTree = "<group>"; };
 		2F91AE5321D3878300ACF08C /* IncomeRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeRecordViewController.m; sourceTree = "<group>"; };
@@ -402,13 +379,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18B6FD8F21E8833D007E99D3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -441,6 +411,8 @@
 				1811DA5921D703AA0084AD76 /* NoNetworkView.m */,
 				18113C6B21E763EE006141FF /* NoDataView.h */,
 				18113C6C21E763EE006141FF /* NoDataView.m */,
+				18179D3B21EC603B00732F5E /* AddressPickerView.h */,
+				18179D3C21EC603B00732F5E /* AddressPickerView.m */,
 			);
 			path = CommonFunction;
 			sourceTree = "<group>";
@@ -451,7 +423,6 @@
 				184A59E021D07F87008900D5 /* XinYiFu */,
 				184A59F921D07F89008900D5 /* XinYiFuTests */,
 				184A5A0421D07F89008900D5 /* XinYiFuUITests */,
-				18B6FD9321E8833D007E99D3 /* BackGroundAlert */,
 				184A59DF21D07F87008900D5 /* Products */,
 				D99632B20896B00114081913 /* Pods */,
 				93833E6D59554D29778C56EC /* Frameworks */,
@@ -464,7 +435,6 @@
 				184A59DE21D07F87008900D5 /* XinYiFu.app */,
 				184A59F621D07F89008900D5 /* XinYiFuTests.xctest */,
 				184A5A0121D07F89008900D5 /* XinYiFuUITests.xctest */,
-				18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -738,7 +708,6 @@
 		1895152421DDA0D00019F9CC /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				18F9A19A21E486B300C482DD /* YQLAddressPickerView */,
 				1895152521DDA0D00019F9CC /* TTS */,
 			);
 			path = SDK;
@@ -818,31 +787,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		18B6FD9321E8833D007E99D3 /* BackGroundAlert */ = {
-			isa = PBXGroup;
-			children = (
-				18B6FD9E21E884E6007E99D3 /* BackGroundAlert.entitlements */,
-				18B6FD9421E8833D007E99D3 /* NotificationService.h */,
-				18B6FD9521E8833D007E99D3 /* NotificationService.m */,
-				18B6FD9721E8833D007E99D3 /* Info.plist */,
-			);
-			path = BackGroundAlert;
-			sourceTree = "<group>";
-		};
-		18F9A19A21E486B300C482DD /* YQLAddressPickerView */ = {
-			isa = PBXGroup;
-			children = (
-				18F9A19D21E486B300C482DD /* city.json */,
-				18F9A1A121E486B300C482DD /* YAddressPickerView.h */,
-				18F9A19B21E486B300C482DD /* YAddressPickerView.m */,
-				18F9A1A021E486B300C482DD /* CityModel.h */,
-				18F9A19C21E486B300C482DD /* CityModel.m */,
-				18F9A19E21E486B300C482DD /* ProvinceModel.h */,
-				18F9A19F21E486B300C482DD /* ProvinceModel.m */,
-			);
-			path = YQLAddressPickerView;
-			sourceTree = "<group>";
-		};
 		93833E6D59554D29778C56EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,7 +838,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				18B6FD9921E8833D007E99D3 /* PBXTargetDependency */,
 			);
 			name = XinYiFu;
 			productName = XinYiFu;
@@ -939,23 +882,6 @@
 			productReference = 184A5A0121D07F89008900D5 /* XinYiFuUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		18B6FD9121E8833D007E99D3 /* BackGroundAlert */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 18B6FD9D21E8833D007E99D3 /* Build configuration list for PBXNativeTarget "BackGroundAlert" */;
-			buildPhases = (
-				18B6FD8E21E8833D007E99D3 /* Sources */,
-				18B6FD8F21E8833D007E99D3 /* Frameworks */,
-				18B6FD9021E8833D007E99D3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BackGroundAlert;
-			productName = BackGroundAlert;
-			productReference = 18B6FD9221E8833D007E99D3 /* BackGroundAlert.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -986,14 +912,6 @@
 						CreatedOnToolsVersion = 10.1;
 						TestTargetID = 184A59DD21D07F87008900D5;
 					};
-					18B6FD9121E8833D007E99D3 = {
-						CreatedOnToolsVersion = 10.1;
-						SystemCapabilities = {
-							com.apple.Push = {
-								enabled = 1;
-							};
-						};
-					};
 				};
 			};
 			buildConfigurationList = 184A59D921D07F87008900D5 /* Build configuration list for PBXProject "XinYiFu" */;
@@ -1012,7 +930,6 @@
 				184A59DD21D07F87008900D5 /* XinYiFu */,
 				184A59F521D07F89008900D5 /* XinYiFuTests */,
 				184A5A0021D07F89008900D5 /* XinYiFuUITests */,
-				18B6FD9121E8833D007E99D3 /* BackGroundAlert */,
 			);
 		};
 /* End PBXProject section */
@@ -1022,7 +939,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18F9A1A421E486B300C482DD /* city.json in Resources */,
 				184A59EE21D07F89008900D5 /* LaunchScreen.storyboard in Resources */,
 				1895153221DDA0D00019F9CC /* Chinese_And_English_Text.dat in Resources */,
 				1895153321DDA0D00019F9CC /* Chinese_And_English_Speech_Female.dat in Resources */,
@@ -1039,13 +955,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		184A59FF21D07F89008900D5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		18B6FD9021E8833D007E99D3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1177,7 +1086,6 @@
 				189C48D821D46510004B256A /* MineTableViewCell.m in Sources */,
 				184A59E321D07F87008900D5 /* AppDelegate.m in Sources */,
 				1819D9DD21D31BC7009CC7E1 /* ChooseAddressViewController.m in Sources */,
-				18F9A1A521E486B300C482DD /* ProvinceModel.m in Sources */,
 				1801256A21D4D426000919E1 /* IncomeRecordContentCell.m in Sources */,
 				18B6FDA721E8A831007E99D3 /* SelectCityViewController.m in Sources */,
 				184A5A7C21D08F98008900D5 /* UITextField+tool.m in Sources */,
@@ -1205,16 +1113,15 @@
 				18B0746D21D1FD8200B8804B /* RegisterSureViewController.m in Sources */,
 				184A5A7221D08F98008900D5 /* UIButton+tool.m in Sources */,
 				184A5A7521D08F98008900D5 /* UINavigationController+BackButtonHandler.m in Sources */,
-				18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */,
 				1811DA5A21D703AA0084AD76 /* NoNetworkView.m in Sources */,
 				184A5A3A21D08628008900D5 /* NavViewController.m in Sources */,
 				18B6FD8A21E83A2B007E99D3 /* CashierStatusModel.m in Sources */,
-				18F9A1A321E486B300C482DD /* CityModel.m in Sources */,
 				18B0747E21D31F2300B8804B /* CashierSecondTableViewCell.m in Sources */,
 				184A5A7E21D08F98008900D5 /* ModelToJson.m in Sources */,
 				184A5A7921D08F98008900D5 /* UIButton+CreatBtn.m in Sources */,
 				1886472D21DDA30F00522233 /* GeneralWebViewController.m in Sources */,
 				1801256C21D4D426000919E1 /* IncomeRecordHeadCell.m in Sources */,
+				18179D3D21EC603B00732F5E /* AddressPickerView.m in Sources */,
 				189C48F021D4AF70004B256A /* ChangePhoneNewViewController.m in Sources */,
 				189C48EA21D4AB00004B256A /* UserSetTableViewCell.m in Sources */,
 			);
@@ -1236,14 +1143,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18B6FD8E21E8833D007E99D3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				18B6FD9621E8833D007E99D3 /* NotificationService.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1256,11 +1155,6 @@
 			isa = PBXTargetDependency;
 			target = 184A59DD21D07F87008900D5 /* XinYiFu */;
 			targetProxy = 184A5A0221D07F89008900D5 /* PBXContainerItemProxy */;
-		};
-		18B6FD9921E8833D007E99D3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 18B6FD9121E8833D007E99D3 /* BackGroundAlert */;
-			targetProxy = 18B6FD9821E8833D007E99D3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1535,48 +1429,6 @@
 			};
 			name = Release;
 		};
-		18B6FD9B21E8833D007E99D3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BackGroundAlert/BackGroundAlert.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2U5L8EXZDH;
-				INFOPLIST_FILE = BackGroundAlert/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111.BackGroundAlert;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		18B6FD9C21E8833D007E99D3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BackGroundAlert/BackGroundAlert.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2U5L8EXZDH;
-				INFOPLIST_FILE = BackGroundAlert/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = XinYiFu.XinYiFu111.BackGroundAlert;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1612,15 +1464,6 @@
 			buildConfigurations = (
 				184A5A1121D07F89008900D5 /* Debug */,
 				184A5A1221D07F89008900D5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		18B6FD9D21E8833D007E99D3 /* Build configuration list for PBXNativeTarget "BackGroundAlert" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				18B6FD9B21E8833D007E99D3 /* Debug */,
-				18B6FD9C21E8833D007E99D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
