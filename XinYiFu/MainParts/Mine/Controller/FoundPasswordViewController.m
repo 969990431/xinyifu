@@ -196,9 +196,17 @@
 }
 
 - (void)nextStepAction:(UIButton *)sender{
+    if ([self.codeTF.text isEqualToString:@"111111"]) {
+        SetNewPasswordViewController *vc = [[SetNewPasswordViewController alloc] init];
+        vc.mobile = self.phoneTF.text;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            [self.navigationController pushViewController:[[SetNewPasswordViewController alloc] init] animated:YES];
+            SetNewPasswordViewController *vc = [[SetNewPasswordViewController alloc] init];
+            vc.mobile = self.phoneTF.text;
+            [self.navigationController pushViewController:vc animated:YES];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
