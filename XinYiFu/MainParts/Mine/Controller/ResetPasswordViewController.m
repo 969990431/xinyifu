@@ -128,6 +128,7 @@
         [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
         return;
     }
+    
     [[RequestTool shareManager]sendNewRequestWithAPI:@"api/reset/password" withVC:self withParams:@{@"password":self.passwordTF.text,@"newPassword":self.checkoutTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [SVProgressHUD showSuccessWithStatus:@"密码修改成功"];
