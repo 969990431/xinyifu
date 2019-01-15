@@ -44,13 +44,15 @@
 
 @end
 @implementation CashierFirstTableViewCell
-+ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath type:(NSInteger)type delegate:(nonnull id<CashierFirstTableViewCellDelegate>)delegate{
++ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath type:(NSInteger)type delegate:(nonnull id<CashierFirstTableViewCellDelegate>)delegate erweimaUrl:(nonnull NSString *)url money:(nonnull NSString *)money{
     CashierFirstTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CashierFirstTableViewCell" ];
     if (!cell) {
         cell = [[CashierFirstTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CashierFirstTableViewCell"];
         cell.selectionStyle = NO;
     }
-    if (type == 4) {
+    cell.delegate = delegate;
+
+    if (type == 5) {
         [cell.setMoneyBtn setTitle:@"取消金额" forState:UIControlStateNormal];
         cell.backView.frame = CGRectMake(20, 113, SCREEN_WIDTH-40, 538);
         [cell.middleSepLine mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -58,15 +60,20 @@
             make.top.mas_equalTo(cell.erweimaImageV.mas_bottom).offset(93);
             make.size.mas_equalTo(CGSizeMake(1, 17));
         }];
+        cell.moneyLabel.text = money;
+        [cell.erweimaImageV sd_setImageWithURL:[NSURL URLWithString:url]];
     }else {
         cell.backView.frame = CGRectMake(20, 113, SCREEN_WIDTH-40, 449);
     }
     [cell setType:type];
     
-    cell.moneyLabel.text = @"123123";
-    cell.moneyTextLabel.text = @"即佛 i 危机感 i 哦就哦 i 家哦 i 为";
+    cell.titlelabel.text = [UserPreferenceModel shareManager].name;
+    cell.contentLabel.text = [NSString stringWithFormat:@"%@  %@", [UserPreferenceModel shareManager].userName, [UserPreferenceModel shareManager].mobile];
     
-    cell.delegate = delegate;
+    
+//    cell.moneyLabel.text = @"123123";
+    cell.moneyTextLabel.text = @"这部分文案放什么？并没有人告知";
+    
     
     return cell;
 }
@@ -398,7 +405,7 @@
 }
 
 - (void)setType:(NSInteger)type {
-    if (type == 3) {
+    if (type == 4) {
         //        已认证，可以扫码
         self.fingerLabel.text = @"扫一扫，向我付款";
         self.statusLabel.backgroundColor = StatusOrange;
@@ -424,7 +431,7 @@
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
         
-    }else if (type == 0) {
+    }else if (type == 1) {
         //        未认证
         self.fingerLabel.text = @"选择身份认证";
         self.statusLabel.backgroundColor = AlertGray;
@@ -449,7 +456,7 @@
         
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
-    }else if (type == 1) {
+    }else if (type == 2) {
         //        审核中
         self.fingerLabel.text = @"正在审核中…";
         self.statusLabel.backgroundColor = AlertGray;
@@ -474,7 +481,7 @@
         
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
-    }else if (type == 2) {
+    }else if (type == 3) {
         //        e审核失败
         self.fingerLabel.text = @"审核失败";
         self.statusLabel.backgroundColor = AlertGray;

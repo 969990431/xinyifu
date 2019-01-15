@@ -126,9 +126,11 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/edit/amount" withVC:self withParams:@{@"sum":self.money, @"remark":self.remark ? self.remark:@""} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/edit/amount" withVC:self withParams:@{@"sum":self.money, @"remark":self.remark ? self.remark:@""} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            
+//            NSString *url = response[@"cashQr"];
+            NSString *url = @"https://gss0.bdstatic.com/70cFsjip0QIZ8tyhnq/img/logo-zhidao.gif";
+            self.erweimaCallBack(url, self.money);
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];

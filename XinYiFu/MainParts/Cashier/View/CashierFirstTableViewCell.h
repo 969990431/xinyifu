@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface CashierFirstTableViewCell : UITableViewCell
-+ (instancetype)cellWithTableView: (UITableView *)tableView indexPath: (NSIndexPath *)indexPath type: (NSInteger)type delegate: (id<CashierFirstTableViewCellDelegate>)delegate;
++ (instancetype)cellWithTableView: (UITableView *)tableView indexPath: (NSIndexPath *)indexPath type: (NSInteger)type delegate: (id<CashierFirstTableViewCellDelegate>)delegate erweimaUrl: (NSString *)url money: (NSString *)money;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CashierStatusModel : JSONModel
+@property (nonatomic, copy)NSString *logo;//店铺头像
+@property (nonatomic, copy)NSString *picUrl;//个人头像
 @property (nonatomic, copy)NSString *name;//店铺名称
 @property (nonatomic, copy)NSString *mobile;//手机号
 @property (nonatomic, copy)NSString *userName;//用户姓名

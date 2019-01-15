@@ -124,6 +124,10 @@
 }
 
 - (void)saveButtonAction:(UIButton *)sender{
+    if (![self.passwordTF.text isEqualToString:[UserPreferenceModel shareManager].password]) {
+        [SVProgressHUD showInfoWithStatus:@"旧密码错误"];
+        return;
+    }
     if ([self checkIsHaveNumAndLetter:self.checkoutTF.text] != 3 || self.checkoutTF.text.length < 8 || self.checkoutTF.text.length > 16) {
         [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
         return;

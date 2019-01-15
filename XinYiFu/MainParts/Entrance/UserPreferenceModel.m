@@ -92,6 +92,20 @@
     return [self unArchiveWithKey:@"agreementStatus"];
 }
 
+- (void)setLogo:(NSString *)logo {
+    [self archiveString:logo withKey:@"logo"];
+}
+- (NSString *)logo {
+    return [self unArchiveWithKey:@"logo"];
+}
+- (void)setPicUrl:(NSString *)picUrl {
+    [self archiveString:picUrl withKey:@"picUrl"];
+}
+
+- (NSString *)picUrl {
+    return [self unArchiveWithKey:@"picUrl"];
+}
+
 //存入字符串
 - (void)archiveString:(NSString *)str withKey:(NSString *)key {
     [[NSUserDefaults standardUserDefaults]setObject:str forKey:key];

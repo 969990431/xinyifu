@@ -18,6 +18,7 @@
 #import "GradeViewController.h"
 #import "GeneralWebViewController.h"
 #import "BDSSpeechSynthesizer.h"
+#import "AuthStatusViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
@@ -109,9 +110,17 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        UserAuthTypeViewController *vc = [[UserAuthTypeViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        //认证状态：1未认证 2审核中 3审核失败 4认证成功
+        
+        if ([UserPreferenceModel shareManager].agreementStatus.integerValue == 1) {
+            UserAuthTypeViewController *vc = [[UserAuthTypeViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            AuthStatusViewController *vc = [[AuthStatusViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }else if (indexPath.row == 2) {
         if (indexPath.row == 2) {
             FeedbackProblemViewController *vc = [[FeedbackProblemViewController alloc] init];

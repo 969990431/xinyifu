@@ -8,12 +8,14 @@
 
 #import "AuthStatusViewController.h"
 #import "UINavigationController+BackButtonHandler.h"
+#import "UserAuthTypeViewController.h"
 
 @interface AuthStatusViewController ()
 @property (nonatomic, strong)UIImageView *imageV;
 @property (nonatomic, strong)UILabel *textLabel;
 @property (nonatomic, strong)UIButton *sureBtn;
 //1 成功 2 失败 3 审核中
+//认证状态：1未认证 2审核中 3审核失败 4认证成功
 @property (nonatomic, assign)NSInteger type;
 
 @end
@@ -30,7 +32,7 @@
 
 - (void)prepareViews {
     
-    self.type = 2;
+    self.type = [UserPreferenceModel shareManager].agreementStatus.integerValue;
     
     self.imageV = [[UIImageView alloc]init];
     [self.view addSubview:self.imageV];
@@ -44,7 +46,7 @@
     self.sureBtn.layer.masksToBounds = YES;
     self.sureBtn.layer.cornerRadius = 20;
     
-    if (self.type == 0) {
+    if (self.type == 3) {
         [self.imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view);
             make.top.mas_equalTo(self.view).offset(61+ (iPhoneX ? 88:64));
@@ -68,8 +70,9 @@
             make.height.mas_equalTo(40);
         }];
         [self.sureBtn setTitle:@"重新认证" forState:UIControlStateNormal];
+        [self.sureBtn addTarget:self action:@selector(chongxinrenzheng) forControlEvents:UIControlEventTouchUpInside];
         [self.sureBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
-    }else if (self.type == 1) {
+    }else if (self.type == 4) {
         [self.imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view);
             make.top.mas_equalTo(self.view).offset(61+ (iPhoneX ? 88:64));
@@ -91,6 +94,7 @@
             make.height.mas_equalTo(40);
         }];
         [self.sureBtn setTitle:@"立即体验" forState:UIControlStateNormal];
+        [self.sureBtn addTarget:self action:@selector(lijitiyan) forControlEvents:UIControlEventTouchUpInside];
         [self.sureBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
     }else {
         [self.imageV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -111,6 +115,14 @@
         
         self.sureBtn.hidden = 1;
     }
+}
+
+- (void)lijitiyan {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (void)chongxinrenzheng {
+    UserAuthTypeViewController *vc = [[UserAuthTypeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

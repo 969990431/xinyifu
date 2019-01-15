@@ -33,12 +33,18 @@
  3:已认证，可以扫码
  4:已认证，有二维码，有金额
  */
+
+//1未认证 2审核中 3审核失败 4认证成功 5代金额的认证成功
 @property (nonatomic, assign)NSInteger type;
 
 @property (nonatomic, strong)UITableView *backTableView;
 @property (nonatomic, strong)UIImage *headerImage;
 
 @property (nonatomic, strong)CashierStatusModel *model;
+
+//从设置金额页面传过来的二维码 金额
+@property (nonatomic, copy)NSString *erweimaUrl;
+@property (nonatomic, copy)NSString *money;
 @end
 
 @implementation CashierViewController
@@ -62,7 +68,9 @@
         [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
     }else {
 //        [self loadUserData];
-        [self loadData];
+        if (self.type != 5) {
+            [self loadData];
+        }
     }
 }
 //用户信息请求
@@ -121,11 +129,14 @@
             if (errorCode == 1) {
                 self.model = [[CashierStatusModel alloc]initWithDictionary:response[@"data"] error:nil];
                 
+                [UserPreferenceModel shareManager].logo = self.model.logo;
+                [UserPreferenceModel shareManager].picUrl = self.model.picUrl;
                 [UserPreferenceModel shareManager].name = self.model.name;
                 [UserPreferenceModel shareManager].mobile = self.model.mobile;
                 [UserPreferenceModel shareManager].userName = self.model.userName;
                 [UserPreferenceModel shareManager].cashQr = self.model.cashQr;
                 [UserPreferenceModel shareManager].agreementStatus = self.model.agreementStatus;
+                self.type = [UserPreferenceModel shareManager].agreementStatus.integerValue;
 //                [UserPreferenceModel shareManager].agreementStatus = @"0";
                 
             }else {
@@ -138,7 +149,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.type == 0 || self.type == 4) {
+    if (self.type == 5 || self.type == 4) {
         return 2;
     }else {
         return 1;
@@ -149,7 +160,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (self.type == 4) {
+        if (self.type == 5) {
             return 538+113;
         }else {
             return 449+113;
@@ -175,7 +186,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return [CashierFirstTableViewCell cellWithTableView:tableView indexPath:indexPath type:[UserPreferenceModel shareManager].agreementStatus.integerValue delegate:self];
+        return [CashierFirstTableViewCell cellWithTableView:tableView indexPath:indexPath type:self.type delegate:self erweimaUrl:self.erweimaUrl money:self.money];
     }else {
         return [[CashierSecondTableViewCell alloc]init];
     }
@@ -201,9 +212,20 @@
 }
 //设置金额
 - (void)setMoney {
-    SetMoneyViewController *vc = [[SetMoneyViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.type == 5) {
+        self.type = [UserPreferenceModel shareManager].agreementStatus.integerValue;
+        [self.backTableView reloadData];
+    }else {
+        SetMoneyViewController *vc = [[SetMoneyViewController alloc] init];
+        vc.erweimaCallBack = ^(NSString * _Nonnull erweimaUrl, NSString * _Nonnull money) {
+            self.erweimaUrl = erweimaUrl;
+            self.money = money;
+            self.type = 5;
+            [self.backTableView reloadData];
+        };
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 //保存首款吗
 - (void)savePic {
