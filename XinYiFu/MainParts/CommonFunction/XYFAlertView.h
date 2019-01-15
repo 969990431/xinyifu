@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XYFAlertView : UIView
+@property (nonatomic ,copy) void (^block)(void);
 + (void)creatCallAlert;
-+ (void)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle;
++ (id)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle;
 @end
 
 NS_ASSUME_NONNULL_END

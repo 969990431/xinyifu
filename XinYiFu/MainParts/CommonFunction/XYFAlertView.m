@@ -8,6 +8,8 @@
 
 #import "XYFAlertView.h"
 
+@interface XYFAlertView ()
+@end
 @implementation XYFAlertView
 
 /*
@@ -18,9 +20,11 @@
 }
 */
 
-+ (void)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle{
++ (id)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle{
     XYFAlertView *view = [[XYFAlertView alloc] initAlertViewWithTitle:title content:content buttonTitle:buttonTitle];
+    
     [[UIApplication sharedApplication].keyWindow addSubview:view];
+    return view;
 }
 
 - (UIView *)initAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle{
@@ -83,6 +87,9 @@
 }
 
 - (void)cancelAction:(UIButton *)sender{
+    if (self.block) {
+        self.block();
+    }
     [self removeFromSuperview];
 }
 

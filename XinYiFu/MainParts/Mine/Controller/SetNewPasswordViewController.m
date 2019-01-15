@@ -164,8 +164,6 @@
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(segLine2.mas_bottom).offset(40);
     }];
-    
-    [XYFAlertView showAlertViewWithTitle:@"设置成功" content:@"密码设置成功，请重新登录密码设置成功，请重新登录密码设置成功，请重新登录" buttonTitle:@"现在登录"];
 }
 
 - (void)textfieldChanged: (UITextField *)textField {
@@ -192,9 +190,12 @@
         return;
     }
     
-    [[RequestTool shareManager]sendRequestWithAPI:@"/api/forget/password" withVC:self withParams:@{@"mobile":self.mobile,@"password":self.checkoutTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/forget/password" withVC:self withParams:@{@"mobile":self.mobile,@"password":self.checkoutTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            
+            XYFAlertView *view = [XYFAlertView showAlertViewWithTitle:@"设置成功" content:@"密码设置成功，请重新登录密码设置成功，请重新登录密码设置成功，请重新登录" buttonTitle:@"现在登录"];
+            view.block = ^(){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            };
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
