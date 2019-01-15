@@ -287,7 +287,7 @@
 }
 
 - (void)uploadImageWithUrl:(NSString *)url WithImage:(UIImage *)image Params:(NSDictionary *)params Task:(UploadTask)uploadTask Progress:(TaskProgress)progress Result:(TaskResult)result{
-    NSString *formatAPI =  [params objectForKey:@"imgType"]? [NSString stringWithFormat:@"app/%@.htm?imgType=%ld",url,[[params objectForKey:@"imgType"] integerValue]]: [NSString stringWithFormat:@"app/%@.htm?token=%@",url,[params objectForKey:@"token"]];
+    NSString *formatAPI = [NSString stringWithFormat:@"app/%@?token=%@",url,[params objectForKey:@"token"]];
     VDLog(@"\nRequest=====>URL:%@%@",[RequestManage shareHTTPManage].baseURL.absoluteString,formatAPI);
     NSData *data = [UIImage smallTheImageBackData:image];
     task_queue("uploadImage", ^{

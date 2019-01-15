@@ -13,6 +13,8 @@
 @property (nonatomic, strong)UILabel *rateLabel;
 
 @property (nonatomic, strong)UIImageView *allGradeImageV;
+
+@property (nonatomic, copy)NSString *level;
 @end
 
 @implementation GradeViewController
@@ -20,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
+    [self loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,6 +41,19 @@
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setTintColor:UIColorFromRGB(119,119,119)];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:[UIFont systemFontOfSize:18]};
+}
+
+- (void)loadData {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/tax/level" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            self.gradeLabel.text = [NSString stringWithFormat:@"%@级", response[@"data"][@"level"]];
+            self.rateLabel.text = [NSString stringWithFormat:@"%@‰", response[@"data"][@"tax"]];
+            NSString *imageName = [NSString stringWithFormat:@"dengji%@", response[@"data"][@"level"]];
+            [self.allGradeImageV setImage: GetImage(imageName)];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 - (void)prepareViews {
@@ -81,7 +97,7 @@
     }];
     
     self.gradeLabel = [UILabel labelWithTextColor:WordCloseBlack font:18 aligment:NSTextAlignmentLeft];
-    self.gradeLabel.text = @"1级";
+    self.gradeLabel.text = @"-级";
     [whiteBackView addSubview:self.gradeLabel];
     [self.gradeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(gradeTitleLabel.mas_right).offset(10);
@@ -100,7 +116,7 @@
     }];
     
     self.rateLabel = [UILabel labelWithTextColor:UIColorFromRGB(240,77,26) font:18 aligment:NSTextAlignmentLeft];
-    self.rateLabel.text = @"12%";
+    self.rateLabel.text = @"-%";
     [whiteBackView addSubview:self.rateLabel];
     [self.rateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(gradeTitleLabel.mas_right).offset(10);
@@ -117,7 +133,7 @@
         make.height.mas_equalTo(20);
     }];
     
-    self.allGradeImageV = [[UIImageView alloc]initWithImage:GetImage(@"dengji1")];
+    self.allGradeImageV = [[UIImageView alloc]initWithImage:GetImage(@"-")];
     self.allGradeImageV.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:self.allGradeImageV];
     [self.allGradeImageV mas_makeConstraints:^(MASConstraintMaker *make) {

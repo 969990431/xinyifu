@@ -7,6 +7,8 @@
 //
 
 #import "UserAuthTypeViewController.h"
+#import "PersonalAuthViewController.h"
+#import "CompanyAuthenViewController.h"
 
 @interface UserAuthTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *backTableView;
@@ -51,8 +53,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.row == 0) {
+        PersonalAuthViewController *vc = [[PersonalAuthViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        CompanyAuthenViewController *vc = [[CompanyAuthenViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

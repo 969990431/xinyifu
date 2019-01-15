@@ -14,7 +14,7 @@
 @end
 
 @implementation UserInfoTableViewCell
-+ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
++ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath dic:(UserInfoModel*)model{
     UserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoTableViewCell"];
     if (!cell) {
         cell = [[UserInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UserInfoTableViewCell"];
@@ -22,13 +22,13 @@
     }
     if (indexPath.row == 0) {
         cell.titleLabel.text = @"银行名称";
-        cell.contentLabel.text = @"sldjf";
+        cell.contentLabel.text = model.bankName;
     }else if (indexPath.row == 1) {
         cell.titleLabel.text = @"银行卡号";
-        cell.contentLabel.text = @"123123";
+        cell.contentLabel.text = model.cardNo;
     }else {
+        cell.contentLabel.text = model.arrive;
         cell.titleLabel.text = @"到账周期";
-        cell.contentLabel.text = @"555";
     }
     return cell;
 }

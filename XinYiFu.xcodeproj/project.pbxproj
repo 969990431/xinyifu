@@ -103,6 +103,7 @@
 		18B6FDA421E8A7D0007E99D3 /* PersonProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FDA321E8A7D0007E99D3 /* PersonProvinceModel.m */; };
 		18B6FDA721E8A831007E99D3 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FDA621E8A831007E99D3 /* SelectCityViewController.m */; };
 		18B6FDAA21E8A8A6007E99D3 /* PersonCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FDA921E8A8A6007E99D3 /* PersonCityModel.m */; };
+		18D4ABB921EC769A00678416 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D4ABB821EC769A00678416 /* UserInfoModel.m */; };
 		18F9A1A221E486B300C482DD /* YAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19B21E486B300C482DD /* YAddressPickerView.m */; };
 		18F9A1A321E486B300C482DD /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9A19C21E486B300C482DD /* CityModel.m */; };
 		18F9A1A421E486B300C482DD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F9A19D21E486B300C482DD /* city.json */; };
@@ -345,6 +346,8 @@
 		18B6FDA621E8A831007E99D3 /* SelectCityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
 		18B6FDA821E8A8A6007E99D3 /* PersonCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonCityModel.h; sourceTree = "<group>"; };
 		18B6FDA921E8A8A6007E99D3 /* PersonCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonCityModel.m; sourceTree = "<group>"; };
+		18D4ABB721EC769A00678416 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		18D4ABB821EC769A00678416 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		18F9A19B21E486B300C482DD /* YAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAddressPickerView.m; sourceTree = "<group>"; };
 		18F9A19C21E486B300C482DD /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		18F9A19D21E486B300C482DD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
@@ -786,6 +789,8 @@
 		189C48D521D46488004B256A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18D4ABB721EC769A00678416 /* UserInfoModel.h */,
+				18D4ABB821EC769A00678416 /* UserInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1144,6 +1149,7 @@
 				18B6FD8D21E84ABE007E99D3 /* SelectProvinceViewController.m in Sources */,
 				184A5A4121D089D0008900D5 /* BaseViewController.m in Sources */,
 				189C48E721D4AA67004B256A /* UserSetViewController.m in Sources */,
+				18D4ABB921EC769A00678416 /* UserInfoModel.m in Sources */,
 				184A5A3721D085FB008900D5 /* MainTabViewController.m in Sources */,
 				189C48DB21D46ED0004B256A /* MineHeaderView.m in Sources */,
 				181BFFA921D4C67800B8AB37 /* FeedbackProblemViewController.m in Sources */,

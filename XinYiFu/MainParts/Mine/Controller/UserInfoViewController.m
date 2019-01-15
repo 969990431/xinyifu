@@ -9,10 +9,13 @@
 #import "UserInfoViewController.h"
 #import "UserInfoTableViewCell.h"
 #import "UserHeaderTableViewCell.h"
+#import "UserInfoModel.h"
 
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
 @property (nonatomic, strong)UIImage *headerImage;
+
+@property (nonatomic, strong)UserInfoModel *model;
 @end
 
 @implementation UserInfoViewController
@@ -20,6 +23,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
+    [self loadData];
+}
+
+- (void)loadData {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sys/person/info" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            self.model = [[UserInfoModel alloc]initWithDictionary:response[@"data"] error:nil];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+        [self.backTableView reloadData];
+    }];
 }
 - (void)prepareViews {
     self.title = @"个人信息";
@@ -72,7 +87,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == 0 ? [UserHeaderTableViewCell cellWithTableView:tableView headerImage:self.headerImage]:[UserInfoTableViewCell cellWithTableView:tableView indexPath:indexPath];
+    return indexPath.section == 0 ? [UserHeaderTableViewCell cellWithTableView:tableView headerImage:self.headerImage]:[UserInfoTableViewCell cellWithTableView:tableView indexPath:indexPath dic:self.model];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -125,6 +140,22 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     self.headerImage = info[@"UIImagePickerControllerOriginalImage"];
+    NSData *data = UIImageJPEGRepresentation(self.headerImage, 1.0);
+    NSString *headerString = [NSString stringWithFormat:@"%@", data];
+    
+    [[RequestTool shareManager]uploadImageWithUrl:@"api/uploadFile" WithImage:self.headerImage Params:@{@"token":[UserPreferenceModel shareManager].token} Task:^(NSURLSessionUploadTask *task) {
+
+    } Progress:^(float progress, NSString *taskDesc) {
+
+    } Result:^(id response, BOOL isError) {
+        NSLog(@"--------%@", response);
+    }];
+    
+//    [[RequestTool shareManager]sendNewRequestWithAPI:@"file/uploadFile" withVC:self withParams:@{@"picUrl":headerString} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+//
+//    }];
+    
+    
     [self.backTableView reloadData];
 }
 
