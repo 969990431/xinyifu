@@ -25,7 +25,6 @@
     [super viewDidLoad];
     self.title = @"反馈问题";
     [self prepareViews];
-    [NoNetworkView showWithDelegate:self];
 }
 
 - (void)refreshData{
@@ -118,6 +117,7 @@
     self.submitBtn = [UIButton buttonWithTitle:@"提交" font:18 titleColor:[UIColor whiteColor] backGroundColor:nil aligment:0];
     self.submitBtn.userInteractionEnabled = YES;
     [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
+    [self.submitBtn addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.backTableView addSubview:self.submitBtn];
     [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.imageWallView.mas_bottom).offset(36);
@@ -220,6 +220,16 @@
         [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = NO;
     }
+}
+
+- (void)submitAction:(UIButton *)sender{
+    [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/appsuggestion/save" withVC:self withParams:@{@"content":self.textView.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 /*

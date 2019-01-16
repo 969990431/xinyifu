@@ -152,15 +152,17 @@
             make.width.mas_equalTo(labelWidth);
         }];
         
-        UILabel *spaceLine = [[UILabel alloc] init];
-        spaceLine.backgroundColor = [UIColor colorWithHexString:@"#F6AF95"];
-        [topBackView addSubview:spaceLine];
-        [spaceLine mas_makeConstraints:^(MASConstraintMaker *make){
-            make.top.mas_equalTo(segLine.mas_bottom).offset(10);
-            make.left.mas_equalTo(labelWidth*(i+1)+i);
-            make.height.mas_equalTo(14);
-            make.width.mas_equalTo(1);
-        }];
+        if (i < tabTitleArray.count - 1) {
+            UILabel *spaceLine = [[UILabel alloc] init];
+            spaceLine.backgroundColor = [UIColor colorWithHexString:@"#F6AF95"];
+            [topBackView addSubview:spaceLine];
+            [spaceLine mas_makeConstraints:^(MASConstraintMaker *make){
+                make.top.mas_equalTo(segLine.mas_bottom).offset(10);
+                make.left.mas_equalTo(labelWidth*(i+1)+i);
+                make.height.mas_equalTo(14);
+                make.width.mas_equalTo(1);
+            }];
+        }
         
         switch (i) {
             case 0:

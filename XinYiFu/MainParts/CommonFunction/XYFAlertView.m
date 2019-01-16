@@ -173,4 +173,80 @@
     
 }
 
++ (id)showVersionUpdateView:(BOOL)isUpdate{
+    XYFAlertView *view = [[XYFAlertView alloc] init];
+    [view loadVersionUpdateView:isUpdate];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+    return view;
+}
+
+-(void)loadVersionUpdateView:(BOOL)isUpdate{
+    self.frame = [UIApplication sharedApplication].keyWindow.frame;
+    
+    self.backgroundColor = UIColorFromRGBWithAlpha(0, .5);
+
+    UIView *backView = [[UIView alloc] init];
+    [self addSubview:backView];
+    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(309, 316));
+    }];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:GetImage(@"gengxin")];
+    [backView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    
+    UILabel *title = [UILabel labelWithTextColor:WordCloseBlack font:18 aligment:NSTextAlignmentCenter];
+    title.text = @"版本更新";
+    [backView addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(168);
+        make.centerX.mas_equalTo(backView);
+        make.height.mas_equalTo(26);
+    }];
+    
+    UILabel *content = [UILabel labelWithTextColor:AlertGray font:16 aligment:NSTextAlignmentCenter];
+    [backView addSubview:content];
+    [content mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(title.mas_bottom).offset(16);
+        make.centerX.mas_equalTo(title);
+        make.height.mas_equalTo(22);
+    }];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:GetImage(@"jianbianxaio") forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(backView.mas_bottom).offset(-14);
+        make.centerX.mas_equalTo(backView);
+        make.size.mas_equalTo(CGSizeMake(240, 40));
+    }];
+    
+    if (isUpdate) {
+        content.text = @"发现新版本，升级后体验更顺畅";
+        [button setTitle:@"立即更新" forState:UIControlStateNormal];
+    }else{
+        content.text = @"已是最新版本";
+        [button setTitle:@"确定" forState:UIControlStateNormal];
+    }
+    
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeBtn setBackgroundImage:GetImage(@"shanchu") forState:UIControlStateNormal];
+    [closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:closeBtn];
+    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backView.mas_bottom).offset(22);
+        make.centerX.mas_equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(32, 32));
+    }];
+}
+
+- (void)closeAction:(UIButton *)sender{
+    [self removeFromSuperview];
+}
+
 @end

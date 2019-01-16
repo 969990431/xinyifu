@@ -14,10 +14,12 @@
 @interface IncomeRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *backTableView;
 
+@property (nonatomic ,strong) NSMutableArray *dataArray;
 @property (nonatomic ,strong) NSMutableArray *totalArray;
 @property (nonatomic ,strong) NSMutableArray *detailArray;
 
 @property (nonatomic ,assign) NSInteger currentPage;
+@property (nonatomic ,assign) NSInteger totalPage;
 @end
 
 @implementation IncomeRecordViewController
@@ -31,11 +33,14 @@
 }
 
 - (void)requestData{
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/statistics/detail" withVC:self withParams:@{@"page":[NSNumber numberWithInteger:self.currentPage],@"limit":@15} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [SVProgressHUD show];
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/statistics/detail" withVC:self withParams:@{@"page":[NSNumber numberWithInteger:self.currentPage],@"limit":@10} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [SVProgressHUD dismiss];
         [self.backTableView.mj_header endRefreshing];
         [self.backTableView.mj_footer endRefreshing];
         if (errorCode == 1) {
             if ([response[@"data"][@"list"] count]) {
+                self.totalPage = [response[@"data"][@"totalPage"] integerValue];
                 [self loadData:response[@"data"][@"list"]];
             }else{
                 [NoDataView showWithSuperView:self.view];
@@ -48,14 +53,18 @@
 
 
 - (void)loadData:(NSArray *)array{
-    for (NSDictionary *dict in array) {
+    [self.dataArray addObjectsFromArray:array];
+    [self.totalArray removeAllObjects];
+    [self.detailArray removeAllObjects];
+
+    for (NSDictionary *dict in self.dataArray) {
         if ([dict[@"sign"] integerValue] == 0) {
             [self.totalArray addObject:dict];
         }
     }
     for (int i = 0; i < self.totalArray.count; i++) {
         NSMutableArray *subArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *subDic in array) {
+        for (NSDictionary *subDic in self.dataArray) {
             if ([subDic[@"sign"] integerValue] == 1) {
                 NSDictionary *dict = self.totalArray[i];
                 if ([dict[@"dateTime"] isEqualToString:[subDic[@"creditTime"] substringToIndex:10]]) {
@@ -81,14 +90,17 @@
     
     self.backTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.currentPage = 1;
-        [self.totalArray removeAllObjects];
-        [self.detailArray removeAllObjects];
+        [self.dataArray removeAllObjects];
         [self requestData];
     }];
     
     self.backTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        self.currentPage ++;
-        [self requestData];
+        if (self.currentPage < self.totalPage) {
+            self.currentPage ++;
+            [self requestData];
+        }else{
+            [self.backTableView.mj_footer endRefreshingWithNoMoreData];
+        }
     }];
 }
 
@@ -168,6 +180,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (id)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
 }
 
 - (id)totalArray{

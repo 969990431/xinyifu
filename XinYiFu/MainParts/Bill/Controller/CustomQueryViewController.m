@@ -12,7 +12,6 @@
 
 @interface CustomQueryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView *backTableView;
-@property (nonatomic ,assign) BOOL getResult;
 
 @property (nonatomic ,strong) UITextField *startTime;
 @property (nonatomic ,strong) NSDate *startDate;
@@ -22,6 +21,8 @@
 
 @property (nonatomic ,strong) UIView *datePickerBackView;
 @property (nonatomic ,strong) UIDatePicker *datePicker;
+
+@property (nonatomic ,strong) NSDictionary *dataDict;
 @end
 
 @implementation CustomQueryViewController
@@ -55,14 +56,15 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.getResult+1;
+    NSInteger score = [self.dataDict[@"record"][@"Score"] integerValue];
+    return 1 + (score?1:0);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 3;
     }
-    return 3;
+    return [self.dataDict[@"page"][@"list"] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,9 +110,10 @@
         }
     }else{
         if (indexPath.row == 0) {
-            return [IncomeRecordHeadCell cellWithTableView:tableView indexPath:indexPath count:@"2" total:@"￥23.00"];
+            return [IncomeRecordHeadCell cellWithTableView:tableView indexPath:indexPath count:[NSString stringWithFormat:@"%@",self.dataDict[@"record"][@"Score"]] total:[NSString stringWithFormat:@"￥%@",self.dataDict[@"record"][@"transAmt"]]];
         }else {
-            return [IncomeRecordContentCell cellWithTableView:tableView indexPath:indexPath name:@"2018-12-1" time:@"收款笔数：1" money:@"￥20.00"];
+            NSDictionary *dict = self.dataDict[@"page"][@"list"][indexPath.row - 1];
+            return [IncomeRecordContentCell cellWithTableView:tableView indexPath:indexPath name:[NSString stringWithFormat:@"%@",dict[@"createTime"]] time:[NSString stringWithFormat:@"收款笔数：%@",dict[@"Score"]] money:[NSString stringWithFormat:@"￥%@",dict[@"transAmt"]]];
         }
     }
 }
@@ -130,10 +133,9 @@
                 [SVProgressHUD dismissWithDelay:2];
             }
         }else if (indexPath.row == 2) {
-            self.getResult = YES;
-            
-            [[RequestTool shareManager]sendRequestWithAPI:@"/api/statistics/time" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"startDate":self.startTime.text,@"endDate":self.endTime.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+            [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/statistics/time" withVC:self withParams:@{@"startDate":self.startTime.text,@"endDate":self.endTime.text,} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
                 if (errorCode == 1) {
+                    self.dataDict = response[@"data"];
                     [tableView reloadData];
                 }else {
                     [SVProgressHUD showErrorWithStatus:errorMessage];
@@ -293,6 +295,13 @@
         self.endDate = self.datePicker.date;
     }
     [self.datePickerBackView removeFromSuperview];
+}
+
+- (id)dataDict{
+    if (!_dataDict) {
+        _dataDict = [[NSDictionary alloc] init];
+    }
+    return _dataDict;
 }
 
 /*

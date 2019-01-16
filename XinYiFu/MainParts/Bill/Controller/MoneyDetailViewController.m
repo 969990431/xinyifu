@@ -27,7 +27,9 @@
 }
 
 - (void)requestDataWithType:(NSInteger)type{
+    [SVProgressHUD show];
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/statistics/record" withVC:self withParams:@{@"type":[NSNumber numberWithInteger:type]} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [SVProgressHUD dismiss];
         if (errorCode == 1) {
             self.dataArray = response[@"data"][@"list"];
             [self.backTableView reloadData];

@@ -9,6 +9,7 @@
 #import "UserServiceViewController.h"
 #import "AddAddressViewController.h"
 #import "ChooseAddressViewController.h"
+#import "GeneralWebViewController.h"
 
 @interface UserServiceViewController ()<UITableViewDelegate,UITableViewDataSource>{
     UIButton *selectedButton;
@@ -22,7 +23,6 @@
 @property (nonatomic ,strong) UIButton *item0;
 @property (nonatomic ,strong) UIButton *item1;
 
-@property (nonatomic ,strong) NSArray *dataList;
 @property (nonatomic ,strong) NSDictionary *dataDict;
 @end
 
@@ -52,10 +52,7 @@
 - (void)requestData{
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            self.dataList = response[@"data"];
-            if (self.dataList.count) {
-                self.dataDict = self.dataList[0];
-            }
+            
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
@@ -254,6 +251,8 @@
         make.left.mas_equalTo(18);
     }];
     label.attributedText = [@"查看《薪易付收钱码协议》" changeColor:WordRed andRange:NSMakeRange(2, 10)];
+    label.userInteractionEnabled = YES;
+    [label addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(webAction:)]];
 
     UIButton *button = nil;
     if (selectedButton == self.item0) {
@@ -284,17 +283,39 @@
 
 - (void)submitBtnAction:(UIButton *)sender{
     if (selectedButton == self.item0) {
-        [XYFAlertView showAlertViewWithTitle:@"恭喜您，领取成功" content:@"您的订单已收到，会尽快给您发货！" buttonTitle:@"确定"];
+        if (self.dataDict[@"addressId"]) {
+            [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/address/getcode" withVC:self withParams:@{@"addressId":self.dataDict[@"addressId"]} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+                if (errorCode == 1) {
+                    [XYFAlertView showAlertViewWithTitle:@"恭喜您，领取成功" content:@"您的订单已收到，会尽快给您发货！" buttonTitle:@"确定"];
+                    self.dataDict = nil;
+                    [self.backTableView reloadData];
+                }else {
+                    [SVProgressHUD showErrorWithStatus:errorMessage];
+                }
+            }];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"请先选择收货地址"];
+        }
     }else{
-        [SVProgressHUD showWithStatus:@"正在保存二维码"];
-        [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-            [SVProgressHUD dismiss];
-            if (errorCode == 1) {
-                UIImageWriteToSavedPhotosAlbum(GetImage(@"guanfangshoukuanma"), self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-            }else {
-                [SVProgressHUD showErrorWithStatus:errorMessage];
-            }
-        }];
+        [SVProgressHUD showErrorWithStatus:@"这部分还没给接口 :("];
+        
+//        CGRect screenRect = [self.view bounds];
+//        UIGraphicsBeginImageContext(screenRect.size);
+//        CGContextRef ctx = UIGraphicsGetCurrentContext();
+//        [self.view.layer renderInContext:ctx];
+//        UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+
+//        [SVProgressHUD showWithStatus:@"正在保存二维码"];
+//        [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+//            [SVProgressHUD dismiss];
+//            if (errorCode == 1) {
+//                UIImageWriteToSavedPhotosAlbum(GetImage(@"guanfangshoukuanma"), self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+//            }else {
+//                [SVProgressHUD showErrorWithStatus:errorMessage];
+//            }
+//        }];
     }
 }
 
@@ -307,6 +328,13 @@
         msg = @"保存图片成功" ;
         [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
     }
+}
+
+- (void)webAction:(UITapGestureRecognizer *)tap{
+    GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
+    webVC.url = @"http://118.31.79.1:8081/money.html";
+    webVC.title = @"薪易付收钱码协议";
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 
