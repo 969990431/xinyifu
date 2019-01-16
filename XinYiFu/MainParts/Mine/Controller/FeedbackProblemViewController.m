@@ -15,6 +15,7 @@
 
 @property (nonatomic ,strong) UIView *imageWallView;
 @property (nonatomic ,strong) NSMutableArray *imageArray;
+@property (nonatomic ,strong) NSMutableArray *imageUrlArray;
 
 @property (nonatomic ,strong) UIButton *submitBtn;
 @end
@@ -185,8 +186,8 @@
         UIImagePickerController *picker = [[UIImagePickerController alloc]init];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
-            picker.mediaTypes = temp_MediaTypes;
+//            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+//            picker.mediaTypes = temp_MediaTypes;
             picker.delegate = self;
             picker.allowsEditing = NO;
         }
@@ -204,8 +205,24 @@
     if (!self.imageArray) {
         self.imageArray = [[NSMutableArray alloc] init];
     }
-    [self.imageArray addObject:info[@"UIImagePickerControllerOriginalImage"]];
-    [self reloadImageWall];
+    if (!self.imageUrlArray) {
+        self.imageUrlArray = [[NSMutableArray alloc] init];
+    }
+    [SVProgressHUD show];
+    [[RequestTool shareManager]uploadImageWithUrl:@"api/uploadFile" WithImage:info[@"UIImagePickerControllerOriginalImage"] Params:@{@"token":[UserPreferenceModel shareManager].token} Task:^(NSURLSessionUploadTask *task) {
+        
+    } Progress:^(float progress, NSString *taskDesc) {
+        
+    } Result:^(id response, BOOL isError) {
+        if ([response[@"code"] integerValue] == 1) {
+            [SVProgressHUD dismiss];
+            [self.imageArray addObject:info[@"UIImagePickerControllerOriginalImage"]];
+            [self.imageUrlArray addObject:response[@"data"][@"filepath"]];
+            [self reloadImageWall];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"上传失败,请重试"];
+        }
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
@@ -222,10 +239,22 @@
     }
 }
 
-- (void)submitAction:(UIButton *)sender{    
-    [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/appsuggestion/save" withVC:self withParams:@{@"content":self.textView.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+- (void)submitAction:(UIButton *)sender{
+    NSString *imgs = @"";
+    for (NSString *str in self.imageUrlArray) {
+        imgs = [imgs stringByAppendingString:str];
+        imgs = [imgs stringByAppendingString:@","];
+    }
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"content":self.textView.text}];
+    if (imgs.length) {
+        imgs = [imgs substringWithRange:NSMakeRange(0, imgs.length - 1)];
+        [dict setObject:imgs forKey:@"imgs"];
+    }
+    [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/suggestion/save" withVC:self withParams:dict withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [SVProgressHUD dismiss];
         if (errorCode == 1) {
-            
+            [SVProgressHUD showInfoWithStatus:@"提交成功"];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
