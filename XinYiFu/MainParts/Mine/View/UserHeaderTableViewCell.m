@@ -22,8 +22,8 @@
     }
     
     cell.titleLabel.text = @"头像";
-    [cell.headerImageV sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:GetImage(@"touxiang")];
-    [cell.headerImageV setImage:image];
+    [cell.headerImageV sd_setImageWithURL:[NSURL URLWithString:[UserPreferenceModel shareManager].logo ? [UserPreferenceModel shareManager].logo : [UserPreferenceModel shareManager].picUrl] placeholderImage:GetImage(@"touxiang")];
+//    [cell.headerImageV setImage:image];
     
     return cell;
 }

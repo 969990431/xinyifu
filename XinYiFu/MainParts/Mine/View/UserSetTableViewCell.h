@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UserSetTableViewCell : UITableViewCell
-+ (instancetype)cellWithTableView: (UITableView *)tableView indexPath: (NSIndexPath *)indexPath;
++ (instancetype)cellWithTableView: (UITableView *)tableView indexPath: (NSIndexPath *)indexPath kefudianhua: (NSString *)kefudianhua;
 @end
 
 NS_ASSUME_NONNULL_END

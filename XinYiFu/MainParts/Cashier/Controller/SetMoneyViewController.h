@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^GetErweimaBlock)(NSString *erweimaUrl, NSString *money);
+typedef void(^GetErweimaBlock)(NSString *erweimaUrl, NSString *money, UIImage *erweimaImage, NSString *remark);
 @interface SetMoneyViewController : BaseViewController
 @property (nonatomic, copy)GetErweimaBlock erweimaCallBack;
 @end

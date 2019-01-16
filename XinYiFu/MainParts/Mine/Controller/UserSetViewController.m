@@ -12,9 +12,11 @@
 #import "AboutUsViewController.h"
 #import "ResetPasswordViewController.h"
 #import "XYFAlertView.h"
+#import "GeneralWebViewController.h"
 
 @interface UserSetViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
+@property (nonatomic, copy)NSString *kefudianhua;
 
 @end
 
@@ -23,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
+    [self getKefu];
 }
 - (void)prepareViews {
     self.title = @"设置";
@@ -63,10 +66,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [UserSetTableViewCell cellWithTableView:tableView indexPath:indexPath];
+    return [UserSetTableViewCell cellWithTableView:tableView indexPath:indexPath kefudianhua:self.kefudianhua];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BaseViewController *vc;
+    GeneralWebViewController *webVC;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
 //            密码设置
@@ -77,17 +81,33 @@
         }
     }else if (indexPath.section == 1) {
 //        用户协议
+        webVC = [[GeneralWebViewController alloc]init];
+        webVC.title = @"用户协议";
+        webVC.url = [NSString stringWithFormat:@"%@/money.html", [RequestTool shareManager].baseUrl];
+        [self.navigationController pushViewController:webVC animated:YES];
     }else {
         if (indexPath.row == 0) {
 //关于
             vc = [[AboutUsViewController alloc] init];
         }else {
 //            联系客服
-            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"40008882234"];
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",self.kefudianhua];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:nil completionHandler:nil];
+            
             return;
         }
     }
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)getKefu {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sys/mobile" withVC:self withParams:@{} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            self.kefudianhua = response[@"data"];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+        [self.backTableView reloadData];
+    }];
 }
 @end

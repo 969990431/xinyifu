@@ -45,6 +45,8 @@
 //从设置金额页面传过来的二维码 金额
 @property (nonatomic, copy)NSString *erweimaUrl;
 @property (nonatomic, copy)NSString *money;
+@property (nonatomic, strong)UIImage *SetMoneyErweimaImage;
+@property (nonatomic, copy)NSString *remark;
 @end
 
 @implementation CashierViewController
@@ -186,7 +188,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return [CashierFirstTableViewCell cellWithTableView:tableView indexPath:indexPath type:self.type delegate:self erweimaUrl:self.erweimaUrl money:self.money];
+        return [CashierFirstTableViewCell cellWithTableView:tableView indexPath:indexPath type:self.type delegate:self erweimaUrl:self.erweimaUrl money:self.money erweimaImage:self.SetMoneyErweimaImage remark:self.remark];
     }else {
         return [[CashierSecondTableViewCell alloc]init];
     }
@@ -213,13 +215,16 @@
 //设置金额
 - (void)setMoney {
     if (self.type == 5) {
+        self.SetMoneyErweimaImage = nil;
         self.type = [UserPreferenceModel shareManager].agreementStatus.integerValue;
         [self.backTableView reloadData];
     }else {
         SetMoneyViewController *vc = [[SetMoneyViewController alloc] init];
-        vc.erweimaCallBack = ^(NSString * _Nonnull erweimaUrl, NSString * _Nonnull money) {
+        vc.erweimaCallBack = ^(NSString * _Nonnull erweimaUrl, NSString * _Nonnull money, UIImage *erweima, NSString *remark) {
             self.erweimaUrl = erweimaUrl;
             self.money = money;
+            self.SetMoneyErweimaImage = erweima;
+            self.remark = remark;
             self.type = 5;
             [self.backTableView reloadData];
         };
@@ -283,7 +288,24 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     self.headerImage = info[@"UIImagePickerControllerOriginalImage"];
+    [[RequestTool shareManager]uploadImageWithUrl:@"api/uploadFile" WithImage:self.headerImage Params:@{@"token":[UserPreferenceModel shareManager].token} Task:^(NSURLSessionUploadTask *task) {
+        
+    } Progress:^(float progress, NSString *taskDesc) {
+        
+    } Result:^(id response, BOOL isError) {
+        NSLog(@"--------%@", response);
+        [self saveHeader:response[@"data"][@"filepath"]];
+    }];
+    
+    
     [self.backTableView reloadData];
+}
+
+- (void)saveHeader: (NSString *)url {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sys/save/handPic" withVC:self withParams:@{@"picUrl":url} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [UserPreferenceModel shareManager].logo = [NSString stringWithFormat:@"http://xinyifu.oss-cn-hangzhou.aliyuncs.com/%@", url];
+        [self.backTableView reloadData];
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{

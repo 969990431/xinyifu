@@ -138,7 +138,7 @@
     if (indexPath.row == 3) {
         GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
         webVC.hidesBottomBarWhenPushed = 1;
-        webVC.url = @"http://xyfapi.ycw580.com/question.html";
+        webVC.url = [NSString stringWithFormat:@"%@/question.html", [RequestTool shareManager].baseUrl];
         webVC.title = @"帮助中心";
         [self.navigationController pushViewController:webVC animated:YES];
         

@@ -44,7 +44,7 @@
 
 @end
 @implementation CashierFirstTableViewCell
-+ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath type:(NSInteger)type delegate:(nonnull id<CashierFirstTableViewCellDelegate>)delegate erweimaUrl:(nonnull NSString *)url money:(nonnull NSString *)money{
++ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath type:(NSInteger)type delegate:(nonnull id<CashierFirstTableViewCellDelegate>)delegate erweimaUrl:(nonnull NSString *)url money:(nonnull NSString *)money erweimaImage:(nonnull UIImage *)erweimaImage remark:(nonnull NSString *)remark{
     CashierFirstTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CashierFirstTableViewCell" ];
     if (!cell) {
         cell = [[CashierFirstTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CashierFirstTableViewCell"];
@@ -60,7 +60,7 @@
             make.top.mas_equalTo(cell.erweimaImageV.mas_bottom).offset(93);
             make.size.mas_equalTo(CGSizeMake(1, 17));
         }];
-        cell.moneyLabel.text = money;
+        cell.moneyLabel.text = [NSString stringWithFormat:@"¥ %.2f", money.floatValue];
         [cell.erweimaImageV sd_setImageWithURL:[NSURL URLWithString:url]];
     }else {
         [cell.setMoneyBtn setTitle:@"设置金额" forState:UIControlStateNormal];
@@ -72,13 +72,24 @@
         }];
     }
     [cell setType:type];
-    
+    [cell.headerImageV sd_setImageWithURL:[NSURL URLWithString:[UserPreferenceModel shareManager].logo ? [UserPreferenceModel shareManager].logo : [UserPreferenceModel shareManager].picUrl] placeholderImage:GetImage(@"touxiang")];
     cell.titlelabel.text = [UserPreferenceModel shareManager].name;
     cell.contentLabel.text = [NSString stringWithFormat:@"%@  %@", [UserPreferenceModel shareManager].userName, [UserPreferenceModel shareManager].mobile];
     
     
 //    cell.moneyLabel.text = @"123123";
-    cell.moneyTextLabel.text = @"这部分文案放什么？并没有人告知";
+    
+    if (erweimaImage) {
+        [cell.erweimaImageV setImage:erweimaImage];
+    }else {
+        [cell.erweimaImageV setImage:nil];
+    }
+    
+    if (remark) {
+        cell.moneyTextLabel.text = remark;
+    }else {
+        cell.moneyTextLabel.text = @"备注";
+    }
     
     
     return cell;

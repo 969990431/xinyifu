@@ -21,6 +21,13 @@
 }
 - (void)loginOut {
     self.token = nil;
+    self.logo = nil;
+    self.picUrl = nil;
+    self.name = nil;
+    self.mobile = nil;
+    self.userName = nil;
+    self.cashQr = nil;
+    self.agreementStatus = nil;
     
     
     LoginViewController *loginVC = [[LoginViewController alloc]init];

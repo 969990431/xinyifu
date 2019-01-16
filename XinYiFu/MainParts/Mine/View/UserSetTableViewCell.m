@@ -17,7 +17,7 @@
 
 @implementation UserSetTableViewCell
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
++ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath kefudianhua:(nonnull NSString *)kefudianhua{
     UserSetTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserSetTableViewCell"];
     if (!cell) {
         cell = [[UserSetTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UserSetTableViewCell"];
@@ -41,7 +41,7 @@
             cell.contentLabel.text = @"";
         }else {
             cell.titleLabel.text = @"联系客服";
-            cell.contentLabel.text = @"400-022-0811";
+            cell.contentLabel.text = kefudianhua;
             cell.contentLabel.textColor = WordGreen;
         }
     }

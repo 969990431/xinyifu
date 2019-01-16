@@ -7,6 +7,7 @@
 //
 
 #import "MessageCenterTableViewCell.h"
+#import "MessageListModel.h"
 
 @interface MessageCenterTableViewCell ()
 @property (nonatomic, strong)UILabel *titleLabel;
@@ -23,9 +24,11 @@
         cell.selectionStyle = NO;
     }
     
-    cell.titleLabel.text = @"jlsjdffsdjl";
-    cell.contentLabel.text = @"时间都浪费哦今晚服务费";
-    cell.timeLabel.text = @"123-123-123";
+    MessageListModel *model = dataSource[indexPath.section];
+    cell.titleLabel.text = model.title;
+    cell.contentLabel.text = model.content;
+    cell.timeLabel.text = model.createTime;
+    cell.redPointImageV.hidden = model.isRead;
     return cell;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

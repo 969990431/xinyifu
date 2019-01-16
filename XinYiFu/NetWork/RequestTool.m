@@ -59,7 +59,12 @@
                     responseBlock(nil,@"解析出错",-10000);
                 }
             } else {
-                responseBlock(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
+                if ([[responseObject valueForKey:@"code"] integerValue] == 2) {
+//                    token过期
+                    [[UserPreferenceModel shareManager]loginOut];
+                }else {
+                    responseBlock(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
+                }
             }
         } else {
             VDLog(@"failure error:%@",error);
@@ -140,30 +145,45 @@
             }
         }
         else{
-            response(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
+            if ([[responseObject valueForKey:@"code"] integerValue] == 2) {
+                //                    token过期
+                [[UserPreferenceModel shareManager]loginOut];
+            }else {
+                response(responseObject,responseObject[@"msg"],[[responseObject valueForKey:@"code"] integerValue]);
+            }
         }
 
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        VDLog(@"failure error:%@",error);
-        if (error.code == -1009) {
-            response(nil,@"互联网的连接似乎已经断开",error.code);
+        
+        NSData * data = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        UIImage *image = [UIImage imageWithData:data];
+        
+        if (image) {
+            response(nil,image,error.code);
+            
+        }else {
+            VDLog(@"failure error:%@",error);
+            if (error.code == -1009) {
+                response(nil,@"互联网的连接似乎已经断开",error.code);
+            }
+            else if(error.code == -1001){
+                response(nil,@"请求超时,请检查下网络",error.code);
+            }
+            else if(error.code == -1011){
+                response(nil,@"不支持该响应类型",error.code);
+            }
+            else if(error.code == -3840){
+                response(nil,@"槽糕！貌似掉进异次元了",error.code);
+            }
+            else if(error.code == -1005){
+                response(nil,@"网络状况貌似不太好",error.code);
+            }
+            else{
+                response(nil,@"服务器需要休息片刻",error.code);
+            }
         }
-        else if(error.code == -1001){
-            response(nil,@"请求超时,请检查下网络",error.code);
-        }
-        else if(error.code == -1011){
-            response(nil,@"不支持该响应类型",error.code);
-        }
-        else if(error.code == -3840){
-            response(nil,@"槽糕！貌似掉进异次元了",error.code);
-        }
-        else if(error.code == -1005){
-            response(nil,@"网络状况貌似不太好",error.code);
-        }
-        else{
-            response(nil,@"服务器需要休息片刻",error.code);
-        }
+        
 
     }];
 
@@ -287,7 +307,7 @@
 }
 
 - (void)uploadImageWithUrl:(NSString *)url WithImage:(UIImage *)image Params:(NSDictionary *)params Task:(UploadTask)uploadTask Progress:(TaskProgress)progress Result:(TaskResult)result{
-    NSString *formatAPI = [NSString stringWithFormat:@"app/%@?token=%@",url,[params objectForKey:@"token"]];
+    NSString *formatAPI = [NSString stringWithFormat:@"%@?token=%@",url,[params objectForKey:@"token"]];
     VDLog(@"\nRequest=====>URL:%@%@",[RequestManage shareHTTPManage].baseURL.absoluteString,formatAPI);
     NSData *data = [UIImage smallTheImageBackData:image];
     task_queue("uploadImage", ^{

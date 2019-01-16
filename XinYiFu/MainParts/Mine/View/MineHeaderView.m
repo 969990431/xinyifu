@@ -30,9 +30,9 @@
     view.userCenterClick = userCenterClick;
     view.messageCenterClick = messageCenterClick;
     
-    [view.headerImageV sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:GetImage(@"bianjitouxiang")];
-    view.companyNameLabel.text = @"公司名字";
-    view.nameLabel.text = @"姓名 123123123";
+    [view.headerImageV sd_setImageWithURL:[NSURL URLWithString:[UserPreferenceModel shareManager].logo ? [UserPreferenceModel shareManager].logo : [UserPreferenceModel shareManager].picUrl] placeholderImage:GetImage(@"bianjitouxiang")];
+    view.companyNameLabel.text = [UserPreferenceModel shareManager].name;
+    view.nameLabel.text = [NSString stringWithFormat:@"%@  %@", [UserPreferenceModel shareManager].userName, [UserPreferenceModel shareManager].mobile];
     return view;
 }
 - (instancetype)initWithFrame:(CGRect)frame {

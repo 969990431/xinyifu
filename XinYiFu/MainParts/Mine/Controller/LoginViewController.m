@@ -10,6 +10,7 @@
 #import "FoundPasswordViewController.h"
 #import "RegisterViewController.h"
 #import "MainTabViewController.h"
+#import "GeneralWebViewController.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong)UITableView *backTableView;
@@ -228,6 +229,7 @@
     }];
     
     self.agreementLabel = [UILabel labelWithTextColor:WordDeepGray font:12 aligment:NSTextAlignmentCenter];
+    self.agreementLabel.userInteractionEnabled = YES;
     [self.backTableView addSubview:self.agreementLabel];
     [self.agreementLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
@@ -235,6 +237,9 @@
         make.height.mas_equalTo(17);
     }];
     self.agreementLabel.attributedText = [@"登录薪易付，就表示您同意了《用户协议》"changeColor:WordRed andRange:NSMakeRange(13, 6)];
+    self.agreementLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *xieyiTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(xieyiClick)];
+    [self.agreementLabel addGestureRecognizer:xieyiTap];
     
     self.registerLabel = [UILabel labelWithTextColor:WordDeepGray font:15 aligment:NSTextAlignmentCenter];
     [self.backTableView addSubview:self.registerLabel];
@@ -280,6 +285,12 @@
         [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.loginBtn.enabled = NO;
     }
+}
+- (void)xieyiClick {
+    GeneralWebViewController *vc = [[GeneralWebViewController alloc]init];
+    vc.url = [NSString stringWithFormat:@"%@/privacy.html", [RequestTool shareManager].baseUrl];
+    vc.title = @"用户隐私协议";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)forgetPasswordAction:(UIButton *)sender{

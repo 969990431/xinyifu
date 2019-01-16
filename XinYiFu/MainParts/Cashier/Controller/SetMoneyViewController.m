@@ -102,6 +102,7 @@
     EditInfoTableViewCell *cell = [EditInfoTableViewCell cellWithTableView:tableView indexPath:indexPath delegate:self type:1 title:self.titleArray[indexPath.section] placeHolder:self.placeHolderArray[indexPath.section]];
     if (indexPath.section == 0) {
         self.money = cell.textField.text;
+        cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }else {
         self.remark = cell.textField.text;
     }
@@ -126,16 +127,45 @@
     }
 }
 - (void)submitAction: (UIButton *)sender {
+    if (self.money.floatValue <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确的金额"];
+        return;
+    }
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/edit/amount" withVC:self withParams:@{@"sum":self.money, @"remark":self.remark ? self.remark:@""} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
 //            NSString *url = response[@"cashQr"];
-            NSString *url = @"https://gss0.bdstatic.com/70cFsjip0QIZ8tyhnq/img/logo-zhidao.gif";
-            self.erweimaCallBack(url, self.money);
-            [self.navigationController popViewControllerAnimated:YES];
+//            NSString *url = @"https://gss0.bdstatic.com/70cFsjip0QIZ8tyhnq/img/logo-zhidao.gif";
+//            self.erweimaCallBack(url, self.money);
+            [self requestForErweima];
+//            [self.navigationController popViewControllerAnimated:YES];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }
     }];
+}
+
+- (void)requestForErweima {
+//    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sys/dsyqr.jpg" withVC:self withParams:@{@"amount":self.money} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+//        if (errorCode == 1) {
+//            //            NSString *url = response[@"cashQr"];
+//            NSString *url = @"https://gss0.bdstatic.com/70cFsjip0QIZ8tyhnq/img/logo-zhidao.gif";
+//            self.erweimaCallBack(url, self.money);
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }else {
+//            [SVProgressHUD showErrorWithStatus:errorMessage];
+//        }
+//    }];
+    
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sys/dsyqr.jpg" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token,@"amount":self.money} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorMessage) {
+            self.erweimaCallBack(nil, self.money, errorMessage, self.remark);
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+//        [self.submitBtn setImage:errorMessage forState:UIControlStateNormal];
+    }];
+    
+    
+    
 }
 
 @end

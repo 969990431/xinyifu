@@ -98,14 +98,23 @@
 - (void)loginOutAction {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"退出登录" message:@"确定退出登录？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[UserPreferenceModel shareManager]loginOut];
+        [self postLoginOut];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
     }];
     [alert addAction:sureAction];
     [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)postLoginOut {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/logout" withVC:self withParams:@{} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [[UserPreferenceModel shareManager]loginOut];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+    }];
 }
 
 - (void)addImage{
@@ -138,10 +147,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
-    
     self.headerImage = info[@"UIImagePickerControllerOriginalImage"];
-    NSData *data = UIImageJPEGRepresentation(self.headerImage, 1.0);
-    NSString *headerString = [NSString stringWithFormat:@"%@", data];
     
     [[RequestTool shareManager]uploadImageWithUrl:@"api/uploadFile" WithImage:self.headerImage Params:@{@"token":[UserPreferenceModel shareManager].token} Task:^(NSURLSessionUploadTask *task) {
 
@@ -149,16 +155,18 @@
 
     } Result:^(id response, BOOL isError) {
         NSLog(@"--------%@", response);
+        [self saveHeader:response[@"data"][@"filepath"]];
     }];
-    
-//    [[RequestTool shareManager]sendNewRequestWithAPI:@"file/uploadFile" withVC:self withParams:@{@"picUrl":headerString} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-//
-//    }];
     
     
     [self.backTableView reloadData];
 }
 
+- (void)saveHeader: (NSString *)url {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sys/save/handPic" withVC:self withParams:@{@"picUrl":url} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        [UserPreferenceModel shareManager].logo = [NSString stringWithFormat:@"http://xinyifu.oss-cn-hangzhou.aliyuncs.com/%@", url];
+    }];
+}
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

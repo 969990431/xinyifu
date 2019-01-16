@@ -9,18 +9,31 @@
 #import "MessageCenterViewController.h"
 #import "MessageCenterTableViewCell.h"
 #import "MessageContentViewController.h"
+#import "MessageListModel.h"
 
 @interface MessageCenterViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *backTableView;
+@property (nonatomic, strong)NSMutableArray *dataSource;
+@property (nonatomic, assign)NSInteger pageNo;
 @end
 
 @implementation MessageCenterViewController
-
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prepareViews];
+    [self loadData];
 }
 - (void)prepareViews {
+    self.pageNo = 1;
     self.title = @"消息中心";
     self.view.backgroundColor = UIColorFromRGB(248, 248, 248);
     
@@ -34,10 +47,40 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
+    self.backTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self.dataSource removeAllObjects];
+        self.pageNo = 1;
+        [self loadData];
+    }];
+    self.backTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.pageNo++;
+        [self loadData];
+    }];
+    
+}
+
+- (void)loadData {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/message/list" withVC:self withParams:@{@"page":[NSString stringWithFormat:@"%ld", self.pageNo], @"limit":@"10"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            NSArray *array = response[@"data"][@"list"];
+            for (NSDictionary *dic in array) {
+                MessageListModel *model = [[MessageListModel alloc]initWithDictionary:dic error:nil];
+                [self.dataSource addObject:model];
+            }
+//            if (array.count == 0) {
+//                [self.backTableView.mj_footer endRefreshingWithNoMoreData];
+//            }
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+        [self.backTableView.mj_header endRefreshing];
+        [self.backTableView.mj_footer endRefreshing];
+        [self.backTableView reloadData];
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return self.dataSource.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -59,10 +102,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [MessageCenterTableViewCell cellWithTableView:tableView indexPath:indexPath dataSource:nil];
+    return [MessageCenterTableViewCell cellWithTableView:tableView indexPath:indexPath dataSource:self.dataSource];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageContentViewController *vc = [[MessageContentViewController alloc]init];
+    MessageListModel *model = self.dataSource[indexPath.section];
+    vc.messageId = model.messageId;
+    model.isRead = 1;
+    [self.backTableView reloadData];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
