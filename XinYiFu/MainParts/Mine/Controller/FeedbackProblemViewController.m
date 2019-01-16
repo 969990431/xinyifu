@@ -222,7 +222,7 @@
     }
 }
 
-- (void)submitAction:(UIButton *)sender{
+- (void)submitAction:(UIButton *)sender{    
     [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/appsuggestion/save" withVC:self withParams:@{@"content":self.textView.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             

@@ -112,7 +112,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        [XYFAlertView showVersionUpdateView:YES];
+        [XYFAlertView showVersionUpdateView:NO];
     }else{
         GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
         webVC.url = @"http://118.31.79.1:8081/money.html";
