@@ -122,10 +122,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ADDRESSCELL"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ADDRESSCELL"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ADDRESSCELL"];
+        cell.textLabel.font = [UIFont systemFontOfSize:16];
+        cell.textLabel.textColor = WordDeepGray;
+    }
     cell.textLabel.text = self.dataDict[[NSString stringWithFormat:@"%ld",self.buttonTag]][indexPath.row][@"name"];
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
-    cell.textLabel.textColor = WordDeepGray;
     return cell;
 }
 

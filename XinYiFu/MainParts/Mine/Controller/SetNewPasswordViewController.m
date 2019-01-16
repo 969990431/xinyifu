@@ -177,6 +177,7 @@
 }
 
 - (void)submitBtnAction:(UIButton *)sender{
+    [self.view endEditing:YES];
     if ([self checkIsHaveNumAndLetter:self.passwordTF.text] != 3 || self.passwordTF.text.length < 8 || self.passwordTF.text.length > 16) {
         [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
         [self.submitBtn setBackgroundImage:GetImage(@"hui") forState:UIControlStateNormal];

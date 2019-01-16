@@ -40,9 +40,9 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     NSURLSessionDataTask *task = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSLog(@"参数=======%@\n-----responseObject===%@+++++",[params my_description],[responseObject my_description]);
         if (!error) {
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 //响应
 
                 //                 请求成功数据处理

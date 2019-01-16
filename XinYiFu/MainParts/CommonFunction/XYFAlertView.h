@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,copy) void (^block)(void);
 + (void)creatCallAlert;
 + (id)showAlertViewWithTitle:(NSString *)title content:(NSString *)content buttonTitle:(NSString *)buttonTitle;
++ (id)showVersionUpdateView:(BOOL)isUpdate;
 @end
 
 NS_ASSUME_NONNULL_END
