@@ -26,6 +26,9 @@
 
 
 @property (nonatomic, strong)UIButton *completeBtn;
+
+@property (nonatomic, assign)BOOL firstSecure;
+@property (nonatomic, assign)BOOL secondSecure;
 @end
 
 @implementation RegisterSureViewController
@@ -125,6 +128,8 @@
     }];
     
     self.firstEyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.firstEyeBtn addTarget:self action:@selector(clickEye:) forControlEvents:UIControlEventTouchUpInside];
+    self.firstEyeBtn.tag = 100;
     [self.firstEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
     [self.backTableView addSubview:self.firstEyeBtn];
     [self.firstEyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -173,6 +178,8 @@
     }];
     
     self.secondEyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.secondEyeBtn addTarget:self action:@selector(clickEye:) forControlEvents:UIControlEventTouchUpInside];
+    self.secondEyeBtn.tag = 101;
     [self.secondEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
     [self.backTableView addSubview:self.secondEyeBtn];
     [self.secondEyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,6 +203,28 @@
     }];
     
     
+    
+    
+}
+
+- (void)clickEye: (UIButton *)sender {
+    if (sender.tag == 100) {
+        self.firstSecure = !self.firstSecure;
+        self.passwdTF.secureTextEntry = self.firstSecure;
+        if (!self.firstSecure) {
+            [self.firstEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
+        }else {
+            [self.firstEyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+        }
+    }else {
+        self.secondSecure = !self.secondSecure;
+        self.passwdAgainTF.secureTextEntry = self.secondSecure;
+        if (!self.secondSecure) {
+            [self.secondEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
+        }else {
+            [self.secondEyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (void)textfieldChanged: (UITextField *)textField {

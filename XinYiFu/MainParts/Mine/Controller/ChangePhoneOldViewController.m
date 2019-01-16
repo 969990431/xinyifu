@@ -124,6 +124,7 @@
         }];
         
         self.codeTF = [UITextField textFieldWithPlaceHolder:@"请输入验证码"];
+        self.codeTF.keyboardType = UIKeyboardTypeNumberPad;
         [self.codeTF addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
         [cell addSubview:self.codeTF];
         [self.codeTF mas_makeConstraints:^(MASConstraintMaker *make) {

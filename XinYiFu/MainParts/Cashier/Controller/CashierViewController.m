@@ -271,8 +271,8 @@
         UIImagePickerController *picker = [[UIImagePickerController alloc]init];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
-            picker.mediaTypes = temp_MediaTypes;
+//            NSArray *temp_MediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
+//            picker.mediaTypes = temp_MediaTypes;
             picker.delegate = self;
             picker.allowsEditing = NO;
         }
