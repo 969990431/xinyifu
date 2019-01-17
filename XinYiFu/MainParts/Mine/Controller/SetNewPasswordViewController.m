@@ -8,7 +8,7 @@
 
 #import "SetNewPasswordViewController.h"
 
-@interface SetNewPasswordViewController ()
+@interface SetNewPasswordViewController ()<UITextFieldDelegate>
 @property (nonatomic , strong) UITableView *backTableView;
 @property (nonatomic , strong) UILabel *titleLabel;
 
@@ -72,6 +72,8 @@
     self.passwordTF = [UITextField textFieldWithPlaceHolder:@"请输入新密码"];
     self.passwordTF.secureTextEntry = YES;
     [self.passwordTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.passwordTF.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passwordTF.delegate = self;
     [self.backTableView addSubview:self.passwordTF];
     [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
@@ -122,6 +124,8 @@
     self.checkoutTF = [UITextField textFieldWithPlaceHolder:@"请再次输入新密码"];
     self.checkoutTF.secureTextEntry = YES;
     [self.checkoutTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.checkoutTF.keyboardType = UIKeyboardTypeASCIICapable;
+    self.checkoutTF.delegate = self;
     [self.backTableView addSubview:self.checkoutTF];
     [self.checkoutTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
@@ -241,4 +245,9 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+}
 @end

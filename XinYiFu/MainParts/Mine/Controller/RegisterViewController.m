@@ -103,6 +103,7 @@
     
     self.phoneTF = [UITextField textFieldWithPlaceHolder:@"请输入手机号"];
     [self.phoneTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.phoneTF.keyboardType = UIKeyboardTypePhonePad;
     [self.backTableView addSubview:self.phoneTF];
     [self.phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
@@ -132,6 +133,7 @@
     
     self.codeTF = [UITextField textFieldWithPlaceHolder:@"请输入验证码"];
     [self.codeTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.codeTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.backTableView addSubview:self.codeTF];
     [self.codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);

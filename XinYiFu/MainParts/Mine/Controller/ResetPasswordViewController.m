@@ -8,7 +8,7 @@
 
 #import "ResetPasswordViewController.h"
 
-@interface ResetPasswordViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ResetPasswordViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic ,retain) UITableView *backTableView;
 
 @property (nonatomic ,retain) UITextField *passwordTF;
@@ -84,6 +84,8 @@
         self.passwordTF = [UITextField textFieldWithPlaceHolder:@"请输入旧密码"];
         self.passwordTF.font = [UIFont systemFontOfSize:16.f];
         self.passwordTF.secureTextEntry = YES;
+        self.passwordTF.keyboardType = UIKeyboardTypeASCIICapable;
+        self.passwordTF.delegate = self;
         [self.passwordTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.passwordTF];
         [self.passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,6 +98,8 @@
         self.checkoutTF = [UITextField textFieldWithPlaceHolder:@"请输入新密码"];
         self.checkoutTF.font = [UIFont systemFontOfSize:16.f];
         self.checkoutTF.secureTextEntry = YES;
+        self.checkoutTF.keyboardType = UIKeyboardTypeASCIICapable;
+        self.checkoutTF.delegate = self;
         [self.checkoutTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:self.checkoutTF];
         [self.checkoutTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -180,6 +184,12 @@
         [self.submitBtn setBackgroundImage:GetImage(@"jinemeidianji") forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = NO;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
 }
 
 
