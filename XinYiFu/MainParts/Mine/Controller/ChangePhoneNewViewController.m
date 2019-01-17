@@ -199,7 +199,7 @@
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/reset/mobile" withVC:self withParams:@{@"mobile":self.phoneNoTF.text, @"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [SVProgressHUD showSuccessWithStatus:@"更换手机号成功"];
-            [UserPreferenceModel shareManager].mobile = self.phoneNoTF.text;
+            [UserPreferenceModel shareManager].account = self.phoneNoTF.text;
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];

@@ -35,6 +35,8 @@
  */
 
 //1未认证 2审核中 3审核失败 4认证成功 5代金额的认证成功
+
+//0未认证 1 2 审核中 3审核失败 4认证成功 5代金额的认证成功
 @property (nonatomic, assign)NSInteger type;
 
 @property (nonatomic, strong)UITableView *backTableView;
@@ -174,7 +176,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.0001;
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableViejw viewForHeaderInSection:(NSInteger)section {
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

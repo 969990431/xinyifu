@@ -87,7 +87,7 @@
     
     [self configureBDS];
     
-    [self playVideo];
+//    [self playVideo];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD setMaximumDismissTimeInterval:2];
     

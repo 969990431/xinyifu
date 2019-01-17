@@ -31,8 +31,13 @@
     view.messageCenterClick = messageCenterClick;
     
     [view.headerImageV sd_setImageWithURL:[NSURL URLWithString:[UserPreferenceModel shareManager].logo ? [UserPreferenceModel shareManager].logo : [UserPreferenceModel shareManager].picUrl] placeholderImage:GetImage(@"bianjitouxiang")];
-    view.companyNameLabel.text = [UserPreferenceModel shareManager].name;
-    view.nameLabel.text = [NSString stringWithFormat:@"%@  %@", [UserPreferenceModel shareManager].userName, [UserPreferenceModel shareManager].mobile];
+    if ([UserPreferenceModel shareManager].agreementStatus.integerValue <= 3) {
+        view.companyNameLabel.text = @"您尚未实名认证";
+        view.nameLabel.text = @"只有认证才可以收钱哦！";
+    }else {
+        view.companyNameLabel.text = [UserPreferenceModel shareManager].name;
+        view.nameLabel.text = [NSString stringWithFormat:@"%@  %@", [UserPreferenceModel shareManager].userName, [UserPreferenceModel shareManager].mobile];
+    }
     return view;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
