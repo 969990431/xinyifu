@@ -8,7 +8,7 @@
 
 #import "RegisterSureViewController.h"
 
-@interface RegisterSureViewController ()
+@interface RegisterSureViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
 @property (nonatomic, strong)UIButton *backBtn;
 
@@ -27,8 +27,6 @@
 
 @property (nonatomic, strong)UIButton *completeBtn;
 
-@property (nonatomic, assign)BOOL firstSecure;
-@property (nonatomic, assign)BOOL secondSecure;
 @end
 
 @implementation RegisterSureViewController
@@ -108,6 +106,9 @@
     
     self.passwdTF = [UITextField textFieldWithPlaceHolder:@"请输入新密码"];
     [self.passwdTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.passwdTF.secureTextEntry = YES;
+    self.passwdTF.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passwdTF.delegate = self;
     [self.backTableView addSubview:self.passwdTF];
     [self.passwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
@@ -130,7 +131,8 @@
     self.firstEyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.firstEyeBtn addTarget:self action:@selector(clickEye:) forControlEvents:UIControlEventTouchUpInside];
     self.firstEyeBtn.tag = 100;
-    [self.firstEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
+    [self.firstEyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+    [self.firstEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateSelected];
     [self.backTableView addSubview:self.firstEyeBtn];
     [self.firstEyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(segLine1.mas_right).offset(-20);
@@ -159,6 +161,9 @@
     
     self.passwdAgainTF = [UITextField textFieldWithPlaceHolder:@"请在此输入新密码"];
     [self.passwdAgainTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.passwdAgainTF.secureTextEntry = YES;
+    self.passwdAgainTF.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passwdAgainTF.delegate = self;
     [self.backTableView addSubview:self.passwdAgainTF];
     [self.passwdAgainTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
@@ -180,7 +185,8 @@
     self.secondEyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.secondEyeBtn addTarget:self action:@selector(clickEye:) forControlEvents:UIControlEventTouchUpInside];
     self.secondEyeBtn.tag = 101;
-    [self.secondEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
+    [self.secondEyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
+    [self.secondEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateSelected];
     [self.backTableView addSubview:self.secondEyeBtn];
     [self.secondEyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(segLine2.mas_right).offset(-20);
@@ -209,21 +215,11 @@
 
 - (void)clickEye: (UIButton *)sender {
     if (sender.tag == 100) {
-        self.firstSecure = !self.firstSecure;
-        self.passwdTF.secureTextEntry = self.firstSecure;
-        if (!self.firstSecure) {
-            [self.firstEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
-        }else {
-            [self.firstEyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
-        }
+        self.passwdTF.secureTextEntry = !self.passwdTF.secureTextEntry;
+        sender.selected = !sender.selected;
     }else {
-        self.secondSecure = !self.secondSecure;
-        self.passwdAgainTF.secureTextEntry = self.secondSecure;
-        if (!self.secondSecure) {
-            [self.secondEyeBtn setBackgroundImage:GetImage(@"5眼睛睁") forState:UIControlStateNormal];
-        }else {
-            [self.secondEyeBtn setBackgroundImage:GetImage(@"4眼睛闭") forState:UIControlStateNormal];
-        }
+        self.passwdAgainTF.secureTextEntry = !self.passwdAgainTF.secureTextEntry;
+        sender.selected = !sender.selected;
     }
 }
 
@@ -245,8 +241,13 @@
 
 
 - (void)completeClick: (UIButton *)button {
+    if ([self checkIsHaveNumAndLetter:self.passwdTF.text] != 3 || self.passwdTF.text.length < 8 || self.passwdTF.text.length > 16) {
+        [SVProgressHUD showInfoWithStatus:@"密码长度为8-16位，必须包含字母和数字"];
+        return;
+    }
     if (![self.passwdTF.text isEqualToString:self.passwdAgainTF.text]) {
         [SVProgressHUD showErrorWithStatus:@"两次密码不一致"];
+        return;
     }
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/register" withVC:self withParams:@{@"mobile":self.mobile, @"password":self.passwdTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
@@ -256,4 +257,40 @@
         }
     }];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+}
+
+-(int)checkIsHaveNumAndLetter:(NSString*)password{
+    //数字条件
+    NSRegularExpression *tNumRegularExpression = [NSRegularExpression regularExpressionWithPattern:@"[0-9]" options:NSRegularExpressionCaseInsensitive error:nil];
+    //符合数字条件的有几个字节
+    NSUInteger tNumMatchCount = [tNumRegularExpression numberOfMatchesInString:password
+                                                                       options:NSMatchingReportProgress
+                                                                         range:NSMakeRange(0, password.length)];
+    
+    //英文字条件
+    NSRegularExpression *tLetterRegularExpression = [NSRegularExpression regularExpressionWithPattern:@"[A-Za-z]" options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    //符合英文字条件的有几个字节
+    NSUInteger tLetterMatchCount = [tLetterRegularExpression numberOfMatchesInString:password options:NSMatchingReportProgress range:NSMakeRange(0, password.length)];
+    
+    if (tNumMatchCount == password.length) {
+        //全部符合数字，表示沒有英文
+        return 1;
+    } else if (tLetterMatchCount == password.length) {
+        //全部符合英文，表示沒有数字
+        return 2;
+    } else if (tNumMatchCount + tLetterMatchCount == password.length) {
+        //符合英文和符合数字条件的相加等于密码长度
+        return 3;
+    } else {
+        return 4;
+        //可能包含标点符号的情況，或是包含非英文的文字，这里再依照需求详细判断想呈现的错误
+    }
+}
+
 @end

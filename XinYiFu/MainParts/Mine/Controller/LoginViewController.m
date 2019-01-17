@@ -12,7 +12,7 @@
 #import "MainTabViewController.h"
 #import "GeneralWebViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
 
 @property (nonatomic, strong)UIImageView *logoImageV;
@@ -138,6 +138,8 @@
     }
     self.passWordTF.secureTextEntry = self.isSecurity;
     [self.passWordTF addTarget:self action:@selector(textfieldChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.passWordTF.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passWordTF.delegate = self;
     [self.backTableView addSubview:self.passWordTF];
     [self.passWordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(35);
@@ -323,6 +325,10 @@
     }];
 }
 
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+}
 
 @end
