@@ -130,9 +130,14 @@
         }
     }
     if (indexPath.row == 1) {
-        GradeViewController *vc = [[GradeViewController alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([UserPreferenceModel shareManager].agreementStatus.integerValue <= 3) {
+            [SVProgressHUD showErrorWithStatus:@"您尚未完成实名认证"];
+            return;
+        }else {
+            GradeViewController *vc = [[GradeViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
     
