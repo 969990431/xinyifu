@@ -182,7 +182,7 @@
         self.titlelabel.text = @"您尚未实名认证";
         self.contentLabel.text = @"只有认证才可以收钱哦！";
         
-        self.bottomContentLabel.attributedText = [@"您认证的信息有误，导致认证失败，可先联系客服400-000-890或者重新选择身份认证"changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(22, 21) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(22, 21)];
+        self.bottomContentLabel.attributedText = [[NSString stringWithFormat:@"您认证的信息有误，导致认证失败，可先联系客服%@或者重新选择身份认证", [UserPreferenceModel shareManager].kefudianhua]changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(22, [UserPreferenceModel shareManager].kefudianhua.length+10) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(22, [UserPreferenceModel shareManager].kefudianhua.length+10)];
         
         self.erweimaImageV.hidden = 1;
         self.setMoneyBtn.hidden = 1;
@@ -210,8 +210,14 @@
         //        有二维码，有金额
         self.erweimaImageV.hidden = 0;
         self.setMoneyBtn.hidden = 0;
-        self.middleSepLine.hidden = 0;
-        self.saveErweimaBtn.hidden = 0;
+//        [self.setMoneyBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(self.middleSepLine);
+//            make.height.mas_equalTo(20);
+//            make.centerX.mas_equalTo(self.erweimaImageV);
+//            make.width.mas_equalTo(self.erweimaImageV);
+//        }];
+        self.middleSepLine.hidden = 1;
+        self.saveErweimaBtn.hidden = 1;
         self.shoukuanView.hidden = 0;
         
         self.gerenLabel.hidden = 1;
@@ -512,7 +518,7 @@
             make.top.mas_equalTo(self.shenhezhongImageV.mas_bottom).offset(15);
         }];
         
-        self.bottomContentLabel.attributedText = [@"您的认证信息正在审核中，三个工作日内给您回复，请您耐心等待！如有疑问请联系客服400-000-890"changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(39, 11) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(39, 11)];
+        self.bottomContentLabel.attributedText = [[NSString stringWithFormat: @"您的认证信息正在审核中，三个工作日内给您回复，请您耐心等待！如有疑问请联系客服%@", [UserPreferenceModel shareManager].kefudianhua]changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(39, [UserPreferenceModel shareManager].kefudianhua.length) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(39, [UserPreferenceModel shareManager].kefudianhua.length)];
     }
     return self;
 }

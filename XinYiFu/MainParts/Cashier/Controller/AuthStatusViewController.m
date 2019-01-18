@@ -63,7 +63,7 @@
             make.height.mas_equalTo(80);
         }];
         self.textLabel.numberOfLines = 0;
-        self.textLabel.attributedText = [@"您认证的信息有误，导致认证失败，可先联系客服400-000-890或者重新选择身份认证"changeFont:[UIFont systemFontOfSize:18] andRanges:@[[NSValue valueWithRange:NSMakeRange(22, 11)], [NSValue valueWithRange:NSMakeRange(35, 8)]]];
+        self.textLabel.attributedText = [[NSString stringWithFormat: @"您认证的信息有误，导致认证失败，可先联系客服%@或者重新选择身份认证",[UserPreferenceModel shareManager].kefudianhua]changeFont:[UIFont systemFontOfSize:18] andRanges:@[[NSValue valueWithRange:NSMakeRange(22, [UserPreferenceModel shareManager].kefudianhua.length)], [NSValue valueWithRange:NSMakeRange(22+[UserPreferenceModel shareManager].kefudianhua.length+2, 8)]]];
         
         [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(68);
@@ -113,7 +113,7 @@
             make.height.mas_equalTo(80);
         }];
         self.textLabel.numberOfLines = 0;
-        self.textLabel.attributedText = [@"您认证的信息正在审核中，三个工作日内给您回复，请您耐心等待！如有疑问请联系客服400-000-890"changeFont:[UIFont systemFontOfSize:18] andRange:NSMakeRange(39, 11)];
+        self.textLabel.attributedText = [[NSString stringWithFormat: @"您认证的信息正在审核中，三个工作日内给您回复，请您耐心等待！如有疑问请联系客服%@", [UserPreferenceModel shareManager].kefudianhua]changeFont:[UIFont systemFontOfSize:18] andRange:NSMakeRange(39, [UserPreferenceModel shareManager].kefudianhua.length)];
         
         self.sureBtn.hidden = 1;
     }

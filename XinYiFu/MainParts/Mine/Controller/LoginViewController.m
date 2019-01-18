@@ -305,7 +305,8 @@
 
 - (void)loginAction {
     [SVProgressHUD showWithStatus:@"登录中"];
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/login" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"password":self.passWordTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    NSLog(@"===%@", @{@"mobile":self.phoneTF.text, @"password":self.passWordTF.text, @"deviceId":([UserPreferenceModel shareManager].deviceToken ? [UserPreferenceModel shareManager].deviceToken:@""), @"deviceType":@"ios"});
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/login" withVC:self withParams:@{@"mobile":self.phoneTF.text, @"password":self.passWordTF.text, @"deviceId":([UserPreferenceModel shareManager].deviceToken ? [UserPreferenceModel shareManager].deviceToken:@""), @"deviceType":@"ios"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         [SVProgressHUD dismiss];
         if (errorCode == 1) {
             [UserPreferenceModel shareManager].token = response[@"token"];

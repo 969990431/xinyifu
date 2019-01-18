@@ -47,7 +47,7 @@
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/tax/level" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             self.gradeLabel.text = [NSString stringWithFormat:@"%@级", response[@"data"][@"level"]];
-            self.rateLabel.text = [NSString stringWithFormat:@"%@‰", response[@"data"][@"tax"]];
+            self.rateLabel.text = [NSString stringWithFormat:@"%.1f‰", [response[@"data"][@"tax"] floatValue]/10];
             NSString *imageName = [NSString stringWithFormat:@"dengji%@", response[@"data"][@"level"]];
             [self.allGradeImageV setImage: GetImage(imageName)];
         }else {
@@ -106,7 +106,7 @@
     }];
     
     UILabel *rateLabel = [UILabel labelWithTextColor:WordCloseBlack font:14 aligment:NSTextAlignmentLeft];
-    rateLabel.text = @"费  率：";
+    rateLabel.text = @"费    率：";
     [whiteBackView addSubview:rateLabel];
     [rateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(gradeImageV.mas_right).offset(10);
@@ -163,7 +163,7 @@
     }];
     
     UILabel *textLabel4 = [UILabel labelWithTextColor:[UIColor whiteColor] font:16 aligment:NSTextAlignmentCenter];
-    textLabel4.text = @"客服电话：123123";
+    textLabel4.text = [NSString stringWithFormat: @"客服电话：%@",[UserPreferenceModel shareManager].kefudianhua];
     [self.view addSubview:textLabel4];
     [textLabel4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);

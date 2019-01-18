@@ -175,11 +175,9 @@
     
     NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken success");
     
-    NSLog(@"deviceToken————>>>%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<"withString: @""]
-                                    
-                                    stringByReplacingOccurrencesOfString: @">"withString: @""]
-                                   
-                                   stringByReplacingOccurrencesOfString: @" "withString: @""]);
+    NSLog(@"deviceToken————>>>%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<"withString: @""]stringByReplacingOccurrencesOfString: @">"withString: @""]stringByReplacingOccurrencesOfString: @" "withString: @""]);
+    
+    [UserPreferenceModel shareManager].deviceToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<"withString: @""]stringByReplacingOccurrencesOfString: @">"withString: @""]stringByReplacingOccurrencesOfString: @" "withString: @""];
     
 }
 
