@@ -12,6 +12,7 @@
 @property (nonatomic ,strong) UITableView *backTableView;
 
 @property (nonatomic ,strong) UITextView *textView;
+@property (nonatomic ,strong) UILabel *textLength;
 
 @property (nonatomic ,strong) UIView *imageWallView;
 @property (nonatomic ,strong) NSMutableArray *imageArray;
@@ -83,7 +84,15 @@
         make.left.mas_equalTo(10);
         make.right.mas_equalTo(-10);
         make.top.mas_equalTo(0);
-        make.height.mas_equalTo(180);
+        make.height.mas_equalTo(165);
+    }];
+    self.textLength = [UILabel labelWithTextColor:WordGray font:12 aligment:NSTextAlignmentRight];
+    self.textLength.text = @"0/50";
+    [textViewBackView addSubview:self.textLength];
+    [self.textLength mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_offset(-10);
+        make.bottom.mas_offset(-3);
+        make.height.mas_offset(10);
     }];
     
     UIView *bottomTitleView = [[UIView alloc]init];
@@ -229,7 +238,19 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@""]) {
+        return YES;
+    }
+    if (range.location >= 50){
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
 - (void)textViewDidChange:(UITextView *)textView{
+    self.textLength.text = [NSString stringWithFormat:@"%ld/50",textView.text.length];
     if (self.textView.text.length) {
         [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = YES;

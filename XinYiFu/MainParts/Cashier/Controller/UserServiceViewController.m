@@ -316,6 +316,15 @@
 //                [SVProgressHUD showErrorWithStatus:errorMessage];
 //            }
 //        }];
+        [SVProgressHUD showWithStatus:@"正在保存二维码"];
+        [[RequestTool shareManager]sendRequestWithAPI:@"/api/sys/dsybackqr.jpg" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+            if ([errorMessage isKindOfClass:[UIImage class]]) {
+                [SVProgressHUD dismiss];
+                UIImageWriteToSavedPhotosAlbum((UIImage *)errorMessage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            }else if ([errorMessage isKindOfClass:[NSString class]]){
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+            }
+        }];
     }
 }
 

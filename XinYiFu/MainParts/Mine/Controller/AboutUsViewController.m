@@ -115,7 +115,7 @@
         [XYFAlertView showVersionUpdateView:NO];
     }else{
         GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
-        webVC.url = @"http://118.31.79.1:8081/money.html";
+        webVC.url = @"http://118.31.79.1:8081/version.html";
         webVC.title = @"版本说明";
         [self.navigationController pushViewController:webVC animated:YES];
     }
