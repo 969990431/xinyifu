@@ -16,6 +16,8 @@
 @property (nonatomic, strong)UIButton *sureBtn;
 //1 成功 2 失败 3 审核中
 //认证状态：1未认证 2审核中 3审核失败 4认证成功
+
+//0未认证 1 2 审核中 3审核失败 4认证成功 5代金额的认证成功
 @property (nonatomic, assign)NSInteger type;
 
 @end
@@ -72,7 +74,7 @@
         [self.sureBtn setTitle:@"重新认证" forState:UIControlStateNormal];
         [self.sureBtn addTarget:self action:@selector(chongxinrenzheng) forControlEvents:UIControlEventTouchUpInside];
         [self.sureBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
-    }else if (self.type == 4) {
+    }else if (self.type == 4 || self.type == 5) {
         [self.imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view);
             make.top.mas_equalTo(self.view).offset(61+ (iPhoneX ? 88:64));

@@ -111,8 +111,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         //认证状态：1未认证 2审核中 3审核失败 4认证成功
+        //0未认证 1 2 审核中 3审核失败 4认证成功 5代金额的认证成功
         
-        if ([UserPreferenceModel shareManager].agreementStatus.integerValue == 1) {
+        if ([UserPreferenceModel shareManager].agreementStatus.integerValue == 0) {
             UserAuthTypeViewController *vc = [[UserAuthTypeViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -129,9 +130,14 @@
         }
     }
     if (indexPath.row == 1) {
-        GradeViewController *vc = [[GradeViewController alloc]init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([UserPreferenceModel shareManager].agreementStatus.integerValue <= 3) {
+            [SVProgressHUD showErrorWithStatus:@"您尚未完成实名认证"];
+            return;
+        }else {
+            GradeViewController *vc = [[GradeViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
     

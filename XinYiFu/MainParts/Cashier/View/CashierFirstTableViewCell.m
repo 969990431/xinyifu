@@ -71,7 +71,6 @@
             make.size.mas_equalTo(CGSizeMake(1, 17));
         }];
     }
-    [cell setType:type];
     [cell.headerImageV sd_setImageWithURL:[NSURL URLWithString:[UserPreferenceModel shareManager].logo ? [UserPreferenceModel shareManager].logo : [UserPreferenceModel shareManager].picUrl] placeholderImage:GetImage(@"touxiang")];
     cell.titlelabel.text = [UserPreferenceModel shareManager].name;
     cell.contentLabel.text = [NSString stringWithFormat:@"%@  %@", [UserPreferenceModel shareManager].userName, [UserPreferenceModel shareManager].mobile];
@@ -88,8 +87,11 @@
     if (remark) {
         cell.moneyTextLabel.text = remark;
     }else {
-        cell.moneyTextLabel.text = @"备注";
+//        cell.moneyTextLabel.text = @"备注";
     }
+    
+    
+    [cell setType:type];
     
     
     return cell;
@@ -101,8 +103,8 @@
         self.fingerLabel.text = @"扫一扫，向我付款";
         self.statusLabel.backgroundColor = StatusOrange;
         self.statusLabel.text = @"已认证";
-        self.titlelabel.text = @"";
-        self.contentLabel.text = @"";
+//        self.titlelabel.text = @"";
+//        self.contentLabel.text = @"";
         
         self.erweimaImageV.hidden = 0;
         self.setMoneyBtn.hidden = 0;
@@ -122,7 +124,7 @@
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
         
-    }else if (type == 1) {
+    }else if (type == 0) {
         //        未认证
         self.fingerLabel.text = @"选择身份认证";
         self.statusLabel.backgroundColor = AlertGray;
@@ -147,7 +149,7 @@
         
         self.moneyLabel.hidden = 1;
         self.moneyTextLabel.hidden = 1;
-    }else if (type == 2) {
+    }else if (type == 2 || type == 1) {
         //        审核中
         self.fingerLabel.text = @"正在审核中…";
         self.statusLabel.backgroundColor = AlertGray;
@@ -257,7 +259,7 @@
         self.statusLabel = [UILabel labelWithTextColor:[UIColor whiteColor] font:13 aligment:NSTextAlignmentCenter];
         self.statusLabel.layer.cornerRadius = 3;
         self.statusLabel.layer.masksToBounds = YES;
-        self.statusLabel.text = @"sdjfljsdlkf";
+//        self.statusLabel.text = @"sdjfljsdlkf";
         self.statusLabel.backgroundColor = RandomColor;
         [self.backView addSubview:self.statusLabel];
         [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -268,7 +270,7 @@
         }];
         
         self.titlelabel = [UILabel labelWithTextColor:UIColorFromRGB(51, 51, 51) font:18 aligment:NSTextAlignmentCenter];
-        self.titlelabel.text = @"12312319";
+//        self.titlelabel.text = @"12312319";
         [self.backView addSubview:self.titlelabel];
         [self.titlelabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(0);
@@ -279,7 +281,7 @@
         
         
         self.contentLabel = [UILabel labelWithTextColor:WordDeepGray font:15 aligment:NSTextAlignmentCenter];
-        self.contentLabel.text = @"1231231";
+//        self.contentLabel.text = @"1231231";
         [self.backView addSubview:self.contentLabel];
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(0);
