@@ -28,6 +28,8 @@
     self.userName = nil;
     self.cashQr = nil;
     self.agreementStatus = nil;
+    self.kefudianhua = nil;
+    self.deviceToken = nil;
     
     
     LoginViewController *loginVC = [[LoginViewController alloc]init];
@@ -111,6 +113,20 @@
 
 - (NSString *)picUrl {
     return [self unArchiveWithKey:@"picUrl"];
+}
+
+- (void)setKefudianhua:(NSString *)kefudianhua {
+    [self archiveString:kefudianhua withKey:@"kefudianhua"];
+}
+- (NSString *)kefudianhua {
+    return [self unArchiveWithKey:@"kefudianhua"];
+}
+
+- (void)setDeviceToken:(NSString *)deviceToken {
+    [self archiveString:deviceToken withKey:@"deviceToken"];
+}
+- (NSString *)deviceToken {
+    return [self unArchiveWithKey:@"deviceToken"];
 }
 
 //存入字符串

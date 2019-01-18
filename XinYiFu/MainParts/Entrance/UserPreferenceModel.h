@@ -27,5 +27,10 @@
 @property (nonatomic, copy)NSString *cashQr;//门店首款码
 @property (nonatomic, copy)NSString *agreementStatus;//认证状态：1未认证 2审核中 3审核失败 4认证成功
 
+@property (nonatomic, copy)NSString *kefudianhua;//客服电话
+@property (nonatomic, copy)NSString *deviceToken;//设备token
+
+
+
 @end
 

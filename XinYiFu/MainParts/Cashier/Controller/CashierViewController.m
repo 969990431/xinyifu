@@ -71,11 +71,23 @@
         LoginViewController *loginVC = [[LoginViewController alloc]init];
         [UIApplication sharedApplication].keyWindow.rootViewController = [[NavViewController alloc]initWithRootViewController:loginVC];
     }else {
+        [self getKefu];
 //        [self loadUserData];
         if (self.type != 5) {
             [self loadData];
         }
     }
+}
+//获取客服电话
+- (void)getKefu {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sys/mobile" withVC:self withParams:@{} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [UserPreferenceModel shareManager].kefudianhua = response[@"data"];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+        [self.backTableView reloadData];
+    }];
 }
 //用户信息请求
 - (void)loadUserData {
@@ -236,7 +248,16 @@
 }
 //保存首款吗
 - (void)savePic {
-    [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
+    [[RequestTool shareManager]sendRequestWithAPI:@"/api/sys/dsybackqr.jpg" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorMessage) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
+        }
+        //        [self.submitBtn setImage:errorMessage forState:UIControlStateNormal];
+    }];
+    
+    
+    
 }
 //收款记录
 - (void)gotoRecord {
