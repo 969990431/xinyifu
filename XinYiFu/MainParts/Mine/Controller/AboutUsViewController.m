@@ -54,32 +54,6 @@
         make.centerX.mas_equalTo(imageView);
         make.height.mas_equalTo(26);
     }];
-//
-//    UILabel *detailTitle = [UILabel labelWithTextColor:WordCloseBlack font:16 aligment:NSTextAlignmentLeft];
-//    detailTitle.text = @"版本说明：";
-//    [self.backTableView addSubview:detailTitle];
-//    [detailTitle mas_makeConstraints:^(MASConstraintMaker *make){
-//        make.top.mas_equalTo(self.versionLabel.mas_bottom).offset(24);
-//        make.left.mas_equalTo(34);
-//    }];
-//
-//    self.detailLabel = [UILabel labelWithTextColor:AlertGray font:16 aligment:NSTextAlignmentLeft];
-//    self.detailLabel.text = @"版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明版本说明";
-//    [self.backTableView addSubview:self.detailLabel];
-//    [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make){
-//        make.top.mas_equalTo(detailTitle.mas_bottom);
-//        make.left.mas_equalTo(34);
-//        make.right.mas_equalTo(self.view.mas_right).offset(-34);
-//    }];
-//
-//    UILabel *copyright = [UILabel labelWithTextColor:WordDeepGray font:16 aligment:NSTextAlignmentCenter];
-//    copyright.text = @"copyright 2019";
-//    [self.backTableView addSubview:copyright];
-//    [copyright mas_makeConstraints:^(MASConstraintMaker *make){
-//        make.centerX.mas_equalTo(self.view);
-//        make.height.mas_equalTo(22);
-//        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-18);
-//    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -112,7 +86,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        [XYFAlertView showVersionUpdateView:NO];
+        [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/sys/version/valid" withVC:self withParams:@{@"version":@"1.0.0"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+            if (errorCode == 1) {
+                if ([response[@"data"][@"status"] integerValue] == 1) {
+                    [XYFAlertView showVersionUpdateView:NO];
+                }else{
+                    [XYFAlertView showVersionUpdateView:YES];
+                }
+            }else{
+                [SVProgressHUD showErrorWithStatus:errorMessage];
+            }
+        }];
     }else{
         GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
         webVC.url = @"http://118.31.79.1:8081/version.html";
