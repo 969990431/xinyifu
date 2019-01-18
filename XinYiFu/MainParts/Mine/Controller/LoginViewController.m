@@ -12,6 +12,10 @@
 #import "MainTabViewController.h"
 #import "GeneralWebViewController.h"
 
+#import <UMCommon/UMCommon.h>
+#import <UMPush/UMessage.h>
+#import <UserNotifications/UserNotifications.h>
+
 @interface LoginViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
 
@@ -310,6 +314,10 @@
         [SVProgressHUD dismiss];
         if (errorCode == 1) {
             [UserPreferenceModel shareManager].token = response[@"token"];
+            //绑定别名
+            [UMessage addAlias:[UserPreferenceModel shareManager].token type:@"UMENGTEST" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            }];
+            
 //            记住帐号 密码
             if (self.isMemory) {
                 [UserPreferenceModel shareManager].account = self.phoneTF.text;

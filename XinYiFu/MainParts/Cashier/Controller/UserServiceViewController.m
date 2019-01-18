@@ -297,25 +297,6 @@
             [SVProgressHUD showInfoWithStatus:@"请先选择收货地址"];
         }
     }else{
-        [SVProgressHUD showErrorWithStatus:@"这部分还没给接口 :("];
-        
-//        CGRect screenRect = [self.view bounds];
-//        UIGraphicsBeginImageContext(screenRect.size);
-//        CGContextRef ctx = UIGraphicsGetCurrentContext();
-//        [self.view.layer renderInContext:ctx];
-//        UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-
-//        [SVProgressHUD showWithStatus:@"正在保存二维码"];
-//        [[RequestTool shareManager]sendRequestWithAPI:@"/api/address/list" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-//            [SVProgressHUD dismiss];
-//            if (errorCode == 1) {
-//                UIImageWriteToSavedPhotosAlbum(GetImage(@"guanfangshoukuanma"), self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-//            }else {
-//                [SVProgressHUD showErrorWithStatus:errorMessage];
-//            }
-//        }];
         [SVProgressHUD showWithStatus:@"正在保存二维码"];
         [[RequestTool shareManager]sendRequestWithAPI:@"/api/sys/dsybackqr.jpg" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
             if ([errorMessage isKindOfClass:[UIImage class]]) {

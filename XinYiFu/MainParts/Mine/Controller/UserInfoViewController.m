@@ -11,6 +11,10 @@
 #import "UserHeaderTableViewCell.h"
 #import "UserInfoModel.h"
 
+#import <UMCommon/UMCommon.h>
+#import <UMPush/UMessage.h>
+#import <UserNotifications/UserNotifications.h>
+
 @interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong)UITableView *backTableView;
 @property (nonatomic, strong)UIImage *headerImage;
@@ -111,6 +115,10 @@
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/logout" withVC:self withParams:@{} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [[UserPreferenceModel shareManager]loginOut];
+            //移除别名
+            [UMessage removeAlias:[UserPreferenceModel shareManager].token type:@"UMENGTEST" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+                
+            }];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];
         }

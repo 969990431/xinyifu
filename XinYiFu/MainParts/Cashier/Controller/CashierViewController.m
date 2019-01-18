@@ -248,17 +248,30 @@
 }
 //保存首款吗
 - (void)savePic {
+    [SVProgressHUD showWithStatus:@"正在保存二维码"];
     [[RequestTool shareManager]sendRequestWithAPI:@"/api/sys/dsybackqr.jpg" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-        if (errorMessage) {
-            
-            [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
+        if ([errorMessage isKindOfClass:[UIImage class]]) {
+            [SVProgressHUD dismiss];
+            UIImageWriteToSavedPhotosAlbum((UIImage *)errorMessage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }else if ([errorMessage isKindOfClass:[NSString class]]){
+            [SVProgressHUD showErrorWithStatus:errorMessage];
         }
-        //        [self.submitBtn setImage:errorMessage forState:UIControlStateNormal];
     }];
     
     
-    
 }
+
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+        [SVProgressHUD showErrorWithStatus:@"保存失败,请重试"];
+    }else{
+        msg = @"保存图片成功" ;
+        [SVProgressHUD showSuccessWithStatus:@"已保存二维码至相册"];
+    }
+}
+
 //收款记录
 - (void)gotoRecord {
     IncomeRecordViewController *vc = [[IncomeRecordViewController alloc]init];

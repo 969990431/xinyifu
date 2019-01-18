@@ -81,7 +81,7 @@
     if (erweimaImage) {
         [cell.erweimaImageV setImage:erweimaImage];
     }else {
-        [cell.erweimaImageV setImage:nil];
+        [cell.erweimaImageV sd_setImageWithURL:[NSURL URLWithString:[UserPreferenceModel shareManager].cashQr]];
     }
     
     if (remark) {
@@ -253,7 +253,7 @@
             self.headerImageV.layer.borderWidth = 2;
         self.headerImageV.userInteractionEnabled = 1;
             [self addSubview:self.headerImageV];
-            self.headerImageV.backgroundColor = RandomColor;
+//            self.headerImageV.backgroundColor = RandomColor;
             [self.headerImageV mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self);
                 make.bottom.mas_equalTo(self.backView.mas_top).offset(50);
@@ -266,7 +266,7 @@
         self.statusLabel.layer.cornerRadius = 3;
         self.statusLabel.layer.masksToBounds = YES;
 //        self.statusLabel.text = @"sdjfljsdlkf";
-        self.statusLabel.backgroundColor = RandomColor;
+//        self.statusLabel.backgroundColor = RandomColor;
         [self.backView addSubview:self.statusLabel];
         [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
@@ -328,7 +328,7 @@
         }];
         
         self.erweimaImageV = [[UIImageView alloc]init];
-        self.erweimaImageV.backgroundColor = RandomColor;
+//        self.erweimaImageV.backgroundColor = RandomColor;
         [self.backView addSubview:self.erweimaImageV];
         [self.erweimaImageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.orangeV.mas_bottom).offset(10);
