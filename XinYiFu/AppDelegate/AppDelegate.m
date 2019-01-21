@@ -18,7 +18,7 @@
 #import <UMPush/UMessage.h>
 #import <UserNotifications/UserNotifications.h>
 
-#define UMAppKey @"5c36afe5b465f50b26000d7c"
+#define UMAppKey @"5c418a07b465f55724001329"
 
 
 @interface AppDelegate ()<BDSSpeechSynthesizerDelegate,UNUserNotificationCenterDelegate>

@@ -156,6 +156,7 @@
         self.statusLabel.text = @"未认证";
         self.titlelabel.text = @"您尚未实名认证";
         self.contentLabel.text = @"只有认证才可以收钱哦！";
+        self.bottomContentLabel.attributedText = [[NSString stringWithFormat: @"您的认证信息正在审核中，三个工作日内给您回复，请您耐心等待！如有疑问请联系客服%@", [UserPreferenceModel shareManager].kefudianhua]changeColor:UIColorFromRGB(51, 51, 51) andColorRang:NSMakeRange(39, [UserPreferenceModel shareManager].kefudianhua.length) andFont:[UIFont systemFontOfSize:16] andFontRange:NSMakeRange(39, [UserPreferenceModel shareManager].kefudianhua.length)];
         
         self.erweimaImageV.hidden = 1;
         self.setMoneyBtn.hidden = 1;

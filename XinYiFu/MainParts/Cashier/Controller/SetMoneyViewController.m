@@ -31,7 +31,7 @@
 }
 - (NSArray *)placeHolderArray {
     if (!_placeHolderArray) {
-        _placeHolderArray = @[@"收款金额", @"20字以内"];
+        _placeHolderArray = @[@"收款金额", @"20字以内（可不填）"];
     }
     return _placeHolderArray;
 }
@@ -121,7 +121,7 @@
         self.remark = textField.text;
     }
     
-    if (![self.money isNullString] && ![self.remark isNullString]) {
+    if (![self.money isNullString]) {
         [self.submitBtn setBackgroundImage:GetImage(@"keyidianji") forState:UIControlStateNormal];
         self.submitBtn.userInteractionEnabled = YES;
     }else {
@@ -134,10 +134,10 @@
         [SVProgressHUD showErrorWithStatus:@"请输入正确的金额"];
         return;
     }
-    if ([self.remark isNullString]) {
-        [SVProgressHUD showErrorWithStatus:@"请填写备注内容"];
-        return;
-    }
+//    if ([self.remark isNullString]) {
+//        [SVProgressHUD showErrorWithStatus:@"请填写备注内容"];
+//        return;
+//    }
     
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/edit/amount" withVC:self withParams:@{@"sum":self.money, @"remark":self.remark ? self.remark:@""} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {

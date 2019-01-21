@@ -189,7 +189,7 @@
         return;
     }
     sender.userInteractionEnabled = NO;
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/verify/new/mobile" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self getCodeAction:self.codeBtn];
         }else {

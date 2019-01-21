@@ -69,7 +69,7 @@
     [super viewDidLoad];
     [self setChildVc:[[CashierViewController alloc]init] title:@"收银" image:@"shouyin2" selectImage:@"shouyin1"];
     [self setChildVc:[[BillViewController alloc]init] title:@"账单" image:@"zhangdan2" selectImage:@"zhangdan1"];
-    [self setChildVc:[[MineViewController alloc]init] title:@"我的" image:@"geren2" selectImage:@"geren1"];
+    [self setChildVc:[[MineViewController alloc]init] title:@"个人" image:@"geren2" selectImage:@"geren1"];
     
     UITabBar *tab = [[UITabBar alloc]init];
     //    [[UITabBar appearance] setBarTintColor:[UIColor lightGrayColor]];
