@@ -7,6 +7,7 @@
 //
 
 #import "GradeViewController.h"
+#import "GradeModel.h"
 
 @interface GradeViewController ()
 @property (nonatomic, strong)UILabel *gradeLabel;
@@ -46,9 +47,10 @@
 - (void)loadData {
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/tax/level" withVC:self withParams:@{@"token":[UserPreferenceModel shareManager].token} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
-            self.gradeLabel.text = [NSString stringWithFormat:@"%@级", response[@"data"][@"level"]];
-            self.rateLabel.text = [NSString stringWithFormat:@"%.1f‰", [response[@"data"][@"tax"] floatValue]/10];
-            NSString *imageName = [NSString stringWithFormat:@"dengji%@", response[@"data"][@"level"]];
+            GradeModel *model = [[GradeModel alloc]initWithDictionary:response[@"data"] error:nil];
+            self.gradeLabel.text = model.level;
+            self.rateLabel.text = [NSString stringWithFormat:@"%.1f%%", [model.tax floatValue]];
+            NSString *imageName = [NSString stringWithFormat:@"dengji%@", model.level];
             [self.allGradeImageV setImage: GetImage(imageName)];
         }else {
             [SVProgressHUD showErrorWithStatus:errorMessage];

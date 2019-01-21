@@ -288,7 +288,11 @@
 }
 //点击头像
 - (void)clickTheHeader {
-    [self addImage];
+    if ([UserPreferenceModel shareManager].agreementStatus.integerValue <= 3) {
+        [SVProgressHUD showErrorWithStatus:@"您尚未完成实名认证"];
+    }else {
+        [self addImage];
+    }
 }
 
 

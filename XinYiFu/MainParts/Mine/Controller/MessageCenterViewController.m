@@ -113,4 +113,35 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        [self.backTableView beginUpdates];
+        
+//        [self.backTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
+//        [self.backTableView endUpdates];
+        [self deleteActionWithIndex:indexPath.section]; 
+    }
+}
+
+- (void)deleteActionWithIndex: (NSInteger)index {
+    MessageListModel *model = self.dataSource[index];
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/message/delete" withVC:self withParams:@{@"messageId":model.messageId} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+        if (errorCode == 1) {
+            [SVProgressHUD showSuccessWithStatus:@"已删除"];
+            [self.dataSource removeObjectAtIndex:index];
+        }else {
+            [SVProgressHUD showErrorWithStatus:errorMessage];
+        }
+        [self.backTableView reloadData];
+    }];
+}
 @end

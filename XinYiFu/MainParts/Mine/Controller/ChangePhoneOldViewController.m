@@ -150,7 +150,7 @@
 - (void)sendCode: (UIButton *)sender {
     
     sender.userInteractionEnabled = NO;
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneNoTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/verify/old/mobile" withVC:self withParams:@{@"mobile":self.phoneNoTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             [self getCodeAction:self.codeBtn];
         }else {
