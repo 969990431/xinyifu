@@ -86,17 +86,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/sys/version/valid" withVC:self withParams:@{@"version":@"1.0.0"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
-            if (errorCode == 1) {
-                if ([response[@"data"][@"status"] integerValue] == 1) {
-                    [XYFAlertView showVersionUpdateView:NO];
-                }else{
-                    [XYFAlertView showVersionUpdateView:YES];
-                }
-            }else{
-                [SVProgressHUD showErrorWithStatus:errorMessage];
-            }
-        }];
+        [self PostpathAPPStoreVersion];
+//        [[RequestTool shareManager] sendNewRequestWithAPI:@"/api/sys/version/valid" withVC:self withParams:@{@"version":@"1.0.0"} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+//            if (errorCode == 1) {
+//                if ([response[@"data"][@"status"] integerValue] == 1) {
+//                    [XYFAlertView showVersionUpdateView:NO];
+//                }else{
+//                    [XYFAlertView showVersionUpdateView:YES];
+//                }
+//            }else{
+//                [SVProgressHUD showErrorWithStatus:errorMessage];
+//            }
+//        }];
     }else{
         GeneralWebViewController *webVC = [[GeneralWebViewController alloc]init];
         webVC.url = @"http://118.31.79.1:8081/version.html";
@@ -117,6 +118,54 @@
     }];
 }
 
+
+- (void)PostpathAPPStoreVersion{
+    [SVProgressHUD show];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",XYFAPPID]]];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionDataTask *task = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        [self receiveData:responseObject[@"results"][0]];
+    }];
+        
+    [task resume];
+}
+
+-(void)receiveData:(id)sender{
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    // 手机当前APP软件版本  比如：1.0.2
+    NSString *nativeVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *storeVersion  = sender[@"version"];
+    
+    NSComparisonResult comparisonResult = [nativeVersion compare:storeVersion options:NSNumericSearch];
+    
+    switch (comparisonResult) {
+        case NSOrderedSame:
+            [XYFAlertView showVersionUpdateView:NO];
+            break;
+        case NSOrderedAscending:
+        {
+            XYFAlertView *view = [XYFAlertView showVersionUpdateView:YES];
+            view.block = ^(){
+                NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=%@", XYFAPPID];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{UIApplicationOpenURLOptionsSourceApplicationKey : @YES}
+                                         completionHandler:^(BOOL success) {
+                                             
+                                         }];
+            };
+        }
+            break;
+        case NSOrderedDescending:
+            [XYFAlertView showVersionUpdateView:NO];
+            break;
+        default:
+            break;
+    }
+    
+}
 
 /*
 #pragma mark - Navigation
