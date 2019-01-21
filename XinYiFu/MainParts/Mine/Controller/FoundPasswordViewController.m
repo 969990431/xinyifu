@@ -169,7 +169,7 @@
     [sender setTitle:@"发送中..." forState:UIControlStateNormal];
     sender.userInteractionEnabled = NO;
     
-    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/send" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
+    [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/verify/old/mobile" withVC:self withParams:@{@"mobile":self.phoneTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         
         if (errorCode == 1) {
             [sender setTitle:@"60s" forState:UIControlStateNormal];
@@ -196,12 +196,12 @@
 }
 
 - (void)nextStepAction:(UIButton *)sender{
-    if ([self.codeTF.text isEqualToString:@"111111"]) {
-        SetNewPasswordViewController *vc = [[SetNewPasswordViewController alloc] init];
-        vc.mobile = self.phoneTF.text;
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
+//    if ([self.codeTF.text isEqualToString:@"111111"]) {
+//        SetNewPasswordViewController *vc = [[SetNewPasswordViewController alloc] init];
+//        vc.mobile = self.phoneTF.text;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        return;
+//    }
     [[RequestTool shareManager]sendNewRequestWithAPI:@"/api/sms/valid" withVC:self withParams:@{@"mobile":self.phoneTF.text,@"valid":self.codeTF.text} withClassName:nil responseBlock:^(id response, NSString *errorMessage, NSInteger errorCode) {
         if (errorCode == 1) {
             SetNewPasswordViewController *vc = [[SetNewPasswordViewController alloc] init];
