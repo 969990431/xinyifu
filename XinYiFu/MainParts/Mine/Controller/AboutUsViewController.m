@@ -47,7 +47,11 @@
     }];
 
     self.versionLabel = [UILabel labelWithTextColor:[UIColor colorWithHexString:@"030303"] font:18 aligment:NSTextAlignmentCenter];
-    self.versionLabel.text = @"v 1.0.0";
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    // 手机当前APP软件版本  比如：1.0.2
+    NSString *nativeVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+
+    self.versionLabel.text = [NSString stringWithFormat:@"v %@",nativeVersion];
     [backView addSubview:self.versionLabel];
     [self.versionLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.mas_equalTo(imageView.mas_bottom).offset(20);
