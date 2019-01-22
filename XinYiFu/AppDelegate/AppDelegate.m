@@ -33,7 +33,7 @@
     [[BDSSpeechSynthesizer sharedInstance] setSynthesizerDelegate:self];
     
     //configureOnlineTTS
-    [[BDSSpeechSynthesizer sharedInstance] setApiKey:@"rAhdMLuyaoEMxGwRfGaTMINK" withSecretKey:@"Adb5QnVZTU4vWUXPpWPNPPypjrN4eVes"];
+    [[BDSSpeechSynthesizer sharedInstance] setApiKey:@"b4bhvvCYcXM58WpbZUPt254W" withSecretKey:@"8DkFKBA0eRw98GnwOaHKip8W2NOZCuPX"];
     [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     //configureOfflineTTS
@@ -43,7 +43,7 @@
     
     NSString* offlineChineseAndEnglishTextData = [[NSBundle mainBundle] pathForResource:@"Chinese_And_English_Text" ofType:@"dat"];
     
-    err = [[BDSSpeechSynthesizer sharedInstance] loadOfflineEngine:offlineChineseAndEnglishTextData speechDataPath:offlineEngineSpeechData licenseFilePath:nil withAppCode:@"15260621"];
+    err = [[BDSSpeechSynthesizer sharedInstance] loadOfflineEngine:offlineChineseAndEnglishTextData speechDataPath:offlineEngineSpeechData licenseFilePath:nil withAppCode:@"15458611"];
     if(err){
         //        [self displayError:err withTitle:@"Offline TTS init failed"];
         return;
