@@ -22,6 +22,7 @@
 #import "IncomeRecordViewController.h"
 
 #import "CashierStatusModel.h"
+#import "MessageCenterViewController.h"
 
 @interface CashierViewController ()<UITableViewDelegate, UITableViewDataSource, CashierFirstTableViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -62,6 +63,8 @@
     [super viewDidLoad];
     [self prepareViews];
 //    [self loadData];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(jumpToMessageCenter) name:@"messageCenter" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(jumpToCashier) name:@"cashier" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,6 +80,22 @@
             [self loadData];
         }
     }
+
+}
+- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"messageCenter" object:nil];
+//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"cashier" object:nil];
+}
+- (void)jumpToMessageCenter{
+    UITabBarController *tab = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *nav = tab.viewControllers[tab.selectedIndex];
+    MessageCenterViewController *vc = [[MessageCenterViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = 1;
+    [nav pushViewController:vc animated:YES];
+}
+- (void) jumpToCashier{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    self.tabBarController.selectedIndex = 0;
 }
 //获取客服电话
 - (void)getKefu {

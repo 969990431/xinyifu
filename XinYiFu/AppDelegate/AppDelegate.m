@@ -13,6 +13,7 @@
 #import "BDSSpeechSynthesizer.h"
 #import <AVFoundation/AVFoundation.h>
 #import "GuideViewController.h"
+#import "MessageCenterViewController.h"
 
 #import <UMCommon/UMCommon.h>
 #import <UMPush/UMessage.h>
@@ -21,7 +22,7 @@
 #define UMAppKey @"5c418a07b465f55724001329"
 
 
-@interface AppDelegate ()<BDSSpeechSynthesizerDelegate,UNUserNotificationCenterDelegate>
+@interface AppDelegate ()<BDSSpeechSynthesizerDelegate,UNUserNotificationCenterDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -110,7 +111,10 @@
 
 {
     [self configureBDS];
-    [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+    if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"语音播报"]) {
+        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+    }
+    
     
     [UMessage setAutoAlert:NO];
     //统计点击数
@@ -133,16 +137,40 @@
         //应用处于前台时的远程推送接受
         
         //关闭U-Push自带的弹出框
-        [UMessage setAutoAlert:YES];
+        [UMessage setAutoAlert:NO];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:userInfo[@"aps"][@"alert"][@"title"] message:userInfo[@"aps"][@"alert"][@"body"] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"语音播报"]) {
+                
+            }else if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"跳转消息中心"]) {
+                
+                UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+                UINavigationController *nav = tab.viewControllers[tab.selectedIndex];
+                MessageCenterViewController *vc = [[MessageCenterViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = 1;
+                [nav pushViewController:vc animated:YES];
+            }else if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"跳转收银首页"]) {
+                UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+                UINavigationController *nav = tab.viewControllers[tab.selectedIndex];
+                [nav popToRootViewControllerAnimated:YES];
+                tab.selectedIndex = 0;
+            }
+            
+        }];
+        [alert addAction:action];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        
         //（前台、后台）的消息处理
         [UMessage didReceiveRemoteNotification:userInfo];
-//        [[BDSSpeechSynthesizer sharedInstance] speakSentence:userInfo[@"aps"][@"alert"][@"body"] withError:nil];
+        
     }else{
         //应用处于前台时的本地推送接受
     }
     //当应用处于前台时提示设置，需要哪个可以设置哪一个
     completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
 }
+
 
 //iOS10新增：处理后台点击通知的代理方法
 
@@ -158,6 +186,24 @@
         if(userInfo.count>0){
             //消息处理
             NSLog(@"跳转到你想要的");
+            
+            if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"语音播报"]) {
+                
+            }else if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"跳转消息中心"]) {
+//                [SVProgressHUD show];
+                UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+                UINavigationController *nav = tab.viewControllers[tab.selectedIndex];
+                MessageCenterViewController *vc = [[MessageCenterViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = 1;
+                [nav pushViewController:vc animated:YES];
+//                [[NSNotificationCenter defaultCenter]postNotificationName:@"messageCenter" object:nil userInfo:nil];
+            }else if ([userInfo[@"aps"][@"alert"][@"title"] isEqualToString:@"跳转收银首页"]) {
+                UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+                UINavigationController *nav = tab.viewControllers[tab.selectedIndex];
+                [nav popToRootViewControllerAnimated:YES];
+                tab.selectedIndex = 0;
+//                [[NSNotificationCenter defaultCenter]postNotificationName:@"cashier" object:nil userInfo:nil];
+            }
         }
     }
     else{ //应用处于后台时的本地推送接受
