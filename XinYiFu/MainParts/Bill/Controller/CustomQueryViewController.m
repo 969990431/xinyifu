@@ -64,7 +64,7 @@
     if (section == 0) {
         return 3;
     }
-    return [self.dataDict[@"page"][@"list"] count];
+    return [self.dataDict[@"page"][@"list"] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
