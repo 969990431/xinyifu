@@ -83,8 +83,8 @@
 
 }
 - (void)dealloc {
-//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"messageCenter" object:nil];
-//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"cashier" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"messageCenter" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"cashier" object:nil];
 }
 - (void)jumpToMessageCenter{
     UITabBarController *tab = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
